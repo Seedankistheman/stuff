@@ -1,0 +1,352 @@
+ASRIEL ANIMS
+        Start : rbxassetid://3197645614  
+        Idle2 : rbxassetid://4661950750 
+        Walk : rbxassetid://4196634355 
+        Run : rbxassetid://4196684102 
+        Fall : rbxassetid://3198653548 
+        Jump : rbxassetid://3198665507 
+        Block : rbxassetid://3203734026 
+        ChaosBlades : rbxassetid://3204744488 
+        ChaosBladesAttack : rbxassetid://3205002959
+        SwordBlock : rbxassetid://4290685608 
+        BarrageStart : rbxassetid://3722729417 
+        FinalBeamEnd : rbxassetid://3724544464 
+        FinalBeamStart : rbxassetid://3724520980 
+        Idle : rbxassetid://4652743075  
+        WalkBack : rbxassetid://4196370864 
+        DashBack : rbxassetid://5776312470 
+        DashForward : rbxassetid://5776291266 
+        DashLeft : rbxassetid://5776300541 
+        DashRight : rbxassetid://5776309122 
+        CB : rbxassetid://4602568239 
+        Heavy1 : rbxassetid://5776249806 
+        Heavy2 : rbxassetid://5776251749 
+        Heavy3 : rbxassetid://5776253664 
+        Heavy4 : rbxassetid://5776256280 
+        Heavy5 : rbxassetid://5776258610 
+        Heavy6 : rbxassetid://5776260400 
+        Light1 : rbxassetid://5776230796  
+        Light2 : rbxassetid://5776233108  
+        Light3 : rbxassetid://5776235173  
+        Light4 : rbxassetid://5776238345  
+        Light5 : rbxassetid://5776240672 
+        Light6 : rbxassetid://5776243290
+        UpperCut : rbxassetid://4300091335 
+        Air1 : rbxassetid://4300117017 
+        Air2 : rbxassetid://4300123660 
+        Air3 : rbxassetid://4300185517 
+        Air4 : rbxassetid://4300190994 
+        Air5 : rbxassetid://4300194950 
+        Air6 : rbxassetid://4300200684 
+        Light1 : rbxassetid://4456884092 
+        Light2 : rbxassetid://4456890962 
+        Light3 : rbxassetid://4456894133 
+        Light4 : rbxassetid://4456898259 
+        Light5 : rbxassetid://4456901030
+frisk anims
+        Idle : rbxassetid://4630785902 / 
+        Walk : rbxassetid://4370512420 / 
+        Run : rbxassetid://4370518984 / 
+        Fall : rbxassetid://3198653548 / 
+        Jump : rbxassetid://3198665507 / 
+        Block : rbxassetid://3203734026 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashSlash : rbxassetid://3222536064 / 
+        Stare : rbxassetid://4516285592 / 
+        Idle2 : rbxassetid://4517822293 / 
+        Walk2 : rbxassetid://4517829215 / 
+        Run2 : rbxassetid://4517832539 / 
+        GunShotLight : rbxassetid://4807919857 / 
+        GunShotHeavy : rbxassetid://4807935308 / 
+        Block2 : rbxassetid://4808343910 / 
+        Block3 : rbxassetid://4808378857 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Light1 : rbxassetid://5776230796 / 
+        Light2 : rbxassetid://5776233108 / 
+        Light3 : rbxassetid://5776260400 / 
+        Light1 : rbxassetid://4800158142 / 
+        Light2 : rbxassetid://4800160350 / 
+        Light3 : rbxassetid://4800163313 / 
+        Light4 : rbxassetid://4800165057 / 
+        Light5 : rbxassetid://4800167156 / 
+        Light1 : rbxassetid://4800254068 / 
+        Light2 : rbxassetid://4800262463 / 
+        Light3 : rbxassetid://4800258366 / 
+        Light4 : rbxassetid://4800266314 / 
+        Light1 : rbxassetid://4800416901 / 
+        Light2 : rbxassetid://5776233108 / 
+        Light3 : rbxassetid://4800436094 / 
+        Light4 : rbxassetid://4800438618 / 
+        Light5 : rbxassetid://4800440761 / 
+        Light1 : rbxassetid://4800624938 / 
+        Light2 : rbxassetid://4800629176 / 
+        Light3 : rbxassetid://4800630930 / 
+        Light4 : rbxassetid://4800624938 / 
+        Light5 : rbxassetid://4800633936 / 
+        Light1 : rbxassetid://4801030095 / 
+        Light2 : rbxassetid://5776251749 / 
+        Light3 : rbxassetid://4801036888 / 
+        Light4 : rbxassetid://4800624938 / 
+        Light5 : rbxassetid://4801041246 / 
+        Light1 : rbxassetid://4800992305 / 
+        Light2 : rbxassetid://4800996691 / 
+        Light3 : rbxassetid://4800998325 / 
+        Light4 : rbxassetid://4800999598 / 
+        Light5 : rbxassetid://4801002022 / 
+        Light1 : rbxassetid://4800738596 / 
+        Light2 : rbxassetid://4800745250 / 
+        Light3 : rbxassetid://4800747744 / 
+        Light4 : rbxassetid://4800749197 / 
+        Light1 : rbxassetid://4800254068 / 
+        Light2 : rbxassetid://4800262463 / 
+        Light3 : rbxassetid://4800258366 / 
+        Light4 : rbxassetid://4800266314 / 
+        Light1 : rbxassetid://4800254068 / 
+        Light2 : rbxassetid://4800262463 / 
+        Light3 : rbxassetid://4800258366 / 
+        Light4 : rbxassetid://4800266314 / 
+        Swing1 : rbxassetid://5022203558 / 
+        Swing2 : rbxassetid://5022499034
+OLD sans anims
+        Idle : rbxassetid://5026896608 / 
+        Walk : rbxassetid://3728845466 / 
+        Run : rbxassetid://3728873938 / 
+        Fall : rbxassetid://4936391689 / 
+        Jump : rbxassetid://3198665507 / 
+        Block : rbxassetid://4358889112 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashSlash : rbxassetid://3222536064 / 
+        RaiseHand : rbxassetid://3731949745 / 
+        Point : rbxassetid://3733309848 / 
+        LiftArm : rbxassetid://3815756705 / 
+        Point2 : rbxassetid://4361441813 / 
+        Point3 : rbxassetid://4361469349 / 
+        Point4 : rbxassetid://4361511573 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Light1 : rbxassetid://4357851278 / 
+        Light2 : rbxassetid://4357872409 / 
+        Light3 : rbxassetid://4357890370 / 
+        Light4 : rbxassetid://4357902460 / 
+        Light5 : rbxassetid://4357907686
+NEW sans moves 
+        Idle : rbxassetid://5026896608 / 
+        Walk : rbxassetid://3728845466 / 
+        Run : rbxassetid://3728873938 / 
+        Fall : rbxassetid://4936391689 / 
+        Jump : rbxassetid://3198665507 / 
+        Block : rbxassetid://6117137595 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashSlash : rbxassetid://3222536064 / 
+        RaiseHand : rbxassetid://3731949745 / 
+        Point : rbxassetid://3733309848 / 
+        LiftArm : rbxassetid://3815756705 / 
+        Point2 : rbxassetid://4361441813 / 
+        Point3 : rbxassetid://4361469349 / 
+        Point4 : rbxassetid://4361511573 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Light1 : rbxassetid://4357851278 / 
+        Light2 : rbxassetid://4357872409 / 
+        Light3 : rbxassetid://4357890370 / 
+        Light4 : rbxassetid://4357902460 / 
+        Light5 : rbxassetid://4357907686
+GT chara anims
+        Idle : rbxassetid://4283811527 / 
+        Walk : rbxassetid://4289083840 / 
+        Run : rbxassetid://4283916488 / 
+        Fall : rbxassetid://3198653548 / 
+        Jump : rbxassetid://3198665507 / 
+        Block : rbxassetid://4290724438 / 
+        DashAttack : rbxassetid://3752886447 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashSlash : rbxassetid://3222536064 / 
+        AreaAttack : rbxassetid://3756843230 / 
+        Light1 : rbxassetid://3746476750 / 
+        Light2 : rbxassetid://3752095377 / 
+        Light3 : rbxassetid://3752218582 / 
+        Yellow1 : rbxassetid://3777055156 / 
+        Yellow3 : rbxassetid://3777066555 / 
+        Yellow2 : rbxassetid://3777061952 / 
+        PatienceKnife : rbxassetid://3778668092 / 
+        IntAttackStart : rbxassetid://4063346980 / 
+        Shield : rbxassetid://4064726792 / 
+        Heal : rbxassetid://4064748591 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Light1 : rbxassetid://4333546395 / 
+        Light2 : rbxassetid://4348265296 / 
+        Light3 : rbxassetid://4348287123 / 
+        Light4 : rbxassetid://4348301706 / 
+        Light5 : rbxassetid://4348323561 / 
+        Light6 : rbxassetid://4348788816 / 
+        Swing2 : rbxassetid://4908460879 / 
+        Swing1 : rbxassetid://4908451681 / 
+        Swing3 : rbxassetid://4908480452 / 
+        Swing4 : rbxassetid://4929786777 / 
+        Swing5 : rbxassetid://4929795262
+Black goku anims
+
+        Fall : rbxassetid://4690344191 / 
+        Jump : rbxassetid://4087647775 / 
+        Block : rbxassetid://4088050522 / 
+        Idle2 : rbxassetid://4929570007 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashSlash : rbxassetid://3222536064 / 
+        Move4Attacker1Swing : rbxassetid://4924211799 / 
+        Run2 : rbxassetid://4196684102 / 
+        Walk2 : rbxassetid://4929609108 / 
+        HardLand : rbxassetid://4575983939 / 
+        Uppercut : rbxassetid://4820780935 / 
+        Run : rbxassetid://4576074471 / 
+        Idle : rbxassetid://4900761581 / 
+        Walk : rbxassetid://4370512420 / 
+        Move1 : rbxassetid://4905914802 / 
+        BigLand : rbxassetid://4575983939 / 
+        Climb : rbxassetid://4903866241 / 
+        ClimbLedge : rbxassetid://4904344271 / 
+        FallAnim : rbxassetid://4575939658 / 
+        Flip : rbxassetid://4575857193 / 
+        LeftWallRun : rbxassetid://4576215936 / 
+        RightWallRun : rbxassetid://4576224688 / 
+        SmallLand : rbxassetid://4575922541 / 
+        Move2Attacker1 : rbxassetid://4910106480 / 
+        Move2Victim1 : rbxassetid://4910109412 / 
+        Move2Attacker2 : rbxassetid://4910172271 / 
+        Move2Attacker3 : rbxassetid://4910232706 / 
+        Move2Attacker1Swing : rbxassetid://4910251981 / 
+        Move3Attacker1 : rbxassetid://4911279815 / 
+        Move3Victim1 : rbxassetid://4911286334 / 
+        Move3Attacker1Swing : rbxassetid://4912449406 / 
+        Move4Attacker1 : rbxassetid://4918877276 / 
+        Move4Victim1 : rbxassetid://4918985728 / 
+        Move4Attacker2 : rbxassetid://4919502087 / 
+        Move5Attacker1 : rbxassetid://4920626240 / 
+        BigJump : rbxassetid://4521638309 / 
+        Move5Victim1 : rbxassetid://4920697324 / 
+        Move5Attacker2 : rbxassetid://4920871999 / 
+        UppercutSwing : rbxassetid://4924146069 / 
+        Move5Attacker1Swing : rbxassetid://4924176970 / 
+        Move5Attacker1Swing2 : rbxassetid://4924191909 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Light1 : rbxassetid://4906030889 / 
+        Light2 : rbxassetid://4906045655 / 
+        Light3 : rbxassetid://4906056809 / 
+        Light4 : rbxassetid://4906072632 / 
+        Light5 : rbxassetid://4906092495 / 
+        Light6 : rbxassetid://4906104364 / 
+        Light7 : rbxassetid://4906108508 / 
+        Swing2 : rbxassetid://4908460879 / 
+        Swing1 : rbxassetid://4908451681 / 
+        Swing3 : rbxassetid://4908480452 / 
+        Swing4 : rbxassetid://4929786777 / 
+        Swing5 : rbxassetid://4929795262 / 
+        Light1 : rbxassetid://4929661098 / 
+        Light2 : rbxassetid://4929665831 / 
+        Light3 : rbxassetid://4929669003 / 
+        Light4 : rbxassetid://4929670790 / 
+        Light5 : rbxassetid://4929673252 / 
+        Heavy1 : rbxassetid://4929676573 / 
+        Heavy2 : rbxassetid://4929681477 / 
+        Heavy3 : rbxassetid://4929684994 / 
+        Heavy4 : rbxassetid://4929688526 / 
+        Heavy5 : rbxassetid://4929694407 / 
+        Heavy6 : rbxassetid://4929696537 / 
+        Light6 : rbxassetid://4929700678 / 
+        Light7 : rbxassetid://4929723918 / 
+        Light8 : rbxassetid://4929733967 / 
+        Light9 : rbxassetid://4929737220
+shinobi anims
+        Idle : rbxassetid://180435571 / 
+        Walk : rbxassetid://4370512420 / 
+        Run : rbxassetid://4370518984 / 
+        Fall : rbxassetid://5111359205 / 
+        Jump : rbxassetid://3198665507 / 
+        Block : rbxassetid://5657245133 / 
+        DashRun : rbxassetid://3222477616 / 
+        DashBack : rbxassetid://5776312470 / 
+        DashForward : rbxassetid://5776291266 / 
+        DashLeft : rbxassetid://5776300541 / 
+        DashRight : rbxassetid://5776309122 / 
+        Swing1 : rbxassetid://5022203558 / 
+        Swing2 : rbxassetid://5022499034 / 
+        Light1 : rbxassetid://5770352035 / 
+        Light2 : rbxassetid://5776851402 / 
+        Light3 : rbxassetid://5770410811 / 
+        Light4 : rbxassetid://5776857179 / 
+        Light5 : rbxassetid://5776863568
+Beam game anims
+        Animation : rbxassetid://1072956145 / 
+        LockOn / 
+        FirstPerson / 
+        KiBlast / 
+        KameEnd : rbxassetid://1048077853 / 
+        KameStart : rbxassetid://1048081610 / 
+        Combat / 
+        KameEnd : rbxassetid://1064590255 / 
+        KameStart1 : rbxassetid://1066351083 / 
+        KameEnd1 : rbxassetid://1048566747 / 
+        KameStart : rbxassetid://1064581090 / 
+        Hurt : rbxassetid://1050002231 / 
+        KnockBack : rbxassetid://1050021008 / 
+        Combo1 : rbxassetid://1062467017 / 
+        Kick : rbxassetid://1065292732 / 
+        Kick2 : rbxassetid://1062514103 / 
+        Combo2 : rbxassetid://1066246826 / 
+        pun1 : rbxassetid://1066194773 / 
+        FuseKick1 : rbxassetid://1067235391 / 
+        FuseKick2 : rbxassetid://1067242162 / 
+        FuseCombo1 : rbxassetid://1067267098 / 
+        Leveling / 
+        Block / 
+        Animation : rbxassetid://1057832631 / 
+        Fuse / 
+        Animation : rbxassetid://1058091578 / 
+        Potara / 
+        Animation : rbxassetid://1058091578 / 
+        WalkSpeedScript / 
+        Fly / 
+        Animation : rbxassetid://1058091578 / 
+        Transformations / 
+        Animation : rbxassetid://1074371206 / 
+        Animation2 : rbxassetid://1074459636 / 
+        Animation3 : rbxassetid://1088139266
+Bloxtale
+        Idle : rbxassetid://2245630779 / 
+        Walk : rbxassetid://2245799765 / 
+        Jump : rbxassetid://2245846352 / 
+        Falling : rbxassetid://2245989809 / 
+        Running : rbxassetid://2249111806 / 
+        Slash1 : rbxassetid://2249218612 / 
+        Slash2 : rbxassetid://2249260302 / 
+        Slash3 : rbxassetid://2257945361 / 
+        Special : rbxassetid://2268077332 / 
+        Lunge : rbxassetid://2264115648 / 
+        Slash4 : rbxassetid://2286878846 / 
+        Slash5 : rbxassetid://2286995591 / 
+        Slash6 : rbxassetid://2291835660 / 
+        LocalScript / 
+        TestAnim : 29027a1aec0078abf5a8480439ecb602 / 
+        ExportAnim : 29027a1aec0078abf5a8480439ecb602 / 
+        OpenMouth : rbxassetid://2267385528 / 
+        TestAnim : 29027a1aec0078abf5a8480439ecb602 / 
+        ExportAnim : 29027a1aec0078abf5a8480439ecb602 / 
+        OpenMouth : rbxassetid://2267385528
+other
+rbxassetid://6416819199
+7005162082
+rbxassetid://6492501335
+rbxassetid://6492518805
+rbxassetid://6492505440
