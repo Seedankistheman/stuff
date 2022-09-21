@@ -76,8 +76,7 @@ local whitelisted = {
 		}
 	}
 }
-  table.insert(owners, bedwars["HashFunction"](plr.Name..plr.UserId))
-table.insert(owners, bedwars["HashFunction"](lplr.Name..lplr.UserId))
+  
 
 local RenderStepTable = {}
 local function BindToRenderStep(name, num, func)
