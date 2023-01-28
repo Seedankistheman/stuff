@@ -1,0 +1,1373 @@
+frame = game:GetObjects("rbxassetid://12308424823")[1]
+
+
+local plrs = game:GetService("Players")
+local rep = game:GetService("ReplicatedStorage")
+local main = require(rep.ClientModules.MainModule)
+local combatModule = {}
+local plr = plrs.LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+local root = char:WaitForChild("HumanoidRootPart")
+local hum = char:WaitForChild("Humanoid")
+local head = char:WaitForChild("Head")
+local torso = char:WaitForChild("Torso")
+local cs = require(game.ReplicatedStorage.CameraShaker)
+local css = cs.new(Enum.RenderPriority.Camera.Value, function(p1)
+	workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame * p1
+end)
+css:Start()
+function combatModule.shakeScreen(key)
+	pcall(function()
+		css:Shake(cs.Presets[key])
+	end)
+end
+function combatModule.HoverEffect()
+	task.spawn(function()
+		local whitelist = {}
+		for i, v in pairs(workspace:GetChildren()) do
+			if v:FindFirstChild("Humanoid") then
+				table.insert(whitelist, v)
+			end
+		end
+		local part, pos = workspace:FindPartOnRayWithIgnoreList(Ray.new(torso.Position, Vector3.new(0, -1, 0).unit * 10), whitelist)
+		if part then
+
+		end
+	end)
+end
+local function getTP(enemy)
+	local c = math.random(1,4)
+	if c == 1 then
+		return CFrame.new(enemy.HumanoidRootPart.Position + main.getSpot(enemy, enemy.HumanoidRootPart.CFrame, 5).lookVector * 5,enemy.HumanoidRootPart.Position)
+	elseif c == 2 then
+		return CFrame.new(enemy.HumanoidRootPart.Position - main.getSpot(enemy, enemy.HumanoidRootPart.CFrame, 5).lookVector * 5,enemy.HumanoidRootPart.Position)
+	elseif c == 3 then
+		return CFrame.new(enemy.HumanoidRootPart.Position + main.getSpot(enemy, enemy.HumanoidRootPart.CFrame, 5).rightVector * 5,enemy.HumanoidRootPart.Position)
+	elseif c == 4 then
+		return CFrame.new(enemy.HumanoidRootPart.Position - main.getSpot(enemy, enemy.HumanoidRootPart.CFrame, 5).rightVector * 5,enemy.HumanoidRootPart.Position)
+	end
+end
+function combatModule.HoverForwardEffect()
+	task.spawn(function()
+		local whitelist = {}
+		for i, v in pairs(workspace:GetChildren()) do
+			if v:FindFirstChild("Humanoid") then
+				table.insert(whitelist, v)
+			end
+		end
+		local part, pos = workspace:FindPartOnRayWithIgnoreList(Ray.new(torso.Position, Vector3.new(0, -1, 0).unit * 10), whitelist)
+		if part then
+
+		end
+	end)
+end
+function combatModule.Damage(char, info, code)
+	for i, enemy in pairs(workspace:GetChildren()) do
+		if enemy:FindFirstChild("HumanoidRootPart") and enemy ~= char and (root.Position + root.CFrame.lookVector * 6 - enemy.HumanoidRootPart.Position).magnitude <= 7 then
+			if math.random(1,2) == 2 and code then
+			
+			end
+			if game.ReplicatedStorage.Remotes.Damage:InvokeServer(getrenv()._G.Pass, enemy, info) then
+				return enemy
+			else
+				break
+			end
+		end
+	end
+	return nil
+end
+local function moveForward(bodypos, cf)
+	if cf then
+		local part, pos = workspace:FindPartOnRay(Ray.new(root.Position, cf), char)
+		if part then
+			bodypos.Position = pos - root.CFrame.lookVector * 1 + Vector3.new(0, 1, 0)
+		else
+			return
+		end
+	else
+		local part, pos = workspace:FindPartOnRay(Ray.new(root.Position, root.CFrame.lookVector.unit * 6), char)
+		if part then
+			bodypos.Position = pos - root.CFrame.lookVector * 1
+		end
+		return
+	end
+end
+local remotes = rep.Remotes
+
+function combatModule.Combat(animationid, form, code)
+	local hum = char.Humanoid
+	local animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.Combat
+	if form:match("SSJ") then
+		animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.SecondCombat
+	elseif form:match("UI") then
+		animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.ThirdCombat
+	end
+	if animations:FindFirstChild(animationid) then
+		local anim = hum:LoadAnimation(animations[animationid])
+		if anim.Length <= 0 then
+			while true do
+				game:GetService("RunService").RenderStepped:wait()
+				if anim.Length > 0 then
+					break
+				end			
+			end
+		end
+		anim:Play(0.05)
+		if form:match("UI") then
+			anim:AdjustSpeed(2)
+		end
+		if animations.Name == "Combat" then
+			anim:AdjustSpeed(2)
+		end
+		if animationid == "Heavy6" or animationid == "Light9" then
+			anim:AdjustSpeed(0.4)
+		end
+		for i, v in pairs(root:GetChildren()) do
+			if v.Name == "Client" then
+				v:Destroy()
+			end
+		end
+		local bodypos = Instance.new("BodyPosition")
+		bodypos.Name = "Client"
+		
+		anim.KeyframeReached:Connect(function(key)
+			if animations.Name == "Combat" then
+				if key == "1" then
+					moveForward(bodypos)
+					anim:AdjustSpeed(0)
+					
+					if combatModule.Damage(char, {
+						HitEffect = "LightHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal",
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 2
+						},code) then
+						combatModule.shakeScreen("Bump")
+					end
+					anim:AdjustSpeed(1)
+					return
+				end
+				if key == "2" then
+					moveForward(bodypos)
+					anim:AdjustSpeed(0)
+					
+					if combatModule.Damage(char, {
+						HitEffect = "LightHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal",
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 2
+						},code) then
+						combatModule.shakeScreen("Bump")
+					end
+					anim:AdjustSpeed(1)
+					return
+				end
+				if key == "3" then
+					if animationid == "Light5" then
+						moveForward(bodypos)
+						anim:AdjustSpeed(0.2)
+						local h = combatModule.Damage(char, {
+							HitEffect = "HeavyHitEffect", 
+							Sound = { rep.Sounds.Knockback, rep.Sounds.Kick }, 
+							Velocity = root.CFrame.lookVector * 90, 
+							Type = "Knockback", 
+							HitTime = 1, 
+							HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
+							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+							Damage = 9
+						},code)
+						anim:AdjustSpeed(1)
+						if h then
+							combatModule.shakeScreen("BigExplosion")
+						end
+					else
+						moveForward(bodypos)
+						anim:AdjustSpeed(0)
+					
+						if combatModule.Damage(char, {
+							HitEffect = "LightHitEffect", 
+							Sound = rep.Sounds.Punch, 
+							Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+							Type = "Normal",
+							HitTime = 1, 
+							HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+							Damage = 2
+							},code) then
+							combatModule.shakeScreen("Bump")
+						end
+					end
+					
+					anim:AdjustSpeed(1)
+					return
+				end
+				if key == "4" then
+					return
+				end
+				if key == "5" then
+					moveForward(bodypos)
+					anim:AdjustSpeed(0)
+			
+					if combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal",
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 2
+						}) then
+						combatModule.shakeScreen("Bump")
+					end
+					anim:AdjustSpeed(1)
+					return
+				end
+				if key == "6" then
+					moveForward(bodypos)
+					anim:AdjustSpeed(0)
+
+					if combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal",
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 2
+						}) then
+						combatModule.shakeScreen("Bump")
+					end
+					anim:AdjustSpeed(1)
+					return
+				end
+				if key ~= "8" then
+					if key == "9" then
+						moveForward(bodypos)
+						anim:AdjustSpeed(0)
+					
+						if combatModule.Damage(char, {
+							HitEffect = "HeavyHitEffect", 
+							Sound = rep.Sounds.Punch, 
+							Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+							Type = "Normal",
+							HitTime = 1, 
+							HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+							Damage = 2
+							}) then
+							combatModule.shakeScreen("Bump")
+						end
+						anim:AdjustSpeed(1)
+					end
+					return
+				end
+				moveForward(bodypos)
+				anim:AdjustSpeed(0)
+			
+				if combatModule.Damage(char, {
+					HitEffect = "HeavyHitEffect", 
+					Sound = rep.Sounds.Punch, 
+					Velocity = root.CFrame.lookVector * 90, 
+					Type = "Knockback",
+					HitTime = 1, 
+					HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
+					VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+					Damage = 9
+					}) then
+					combatModule.shakeScreen("Bump")
+				end
+				anim:AdjustSpeed(1)
+			else
+				if key == "1" then
+					
+					moveForward(bodypos)
+					if combatModule.Damage(char, {
+						HitEffect = "LightHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal", 
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 5
+						},code) then
+						combatModule.shakeScreen("Bump")
+						return
+					end
+				elseif key == "2" then
+					
+					moveForward(bodypos)
+					if combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = { rep.Sounds.Punch, rep.Sounds.Kick }, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal", 
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 3
+						},code) then
+						combatModule.shakeScreen("Explosion")
+						return
+					end
+				elseif key == "3" then
+					moveForward(bodypos)
+					anim:AdjustSpeed(0.2)
+					local v47 = combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = { rep.Sounds.Knockback, rep.Sounds.Kick }, 
+						Velocity = root.CFrame.lookVector * 90, 
+						Type = "Knockback", 
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 9
+					},code)
+					anim:AdjustSpeed(1)
+					if v47 then
+						combatModule.shakeScreen("BigExplosion")
+						return
+					end
+				elseif key == "4" then
+				
+					moveForward(bodypos)
+					if combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = { rep.Sounds.Punch, rep.Sounds.Kick }, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 15 + Vector3.new(0, 15, 0), 
+						Type = "Normal", 
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 3
+						},code) then
+						combatModule.shakeScreen("Explosion")
+						return
+					end
+				elseif key == "5" then
+				
+					moveForward(bodypos)
+					if combatModule.Damage(char, {
+						HitEffect = "HeavyHitEffect", 
+						Sound = { rep.Sounds.Punch, rep.Sounds.Kick }, 
+						Velocity = Vector3.new(0, -60, 0), 
+						Type = "Knockback", 
+						HitTime = 0.1, 
+						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
+						Damage = 3
+						},code) then
+						combatModule.shakeScreen("Explosion")
+						return
+					end
+				elseif key == "6" then
+				
+					moveForward(bodypos)
+					if combatModule.Damage(char, {
+						HitEffect = "LightHitEffect", 
+						Sound = rep.Sounds.Punch, 
+						Position = root.CFrame.Position + root.CFrame.lookVector * 10, 
+						Type = "Normal", 
+						HitTime = 1, 
+						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
+						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6 + Vector3.new(0, 6, 0), 
+						Damage = 5
+						},code) then
+						combatModule.shakeScreen("Bump")
+					end
+				end
+			end
+
+		end)
+		local lock = plr.Backpack.Main.LockOnScript.LockOn
+		if lock.Value then
+			root.CFrame = CFrame.new(root.Position, Vector3.new(lock.Value.HumanoidRootPart.Position.X, root.Position.Y, lock.Value.HumanoidRootPart.Position.Z))
+		end
+		hum:ChangeState(Enum.HumanoidStateType.Flying)
+		local v49, v50 = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+		if v49 then
+			rep.Remotes.Effects:FireServer({ _G.Pass, "Particle", "SmallForwardSmokeParticle", CFrame.new(v50, v50 + root.CFrame.lookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+		end
+		bodypos.MaxForce = Vector3.new(100000, 100000, 100000)
+		bodypos.P = 100000
+		bodypos.Parent = root
+		local bodygyro = Instance.new("BodyGyro")
+		bodygyro.Name = "Client"
+		bodygyro.MaxTorque = Vector3.new(10000, 10000, 10000)
+		bodygyro.CFrame = root.CFrame
+		bodygyro.Parent = root
+		local part, pos = workspace:FindPartOnRay(Ray.new(root.Position, root.CFrame.lookVector.unit * 6), char)
+		if part then
+			bodypos.Position = pos - root.CFrame.lookVector * 1.5
+		else
+			bodypos.Position = root.Position + root.CFrame.lookVector * 5
+		end
+		local del = 1
+		if animationid == "Heavy6" or animationid == "Light9" then
+			task.spawn(function()
+				task.wait(0.25)
+				del = 0
+			end)
+		else
+			del = 0
+		end
+		while true do
+			if animationid == "Heavy6" or animationid == "Light9" then
+				moveForward(bodypos, root.CFrame.lookVector * 40 + Vector3.new(0, 40, 0))
+				moveForward(bodypos)
+			else
+				moveForward(bodypos)
+			end
+			game:GetService("RunService").RenderStepped:wait()
+			if anim.Length - 0.16 < anim.TimePosition and del == 0 then
+				break
+			end
+			if not anim.isPlaying and del == 0 then
+				break
+			end
+			if main.checkIfHit() then
+				break
+			end
+		end
+		if animationid == "Heavy5" or animationid == "Light8" then
+			task.wait(0.3)
+		end	
+		anim:AdjustSpeed(0.8)
+		game.Debris:AddItem(bodypos, 0.5)
+		bodygyro:Destroy()
+	end
+end
+
+
+
+game.Players.LocalPlayer.Backpack.Main:Destroy()
+frame.Parent = game.Players.LocalPlayer.Backpack
+script = frame.GokuMoves
+game:GetService("Players").LordsNutSock.PlayerGui.SansIndicator:Destroy()
+game:GetService("Players").LordsNutSock.PlayerGui.UI.Ui.MoveDebounceShower:Destroy()
+
+
+
+local plrs = game:GetService("Players")
+local rep = game:GetService("ReplicatedStorage")
+local uis = game:GetService("UserInputService")
+local runS = game:GetService("RunService")
+
+local remotes = rep:WaitForChild("Remotes")
+remote = remotes:WaitForChild("Events")
+local code = getrenv()._G.Pass
+local lock = script.Parent:WaitForChild("LockOnScript"):WaitForChild("LockOn")
+local locked = lock.Value
+local plr = plrs.LocalPlayer
+local mouse = plr:GetMouse()
+local char = plr.Character or plr.CharacterAdded:Wait()
+local data = char:WaitForChild("Data")
+local extra = script:WaitForChild("Extra")
+local moveDebounce = extra:WaitForChild("MoveDebounceShower")
+--local combatModule = require(frame:WaitForChild("Style"))
+local main = require(rep.ClientModules.MainModule)
+local camera = workspace.CurrentCamera
+local hum = char:WaitForChild("Humanoid")
+local root = char:WaitForChild("HumanoidRootPart")
+local theme = Instance.new("Sound")
+theme.SoundId = "rbxassetid://8621947706"
+theme.Volume = 0.6
+theme.Looped = true
+theme.Parent = script
+theme:Play()
+local pass = getrenv()._G.Pass
+local debounce = false
+local candash = true
+local combatDebounce = false
+local running = false
+local dashw = tick()
+local dasha = tick()
+local dashs = tick()
+local dashd = tick()
+local animations = {} 
+local keys = {W=false,A=false,S=false,D=false}
+local inputbegan = {}
+local inputended = {}
+local cooldownsTable = {}
+local currentType = "DeltaSans"
+local combatReset = 0
+local field = 80
+local light = 0
+local heavy = 0
+
+
+for i,v in pairs(script:WaitForChild("Animations"):GetChildren()) do
+	animations[v.Name] = hum:LoadAnimation(v)
+
+	end
+
+
+
+lock:GetPropertyChangedSignal("Value"):Connect(function()
+	locked = lock.Value
+end)
+
+hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
+
+hum.Jumping:Connect(function(j)
+	if not j or animations.Jump.isPlaying then
+		return
+	end
+	animations.Jump:Play(0.25)
+end)
+
+local function checkIfHurt()
+	return char:FindFirstChild("Hit") or char:FindFirstChild("Debounce") or hum.Health <= 0
+end
+
+local function checkRegion3(i, p29)
+	local v104, v105, v106 = pairs(game.Workspace:FindPartsInRegion3WithWhiteList(Region3.new(i - p29 / 2, i + p29 / 2), { root }))
+	local v107, v108 = v104(v105, v106)
+	if v107 then
+
+	else
+		return false
+	end
+	return true
+end
+
+local function Lerp(p1, p2, p3)
+	return p1 + (p2 - p1) * p3
+end
+
+local function lerp(p0, p1, t)
+	return p0*(1-t) + p1*t
+end
+
+local function quadBezier(p0, p1, p2, t)
+	local l1 = lerp(p0, p1, t)
+	local l2 = lerp(p1, p2, t)
+	local quad = lerp(l1, l2, t)
+	return quad
+end
+
+local function cooldowns(name, val)
+	if cooldownsTable[name] == nil then
+		cooldownsTable[name] = true
+		return cooldownsTable[name]
+	end
+	if val ~= nil then
+		cooldownsTable[name] = val
+		return
+	end
+	return cooldownsTable[name]
+end
+
+local function uiCooldowns(id,start,cooldown,combatid)
+	if start then
+		moveDebounce["Moves" .. combatid][id].Start.Value = true
+		moveDebounce["Moves" .. combatid][id].Start.Value = false
+		return
+	end
+	moveDebounce["Moves" .. combatid][id].Time.Value = cooldown
+	moveDebounce["Moves" .. combatid][id].Activated.Value = true
+	moveDebounce["Moves" .. combatid][id].Activated.Value = false
+end
+
+local function instantRun()
+	task.spawn(function()
+		running = true
+		hum.WalkSpeed = 70
+		field = 100
+		while true do
+			hum.WalkSpeed = 72
+			task.wait(0.03)
+			if not debounce then
+				break
+			end
+			if checkIfHurt() then
+				break
+			end
+			if not running then
+				break
+			end
+			local pressing = false
+			for i,v in pairs(keys) do
+				if v then pressing = true break end
+			end
+			if not pressing then
+				break
+			end
+			if data.SprintMeter.Value <= 1 then
+				break
+			end	
+		end
+		if running then
+			hum.WalkSpeed = 0
+		end
+		field = 80
+		running = false
+	end)
+end
+
+local function getTP()
+	if not locked then
+		if (mouse.Hit.p - root.Position).magnitude > 400 then
+			return CFrame.new(root.Position, mouse.hit.p) * CFrame.new(0, 0, -400)
+		else
+			return CFrame.new(mouse.Hit.p, mouse.Hit.p + root.CFrame.lookVector * 5)
+		end
+	end
+	return CFrame.new(locked.HumanoidRootPart.Position + main.getSpot(locked, locked.HumanoidRootPart.CFrame, 5).lookVector * 5, locked.HumanoidRootPart.Position)
+end
+
+local function switchType()
+	if currentType == "DeltaSans" then
+		currentType = "Goku"
+		moveDebounce.Moves1.Visible = false
+		moveDebounce.Moves2.Visible = true
+	else
+		currentType = "DeltaSans"
+		moveDebounce.Moves1.Visible = true
+		moveDebounce.Moves2.Visible = false
+	end
+
+end
+
+local function moveForward(bodypos)
+	local part, pos = workspace:FindPartOnRay(Ray.new(root.Position, root.CFrame.lookVector.unit * 10), char)
+	if part then
+		bodypos.Position = pos - root.CFrame.lookVector * 1
+	end
+end
+
+inputbegan[Enum.KeyCode.W] = function()
+	keys.W = true
+	local current = tick()
+	if current - dashw <= 0.25 and candash and not checkIfHurt() and debounce and remotes.Functions:InvokeServer({ pass, "TakeStamina", 12 }) then
+		candash = false
+		animations.DashForward:Play(0.1)
+		if locked then
+			root.CFrame = CFrame.new(root.Position, Vector3.new(locked.HumanoidRootPart.Position.X, root.Position.Y, locked.HumanoidRootPart.Position.Z))
+		end
+		char.Head.Jump:Play()
+		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
+		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+		if part then
+			remote:FireServer(code,{"Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos + root.CFrame.lookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+		end
+		remote:FireServer(code,{"InvFrames", 0.2 })
+		instantRun()
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		candash = true
+	elseif candash then
+		dashw = current
+	end
+end
+inputbegan[Enum.KeyCode.A] = function()
+	keys.A = true
+	local current = tick()
+	if current - dasha <= 0.25 and candash and not checkIfHurt() and debounce and remotes.Functions:InvokeServer({ pass, "TakeStamina", 12 }) then
+		candash = false
+		animations.DashLeft:Play(0.1)
+		if locked then
+			root.CFrame = CFrame.new(root.Position, Vector3.new(locked.HumanoidRootPart.Position.X, root.Position.Y, locked.HumanoidRootPart.Position.Z))
+		end
+		char.Head.Jump:Play()
+		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.rightVector * 100, 0.2 })
+		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+		if part then
+			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos - root.CFrame.rightVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+		end
+		remote:FireServer(code,{ "InvFrames", 0.2 })
+		instantRun()
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		candash = true
+	elseif candash then
+		dasha = current
+	end
+end
+inputbegan[Enum.KeyCode.S] = function()
+	keys.S = true
+	local current = tick()
+	if current - dashs <= 0.25 and candash and not checkIfHurt() and debounce and remotes.Functions:InvokeServer({ pass, "TakeStamina", 12 }) then
+		candash = false
+		animations.DashBack:Play(0.1)
+		if locked then
+			root.CFrame = CFrame.new(root.Position, Vector3.new(locked.HumanoidRootPart.Position.X, root.Position.Y, locked.HumanoidRootPart.Position.Z))
+		end
+		char.Head.Jump:Play()
+		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.lookVector * 100, 0.2 })
+		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+		if part then
+			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos - root.CFrame.LookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+		end
+		remote:FireServer(code,{ "InvFrames", 0.2 })
+		instantRun()
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		candash = true
+	elseif candash then
+		dashs = current
+	end
+end
+inputbegan[Enum.KeyCode.D] = function()
+	keys.D = true
+	local current = tick()
+	if current - dashd <= 0.25 and candash and not checkIfHurt() and debounce and remotes.Functions:InvokeServer({ pass, "TakeStamina", 12 }) then
+		candash = false
+		animations.DashRight:Play(0.1)
+		if locked then
+			root.CFrame = CFrame.new(root.Position, Vector3.new(locked.HumanoidRootPart.Position.X, root.Position.Y, locked.HumanoidRootPart.Position.Z))
+		end
+		char.Head.Jump:Play()
+		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.rightVector * 100, 0.2 })
+		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+		if part then
+			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos + root.CFrame.rightVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+		end
+		remote:FireServer(code,{ "InvFrames", 0.2 })
+		instantRun()
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		hum:ChangeState(Enum.HumanoidStateType.Freefall)
+		task.wait(0.1)
+		candash = true
+	elseif candash then
+		dashd = current
+	end
+end
+
+inputbegan[Enum.KeyCode.R] = function()
+	if debounce and not checkIfHurt() and cooldowns("Teleport", nil) then
+		cooldowns("Teleport", false)
+		debounce = false
+		remote:FireServer(code,{"Teleport",getTP()})
+		task.wait(.05)
+		debounce = true
+		task.wait(0.7)
+		cooldowns("Teleport", true)
+	end
+end
+
+inputbegan[Enum.KeyCode.LeftControl] = function()
+	if debounce and not checkIfHurt() then
+		running = true
+		local tween = main.CreateTween(hum, { 2, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0 }, {
+			WalkSpeed = 72
+		}, true)
+		field = 100
+		while true do
+			task.wait(0.03)
+			if not debounce then
+				break
+			end
+			if checkIfHurt() then
+				break
+			end
+			if not running then
+				break
+			end
+			local pressing = false
+			for i,v in pairs(keys) do
+				if v then pressing = true end
+			end
+			if not pressing then
+				break
+			end
+			if data.SprintMeter.Value <= 1 then
+				break
+			end	
+		end
+		tween:Cancel()
+		if running then
+			hum.WalkSpeed = 0
+		end
+		field = 80
+		running = false
+	end
+end
+
+inputbegan[Enum.KeyCode.Q] = switchType
+inputbegan[Enum.KeyCode.E] = switchType
+
+inputbegan[Enum.KeyCode.F] = function()
+	if debounce and not checkIfHurt() then
+		debounce = false
+		hum.WalkSpeed = 0
+		remotes.Functions:InvokeServer({pass,"Blocking",true})
+		animations.Block:Play()
+		while true do
+			task.wait(0.03)
+			if not uis:IsKeyDown(Enum.KeyCode.F) then
+				break
+			end
+			if checkIfHurt() then
+				break
+			end			
+		end
+		remotes.Functions:InvokeServer({pass,"Blocking",false})
+		animations.Block:Stop()
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.C] = function()
+	if debounce and not checkIfHurt() then
+		debounce = false
+		hum.WalkSpeed = 0
+		functions:InvokeServer(code,{"Charge",true})
+		while true do
+			task.wait(0.03)
+			if not uis:IsKeyDown(Enum.KeyCode.C) then
+				break
+			end
+			if not char:FindFirstChild("Charging") then
+				break
+			end
+			if checkIfHurt() then
+				break
+			end
+		end
+		task.spawn(function()
+			if char:FindFirstChild("Charging") then
+				functions:InvokeServer(code,{"Charge"})
+			end
+		end)
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.Z] = function()
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+		debounce = false
+		hum.WalkSpeed = 0
+		if data.Transformation.Value == "Base" or data.Transformation.Value == "SSJG" or data.Transformation.Value == "SSJB" then
+			functions:InvokeServer(code,{"SSJ"})
+		elseif data.Transformation.Value == "SSJ" then
+			functions:InvokeServer(code,{"SSJ2"})
+		elseif data.Transformation.Value == "SSJ2" then
+			functions:InvokeServer(code,{"SSJ3"})
+		end
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.V] = function()
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+		debounce = false
+		hum.WalkSpeed = 0
+		functions:InvokeServer(code,{"SSJG"})
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.B] = function()
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+		debounce = false
+		hum.WalkSpeed = 0
+		functions:InvokeServer(code,{"SSJB"})
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.X] = function()
+	if debounce and not checkIfHurt() and not data.Transformation.Value:match("UI") then
+		debounce = false
+		hum.WalkSpeed = 0
+		if uis:IsKeyDown(Enum.KeyCode.LeftShift) then
+			functions:InvokeServer(code,{"Aura"})
+		else
+			functions:InvokeServer(code,{"Deform"})
+		end
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.K] = function()
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) then
+		debounce = false
+		hum.WalkSpeed = 0
+		functions:InvokeServer(code,{"Kaioken"})
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
+
+inputbegan[Enum.KeyCode.One] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 25 and cooldowns("Delta1",nil) then
+			debounce = false
+			_G.RootPartFollow = false
+			cooldowns("Delta1", false)
+			uiCooldowns(1, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat1" })
+			uiCooldowns(1, false, 30, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(30)
+			cooldowns("Delta1", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My1",nil) then
+			debounce = false
+			cooldowns("My1", false)
+			uiCooldowns(1, true, nil, 2)
+			functions:InvokeServer(code,{ "Kamehameha", "Start" })
+			while true do
+				if not uis:IsKeyDown(Enum.KeyCode.One) then
+					break
+				end
+				if data.Stamina.Value <= 0 then
+					break
+				end
+				task.wait(0.1)
+			end
+			_G.RootPartFollow = false;
+			hum.WalkSpeed = 0
+			functions:InvokeServer(code,{ "Kamehameha", "End" })
+			uiCooldowns(1, false, 10, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(10)
+			cooldowns("My1", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Two] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 50 and cooldowns("Delta2",nil) and locked then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta2", false)
+			uiCooldowns(2, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat2", locked })
+			uiCooldowns(2, false, 35, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(35)
+			cooldowns("Delta2", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My2",nil) then
+			debounce = false
+			cooldowns("My2", false)
+			uiCooldowns(2, true, nil, 2)
+			remote:FireServer(code,{"TakeStamina",50})
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy();
+				end
+			end
+			_G.RootPartFollow = false
+			functions:InvokeServer(code,{ "StardustRain",locked })
+			uiCooldowns(2, false, 15, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(15)
+			cooldowns("My2", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Three] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 45 and cooldowns("Delta3",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta3", false)
+			uiCooldowns(3, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat3" })
+			uiCooldowns(3, false, 30, 1)
+			debounce = true
+			task.wait(30)
+			cooldowns("Delta3", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 60 and cooldowns("My3",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("My3", false)
+			uiCooldowns(3, true, nil, 2)
+			functions:InvokeServer(code,{"KiBlast"})
+			uiCooldowns(3, false, 0.5, 2)
+			debounce = true
+			task.wait(0.5)
+			cooldowns("My3", true)
+		end
+	end
+end
+
+
+inputbegan[Enum.KeyCode.Four] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 45 and cooldowns("Delta4",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta4", false)
+			uiCooldowns(4, true, nil, 1)
+			_G.RootPartFollow = false
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat4" })
+			_G.RootPartFollow = true
+			uiCooldowns(4, false, 20, 1)
+			debounce = true
+			task.wait(20)
+			cooldowns("Delta4", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 500 and cooldowns("My4",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			_G.RootPartFollow = false
+			remote:FireServer(code,{"TakeStamina",500})
+			_G.RootPartFollow = true
+			cooldowns("My5", false)
+			uiCooldowns(4, true, nil, 2)
+			functions:InvokeServer(code,{"SpiritBomb"})
+			uiCooldowns(4, false, 20, 2)
+			debounce = true
+			task.wait(20)
+			cooldowns("My5", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Five] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 55 and cooldowns("Delta5",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta5", false)
+			uiCooldowns(5, true, nil, 1)
+			_G.RootPartFollow = false
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat5" })
+			_G.RootPartFollow = true
+			uiCooldowns(5, false, 25, 1)
+			debounce = true
+			task.wait(25)
+			cooldowns("Delta5", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 60 and cooldowns("My5",nil) and data.Transformation.Value:match("UI") then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("My5", false)
+			hum.WalkSpeed = 0
+			uiCooldowns(5, true, nil, 2)
+			_G.RootPartFollow = false
+			remote:FireServer(code,{"TakeStamina",60})
+			functions:InvokeServer(code,{"Blink"})
+			_G.RootPartFollow = true
+			hum.WalkSpeed = 0
+			uiCooldowns(5, false, 10, 2)
+			debounce = true
+			task.wait(10)
+			cooldowns("My5", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Six] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 300 and cooldowns("Delta6",nil) and locked and locked.Humanoid.Health >= 1 then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta6", false)
+			uiCooldowns(6, true, nil, 1)
+			_G.RootPartFollow = false
+			hum.WalkSpeed = 0
+			remote:FireServer(code,{"TakeStamina",300})
+			pcall(function()
+				functions:InvokeServer(code,{"WarpKame",locked,getTP()})
+			end)
+			_G.RootPartFollow = true
+			uiCooldowns(6, false, 90, 1)
+			debounce = true
+			task.wait(90)
+			cooldowns("Delta6", true)			
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.M] = function()
+	if debounce and cooldowns("Hakai",nil) and locked then
+		debounce = false
+		cooldowns("Hakai", false)
+		functions:InvokeServer(code,{"Hakai",locked})
+		debounce = true
+		task.wait(10)
+		cooldowns("Hakai", true)
+	end
+end
+
+
+
+inputended[Enum.KeyCode.W] = function()
+	keys.W = false
+end
+inputended[Enum.KeyCode.A] = function()
+	keys.A = false
+end
+inputended[Enum.KeyCode.S] = function()
+	keys.S = false
+end
+inputended[Enum.KeyCode.D] = function()
+	keys.D = false
+end
+
+uis.InputBegan:Connect(function(i,s)
+	if s then return end
+	if inputbegan[i.KeyCode] then
+		inputbegan[i.KeyCode]()
+	elseif (i.UserInputType == Enum.UserInputType.MouseButton1 or (i.UserInputType == Enum.UserInputType.MouseButton2 and locked)) and debounce and not checkIfHurt() and not combatDebounce then
+		debounce = false
+		_G.RootPartFollow = false
+		combatDebounce = true
+		local combatid
+		if i.UserInputType == Enum.UserInputType.MouseButton1 then
+			light += 1
+			combatid = "Light"..light
+		elseif i.UserInputType == Enum.UserInputType.MouseButton2 and locked then
+			heavy += 1;
+			combatid = "Heavy"..heavy
+		end
+		combatModule.HoverForwardEffect();
+		combatReset = math.huge;
+		combatModule.Combat(combatid, data.Transformation.Value, code)
+		combatReset = 75
+		debounce = true
+		_G.RootPartFollow = true
+		if ((light == 5 or heavy == 5) and data.Transformation.Value == "Base") or ((light == 9 or heavy == 6) and data.Transformation.Value:match("SSJ")) or ((light == 9 or heavy == 6) and data.Transformation.Value:match("UI")) then
+			light = 0
+			heavy = 0
+			remotes.Functions:InvokeServer({ _G.Pass, "Comfirmation" })
+			task.wait(2)
+		end
+		combatDebounce = false
+	end
+end)
+
+uis.InputEnded:Connect(function(i,s)
+	if inputended[i.KeyCode] then
+		inputended[i.KeyCode]()
+	end
+end)
+
+local del = true
+local hoverdeb = true
+local pos = root.CFrame
+local rootC1 = root:WaitForChild("RootJoint").C1
+local neckC1 = char.Torso:WaitForChild("Neck").C1
+local LSC1 = char.Torso:WaitForChild("Left Shoulder").C1
+local RSC1 = char.Torso:WaitForChild("Right Shoulder").C1
+
+while true do
+	local s = pcall(function()
+		local event = Instance.new("BindableEvent")
+		event.Event:connect(function()
+			remotes.Functions:InvokeServer({pass, "Reset"})
+		end)
+		game:GetService("StarterGui"):SetCore("ResetButtonCallback", event)
+	end)
+	task.wait(0.03)
+	if s then
+		break
+	end
+end
+xxx=Instance.new("StringValue", data)
+xxx.Name = "Transformation"
+data:WaitForChild("Transformation"):GetPropertyChangedSignal("Value"):Connect(function()
+	if data.Transformation.Value == "UI" then
+		moveDebounce.Moves2["5"].ImageLabel.ImageColor3 = Color3.fromRGB(255,255,255)
+		moveDebounce.Moves2["5"].TextLabel.TextColor3 = Color3.fromRGB(255,255,255)
+	end
+end)
+
+hum.HealthChanged:Connect(function(health)
+	if health <= 0 then
+		theme:Stop()
+	end
+end)
+
+moveDebounce.Parent = plr.PlayerGui:WaitForChild("UI"):WaitForChild("Ui")
+moveDebounce.LocalScript.Disabled = false
+
+runS.RenderStepped:Connect(function(delta)
+	if combatReset > 0 then
+		combatReset -= delta * 60
+		if combatReset <= 0 then
+			combatReset = 0
+			light = 0
+			heavy = 0
+		end
+	end
+	if not keys.A and not keys.W and not keys.S and not keys.D or checkIfHurt() then
+		hum.WalkSpeed = 0
+	end
+	local vector = root.CFrame:VectorToObjectSpace(root.Velocity)
+	if hum.MoveDirection.X ~= 0 or hum.MoveDirection.Z ~= 0 then
+		if hum:GetState() ~= Enum.HumanoidStateType.Jumping and hum:GetState() ~= Enum.HumanoidStateType.Freefall then
+			if vector.Z < 0 and vector.Z < 0 or not keys.W and not keys.S then
+				if hum.WalkSpeed > 0 and hum.WalkSpeed < 11 then
+					animations.Run:Stop(0.1)
+					if not animations.Walk.isPlaying then
+						animations.Walk:Play(0.5)
+					end
+					animations.Walk:AdjustSpeed(hum.WalkSpeed / 10)
+				elseif hum.WalkSpeed > 11 then
+					animations.Walk:Stop(0.1)
+					if not animations.Run.isPlaying then
+						animations.Run:Play(0.5)
+					end
+					animations.Run:AdjustSpeed(hum.WalkSpeed / 35)
+				end
+			elseif hum.WalkSpeed > 0 and hum.WalkSpeed < 11 then
+				animations.Run:Stop(0.1)
+				if not animations.Walk.isPlaying then
+					animations.Walk:Play(0.5)
+				end
+				animations.Walk:AdjustSpeed(-(hum.WalkSpeed / 10))
+			elseif hum.WalkSpeed > 11 then
+				animations.Run:Stop(0.1)
+				if not animations.Walk.isPlaying then
+					animations.Walk:Play(0.5)
+				end
+				animations.Walk:AdjustSpeed(-(1 + hum.WalkSpeed / 50))
+			end
+		else
+			animations.Walk:Stop(0.1)
+			animations.Run:Stop(0.1)
+		end
+	end
+	if hum.MoveDirection == Vector3.new(0, 0, 0) and hum:GetState() ~= Enum.HumanoidStateType.Jumping and hum:GetState() ~= Enum.HumanoidStateType.Freefall then
+		animations.Walk:Stop(0.1)
+		animations.Run:Stop(0.1)
+		if not animations.Idle.isPlaying then
+			animations.Idle:Play(0.1)
+		end
+	elseif (hum:GetState() == Enum.HumanoidStateType.Running or hum:GetState() == Enum.HumanoidStateType.RunningNoPhysics) and (not (hum.WalkSpeed < 20) and hoverdeb and debounce) then
+		hoverdeb = false
+		combatModule.HoverForwardEffect()
+		task.wait(0.2)
+		hoverdeb = true
+	end
+	if hum:GetState() == Enum.HumanoidStateType.Freefall and root.Velocity.Y < 0.1 and debounce then
+		animations.Jump:Stop(0.25)
+		if not animations.Fall.isPlaying then
+			animations.Fall:Play(0.25)
+		end
+		animations.Walk:Stop(0.1)
+		animations.Run:Stop(0.1)
+	else
+		animations.Fall:Stop(0.25)
+	end
+	if hum.Health > 0 and char.Torso:FindFirstChild("Neck") then
+		if not keys.W and not keys.A and not keys.S and not keys.D then
+			char.Torso.Neck.C1 = char.Torso.Neck.C1:lerp(neckC1 * CFrame.Angles(0, 0, 0), 0.1)
+			root.RootJoint.C1 = root.RootJoint.C1:lerp(rootC1 * CFrame.Angles(0, 0, 0), 0.1)
+			char.Torso["Left Shoulder"].C1 = char.Torso["Left Shoulder"].C1:lerp(LSC1 * CFrame.Angles(0, 0, 0), 0.1)
+			char.Torso["Right Shoulder"].C1 = char.Torso["Right Shoulder"].C1:lerp(RSC1 * CFrame.Angles(0, 0, 0), 0.1)
+			camera.FieldOfView = Lerp(camera.FieldOfView, 70, 0.1)
+			return
+		end
+	else
+		return
+	end
+	if hum.WalkSpeed == 0 and not checkIfHurt() and debounce then
+		hum.WalkSpeed = 0.1
+		main.CreateTween(hum, { 0.3, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0 }, {
+			WalkSpeed = 10
+		}, true)
+	end
+	local vel = math.clamp(root.RotVelocity.Y, -10, 10)
+	local vx = math.clamp(vector.X, -10, 10)
+	local vx2 = math.clamp(vector.X, -20, 20)
+	local vz = math.clamp(vector.Z, -10, 10)
+	char.Torso.Neck.C1 = char.Torso.Neck.C1:lerp(neckC1 * CFrame.Angles(math.rad(-vz), math.rad(vx), math.rad(vx)) * CFrame.Angles(0, 0, math.rad(-vel)), 0.1)
+	root.RootJoint.C1 = root.RootJoint.C1:lerp(rootC1 * CFrame.Angles(math.rad(vz), math.rad(vx2), math.rad(vx2)) * CFrame.Angles(0, 0, math.rad(vel)), 0.1)
+	char.Torso["Left Shoulder"].C1 = char.Torso["Left Shoulder"].C1:lerp(LSC1 * CFrame.Angles(0, 0, vel / 20), 0.1)
+	char.Torso["Right Shoulder"].C1 = char.Torso["Right Shoulder"].C1:lerp(RSC1 * CFrame.Angles(0, 0, vel / 20), 0.1)
+	camera.FieldOfView = Lerp(camera.FieldOfView, field, 0.1)
+
+end)
+
+remote.OnClientEvent:Connect(function(args)
+	if args[1] == "Stardust" then
+		local touch = nil
+		local ki = args[2]
+		local touched = false
+		local bodyVelocity = args[4]
+		local aimed = args[5]
+		local timeout = 0
+		local bodyGyro = args[3]
+		touch = ki.Touched:connect(function(hit)
+			if hit and hit.Parent:FindFirstChild("Humanoid") and hit.Name ~= "StardustRainBlast" and hit.Parent.Name ~= "Effects" and hit.Name ~= "Explosion" and not hit:IsDescendantOf(char) and not touched then
+				touch:Disconnect()
+				touched = true
+				remote:FireServer(code,{ "Explosion", ki, aimed, ki.Position, hit.Parent:FindFirstChild("Humanoid") })
+			end
+		end)
+		local start = ki.CFrame
+		local ending = Vector3.new(math.random(-80,80)/10,math.random(-80,80)/10,math.random(-80,80)/10)
+		local middle = ki.Position + ki.CFrame.LookVector * 40
+		for i=1,50 do
+			if aimed and aimed.Parent then
+				local t = i/50
+				local updated = quadBezier(start.Position,middle,aimed.HumanoidRootPart.Position + ending,t)
+				ki.CFrame = CFrame.new(updated,ending)
+				bodyVelocity.Velocity = ki.CFrame.LookVector * 120
+			end
+			if i == 49 then break end
+			task.wait()
+		end
+		task.wait(3)
+		touch:disconnect()
+	end
+end)
+
+debounce = true
+hum.WalkSpeed = 10
+warn("Goku script by Lord.#0068")
