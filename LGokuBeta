@@ -789,7 +789,7 @@ end
 
 inputbegan[Enum.KeyCode.Q] = switchType
 inputbegan[Enum.KeyCode.E] = switchType
-
+debounce = true
 inputbegan[Enum.KeyCode.F] = function()
 	if debounce and not checkIfHurt() then
 		debounce = false
