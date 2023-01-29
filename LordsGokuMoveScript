@@ -745,17 +745,6 @@ inputbegan[Enum.KeyCode.D] = function()
 	end
 end
 
-inputbegan[Enum.KeyCode.R] = function()
-	if debounce and not checkIfHurt() and cooldowns("Teleport", nil) then
-		cooldowns("Teleport", false)
-		debounce = false
-		remote:FireServer(code,{"Teleport",getTP()})
-		task.wait(.05)
-		debounce = true
-		task.wait(0.7)
-		cooldowns("Teleport", true)
-	end
-end
 
 inputbegan[Enum.KeyCode.LeftControl] = function()
 	if debounce and not checkIfHurt() then
