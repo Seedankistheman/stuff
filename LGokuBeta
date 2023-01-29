@@ -1098,6 +1098,7 @@ while true do
 end
 xxx=Instance.new("StringValue", data)
 xxx.Name = "Transformation"
+xxx.Value = "Base"
 data:WaitForChild("Transformation"):GetPropertyChangedSignal("Value"):Connect(function()
 	if data.Transformation.Value == "UI" then
 		moveDebounce.Moves2["5"].ImageLabel.ImageColor3 = Color3.fromRGB(255,255,255)
