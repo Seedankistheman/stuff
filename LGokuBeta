@@ -1,8 +1,6 @@
 frame = game:GetObjects("rbxassetid://12308424823")[1]
-gokumodule = game.ReplicatedStorage:WaitForChild("GokuStuff")
 
-gokuAssets = gokumodule.GokuAssets
-gokuSounds = gokumodule.GokuSounds
+
 local plrs = game:GetService("Players")
 local rep = game:GetService("ReplicatedStorage")
 local main = require(rep.ClientModules.MainModule)
@@ -66,9 +64,7 @@ end
 function combatModule.Damage(char, info, code)
 	for i, enemy in pairs(workspace:GetChildren()) do
 		if enemy:FindFirstChild("HumanoidRootPart") and enemy ~= char and (root.Position + root.CFrame.lookVector * 6 - enemy.HumanoidRootPart.Position).magnitude <= 7 then
-			if math.random(1,2) == 2 and code then
-			
-			end
+	
 			if game.ReplicatedStorage.Remotes.Damage:InvokeServer(getrenv()._G.Pass, enemy, info) then
 				return enemy
 			else
@@ -147,7 +143,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 2
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 					anim:AdjustSpeed(1)
@@ -166,7 +162,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 2
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 					anim:AdjustSpeed(1)
@@ -185,7 +181,7 @@ function combatModule.Combat(animationid, form, code)
 							HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 							Damage = 9
-						},code)
+						})
 						anim:AdjustSpeed(1)
 						if h then
 							combatModule.shakeScreen("BigExplosion")
@@ -203,7 +199,7 @@ function combatModule.Combat(animationid, form, code)
 							HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 							Damage = 2
-							},code) then
+							}) then
 							combatModule.shakeScreen("Bump")
 						end
 					end
@@ -302,7 +298,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 5
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 						return
 					end
@@ -318,7 +314,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -334,7 +330,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 9
-					},code)
+					})
 					anim:AdjustSpeed(1)
 					if v47 then
 						combatModule.shakeScreen("BigExplosion")
@@ -352,7 +348,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -368,7 +364,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -384,7 +380,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6 + Vector3.new(0, 6, 0), 
 						Damage = 5
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 				end
@@ -665,7 +661,7 @@ inputbegan[Enum.KeyCode.W] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-	
+		remote:FireServer(getrenv()._G.Pass,{"InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -689,7 +685,7 @@ inputbegan[Enum.KeyCode.A] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-	
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -712,6 +708,8 @@ inputbegan[Enum.KeyCode.S] = function()
 		char.Head.Jump:Play()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
+	
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -735,7 +733,7 @@ inputbegan[Enum.KeyCode.D] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -747,7 +745,17 @@ inputbegan[Enum.KeyCode.D] = function()
 	end
 end
 
-
+inputbegan[Enum.KeyCode.R] = function()
+	if debounce and not checkIfHurt() and cooldowns("Teleport", nil) then
+		cooldowns("Teleport", false)
+		debounce = false
+		remote:FireServer(code,{"Teleport",getTP()})
+		task.wait(.05)
+		debounce = true
+		task.wait(0.7)
+		cooldowns("Teleport", true)
+	end
+end
 
 inputbegan[Enum.KeyCode.LeftControl] = function()
 	if debounce and not checkIfHurt() then
@@ -789,7 +797,7 @@ end
 
 inputbegan[Enum.KeyCode.Q] = switchType
 inputbegan[Enum.KeyCode.E] = switchType
-debounce = true
+
 inputbegan[Enum.KeyCode.F] = function()
 	if debounce and not checkIfHurt() then
 		debounce = false
@@ -812,33 +820,43 @@ inputbegan[Enum.KeyCode.F] = function()
 	end
 end
 
-
+inputbegan[Enum.KeyCode.C] = function()
+	if debounce and not checkIfHurt() then
+		debounce = false
+		hum.WalkSpeed = 0
+		functions:InvokeServer(code,{"Charge",true})
+		while true do
+			task.wait(0.03)
+			if not uis:IsKeyDown(Enum.KeyCode.C) then
+				break
+			end
+			if not char:FindFirstChild("Charging") then
+				break
+			end
+			if checkIfHurt() then
+				break
+			end
+		end
+		task.spawn(function()
+			if char:FindFirstChild("Charging") then
+				functions:InvokeServer(code,{"Charge"})
+			end
+		end)
+		hum.WalkSpeed = 0
+		debounce = true
+	end
+end
 
 inputbegan[Enum.KeyCode.Z] = function()
-	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
 		if data.Transformation.Value == "Base" or data.Transformation.Value == "SSJG" or data.Transformation.Value == "SSJB" then
-		    data.Transformation.Value = "SSJ"
-		    auraHandle(char,gokuAssets.SSJAura)
-			hairHandle(char,gokuAssets.SSJHair)
-			bodyLightning(char)
-		
+			functions:InvokeServer(code,{"SSJ"})
 		elseif data.Transformation.Value == "SSJ" then
-		     data.Transformation.Value = "SSJ2"
-			if char.HumanoidRootPart:FindFirstChild("FormAura") then
-				auraHandle(char)
-			end
-			auraHandle(char,gokuAssets.SSJAura)
-			hairHandle(char,gokuAssets.SSJ2Hair)
+			functions:InvokeServer(code,{"SSJ2"})
 		elseif data.Transformation.Value == "SSJ2" then
-		    		     data.Transformation.Value = "SSJ3"
-		    		   
-	if char.HumanoidRootPart:FindFirstChild("FormAura") then
-				auraHandle(char)
-			end
-			auraHandle(char,gokuAssets.SSJAura)
-			hairHandle(char,gokuAssets.SSJ3Hair)
+			functions:InvokeServer(code,{"SSJ3"})
 		end
 		hum.WalkSpeed = 0
 		debounce = true
@@ -846,150 +864,20 @@ inputbegan[Enum.KeyCode.Z] = function()
 end
 
 inputbegan[Enum.KeyCode.V] = function()
-	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
-	  spawn(function()
-		    		         local tweenS = game:GetService("TweenService")
-local gokuAssets = game:GetService("ReplicatedStorage").Effects.GokuAssets
-local char = script:WaitForChild("Owner").Value
-local doingEff = true
-
-task.spawn(function()
-	task.wait(0.4)
-	local fo = gokuAssets.Waves:Clone()
-	fo.Material = "Neon"
-	fo.Transparency = 1
-	fo.Color = Color3.fromRGB(255, 42, 0)
-	fo.Size = Vector3.new(8,2.2,8)
-	fo.Position = char.Torso.Position + Vector3.new(0,(2.2)/2 - 3,0)
-	fo.Parent = char.Effects
-	tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 0.1}):Play()
-	while doingEff do
-		fo.Position = char.Torso.Position + Vector3.new(0,fo.Size.Y/2 - 3,0)
-		fo.Orientation = fo.Orientation + Vector3.new(0,2.5,0)
-		task.wait()
-	end
-	if fo then
-		tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 1;Size = Vector3.new(35, 15, 35);Orientation = fo.Orientation + Vector3.new(0,80,0)}):Play()
-		game.Debris:AddItem(fo,2)
-	end
-end)
-
-for i,v in pairs({char["Left Leg"],char["Right Leg"]}) do
-	local effect = gokuAssets.SSGEFFECT:Clone()
-	local weld = Instance.new("Weld")
-	weld.Part0 = v
-	weld.Part1 = effect
-	weld.C0 = CFrame.new(0,-1,0)
-	weld.Parent = effect
-	effect.Parent = char.Effects
-	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
-	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
-	game.Debris:AddItem(effect,3)
-	task.spawn(function()
-		task.wait(1.8)
-		effect.SSGEffect.LockedToPart = false
-		effect.SSGEffect.Speed = NumberRange.new(2)
-		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
-		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
-		effect.SSGEffect.Lifetime = NumberRange.new(1)
-		task.wait(0.15)
-		effect.SSGEffect.Enabled = false
-	end)
-end
-
-task.wait(0.5)
-
-for i,v in pairs({char["Left Arm"],char["Right Arm"],char.Torso}) do
-	local effect = gokuAssets.SSGEFFECT:Clone()
-	local weld = Instance.new("Weld")
-	weld.Part0 = v
-	weld.Part1 = effect
-	weld.C0 = CFrame.new(0,-1,0)
-	weld.Parent = effect
-	effect.Parent = char.Effects
-	if v.Name ~= "Torso" then
-		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
-	else
-		effect.Size = Vector3.new(2,0,1)
-		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(2,2,1)}):Play()
-	end
-	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
-	game.Debris:AddItem(effect,3)
-	task.spawn(function()
-		task.wait(1.5)
-		effect.SSGEffect.LockedToPart = false
-		effect.SSGEffect.Speed = NumberRange.new(2)
-		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
-		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
-		effect.SSGEffect.Lifetime = NumberRange.new(1)
-		task.wait(0.15)
-		effect.SSGEffect.Enabled = false
-	end)
-end
-
-task.wait(0.5)
-
-for i,v in pairs({char.Head}) do
-	local effect = gokuAssets.SSGEFFECT:Clone()
-	local weld = Instance.new("Weld")
-	weld.Part0 = v
-	weld.Part1 = effect
-	weld.C0 = CFrame.new(0,-0.5,0)
-	weld.Parent = effect
-	effect.Parent = char.Effects
-	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,1,1)}):Play()
-	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
-	game.Debris:AddItem(effect,3)
-	task.spawn(function()
-		task.wait(1.5)
-		effect.SSGEffect.LockedToPart = false
-		effect.SSGEffect.Speed = NumberRange.new(2)
-		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
-		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
-		effect.SSGEffect.Lifetime = NumberRange.new(1)
-		task.wait(0.15)
-		effect.SSGEffect.Enabled = false
-	end)
-end
-
-task.wait(1.2)
-
-task.spawn(function()
-	for i = 1,5 do
-		local a = math.random(5,20)
-		local wave2 = gokuAssets.Waves:Clone()
-		wave2.Color = Color3.fromRGB(255, 42, 0)
-		wave2.Size = Vector3.new(0,3,0)
-		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
-		wave2.Transparency = 0.6
-		wave2.Material = Enum.Material.SmoothPlastic
-		wave2.Parent = char.Effects
-		game.Debris:AddItem(wave2,2)
-		tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,1.5,a);Orientation = -Vector3.new(0,math.random(-80,80),0);Position = char.Torso.Position + Vector3.new(0,1.5/2 - 3,0)}):Play()
-		task.spawn(function()
-			task.wait(1)
-			tweenS:Create(wave2, TweenInfo.new(0.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
-		end)
-		task.wait(0.01)
-	end
-end)
-
-doingEff = false
-	  end)
-	    		         auraHandle(char,gokuAssets.SSJGAura)
-			local hair = hairHandle(char,gokuAssets.SSJGHair)
+		functions:InvokeServer(code,{"SSJG"})
 		hum.WalkSpeed = 0
 		debounce = true
 	end
 end
 
 inputbegan[Enum.KeyCode.B] = function()
-	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
-	--	functions:InvokeServer(code,{"SSJB"})
+		functions:InvokeServer(code,{"SSJB"})
 		hum.WalkSpeed = 0
 		debounce = true
 	end
@@ -1000,9 +888,9 @@ inputbegan[Enum.KeyCode.X] = function()
 		debounce = false
 		hum.WalkSpeed = 0
 		if uis:IsKeyDown(Enum.KeyCode.LeftShift) then
-		--	functions:InvokeServer(code,{"Aura"})
+			functions:InvokeServer(code,{"Aura"})
 		else
-		--	functions:InvokeServer(code,{"Deform"})
+			functions:InvokeServer(code,{"Deform"})
 		end
 		hum.WalkSpeed = 0
 		debounce = true
@@ -1010,17 +898,243 @@ inputbegan[Enum.KeyCode.X] = function()
 end
 
 inputbegan[Enum.KeyCode.K] = function()
-	if debounce and not checkIfHurt()   then
+	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) then
 		debounce = false
 		hum.WalkSpeed = 0
-	--	functions:InvokeServer(code,{"Kaioken"})
+		functions:InvokeServer(code,{"Kaioken"})
 		hum.WalkSpeed = 0
 		debounce = true
 	end
 end
 
+inputbegan[Enum.KeyCode.One] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 25 and cooldowns("Delta1",nil) then
+			debounce = false
+			_G.RootPartFollow = false
+			cooldowns("Delta1", false)
+			uiCooldowns(1, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat1" })
+			uiCooldowns(1, false, 30, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(30)
+			cooldowns("Delta1", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My1",nil) then
+			debounce = false
+			cooldowns("My1", false)
+			uiCooldowns(1, true, nil, 2)
+			functions:InvokeServer(code,{ "Kamehameha", "Start" })
+			while true do
+				if not uis:IsKeyDown(Enum.KeyCode.One) then
+					break
+				end
+				if data.Stamina.Value <= 0 then
+					break
+				end
+				task.wait(0.1)
+			end
+			_G.RootPartFollow = false;
+			hum.WalkSpeed = 0
+			functions:InvokeServer(code,{ "Kamehameha", "End" })
+			uiCooldowns(1, false, 10, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(10)
+			cooldowns("My1", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Two] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 50 and cooldowns("Delta2",nil) and locked then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta2", false)
+			uiCooldowns(2, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat2", locked })
+			uiCooldowns(2, false, 35, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(35)
+			cooldowns("Delta2", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My2",nil) then
+			debounce = false
+			cooldowns("My2", false)
+			uiCooldowns(2, true, nil, 2)
+			remote:FireServer(code,{"TakeStamina",50})
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy();
+				end
+			end
+			_G.RootPartFollow = false
+			functions:InvokeServer(code,{ "StardustRain",locked })
+			uiCooldowns(2, false, 15, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(15)
+			cooldowns("My2", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Three] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 45 and cooldowns("Delta3",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta3", false)
+			uiCooldowns(3, true, nil, 1)
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat3" })
+			uiCooldowns(3, false, 30, 1)
+			debounce = true
+			task.wait(30)
+			cooldowns("Delta3", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 60 and cooldowns("My3",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("My3", false)
+			uiCooldowns(3, true, nil, 2)
+			functions:InvokeServer(code,{"KiBlast"})
+			uiCooldowns(3, false, 0.5, 2)
+			debounce = true
+			task.wait(0.5)
+			cooldowns("My3", true)
+		end
+	end
+end
 
 
+inputbegan[Enum.KeyCode.Four] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 45 and cooldowns("Delta4",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta4", false)
+			uiCooldowns(4, true, nil, 1)
+			_G.RootPartFollow = false
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat4" })
+			_G.RootPartFollow = true
+			uiCooldowns(4, false, 20, 1)
+			debounce = true
+			task.wait(20)
+			cooldowns("Delta4", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 500 and cooldowns("My4",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			_G.RootPartFollow = false
+			remote:FireServer(code,{"TakeStamina",500})
+			_G.RootPartFollow = true
+			cooldowns("My5", false)
+			uiCooldowns(4, true, nil, 2)
+			functions:InvokeServer(code,{"SpiritBomb"})
+			uiCooldowns(4, false, 20, 2)
+			debounce = true
+			task.wait(20)
+			cooldowns("My5", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Five] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 55 and cooldowns("Delta5",nil) then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta5", false)
+			uiCooldowns(5, true, nil, 1)
+			_G.RootPartFollow = false
+			remotes.DeltaSansMoves:InvokeServer({ pass, "Combat5" })
+			_G.RootPartFollow = true
+			uiCooldowns(5, false, 25, 1)
+			debounce = true
+			task.wait(25)
+			cooldowns("Delta5", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 60 and cooldowns("My5",nil) and data.Transformation.Value:match("UI") then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("My5", false)
+			hum.WalkSpeed = 0
+			uiCooldowns(5, true, nil, 2)
+			_G.RootPartFollow = false
+			remote:FireServer(code,{"TakeStamina",60})
+			functions:InvokeServer(code,{"Blink"})
+			_G.RootPartFollow = true
+			hum.WalkSpeed = 0
+			uiCooldowns(5, false, 10, 2)
+			debounce = true
+			task.wait(10)
+			cooldowns("My5", true)
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.Six] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 300 and cooldowns("Delta6",nil) and locked and locked.Humanoid.Health >= 1 then
+			debounce = false
+			for i, v in pairs(root:GetChildren()) do
+				if v.Name == "Client" then
+					v:Destroy()
+				end
+			end
+			cooldowns("Delta6", false)
+			uiCooldowns(6, true, nil, 1)
+			_G.RootPartFollow = false
+			hum.WalkSpeed = 0
+			remote:FireServer(code,{"TakeStamina",300})
+			pcall(function()
+				functions:InvokeServer(code,{"WarpKame",locked,getTP()})
+			end)
+			_G.RootPartFollow = true
+			uiCooldowns(6, false, 90, 1)
+			debounce = true
+			task.wait(90)
+			cooldowns("Delta6", true)			
+		end
+	end
+end
+
+inputbegan[Enum.KeyCode.M] = function()
+	if debounce and cooldowns("Hakai",nil) and locked then
+		debounce = false
+		cooldowns("Hakai", false)
+		functions:InvokeServer(code,{"Hakai",locked})
+		debounce = true
+		task.wait(10)
+		cooldowns("Hakai", true)
+	end
+end
 
 
 
@@ -1098,7 +1212,6 @@ while true do
 end
 xxx=Instance.new("StringValue", data)
 xxx.Name = "Transformation"
-xxx.Value = "Base"
 data:WaitForChild("Transformation"):GetPropertyChangedSignal("Value"):Connect(function()
 	if data.Transformation.Value == "UI" then
 		moveDebounce.Moves2["5"].ImageLabel.ImageColor3 = Color3.fromRGB(255,255,255)
