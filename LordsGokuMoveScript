@@ -662,10 +662,8 @@ inputbegan[Enum.KeyCode.W] = function()
 		char.Head.Jump:Play()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
-		if part then
-			remote:FireServer(code,{"Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos + root.CFrame.lookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
-		end
-		remote:FireServer(code,{"InvFrames", 0.2 })
+	
+		remote:FireServer(getrenv()._G.Pass,{"InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -688,10 +686,8 @@ inputbegan[Enum.KeyCode.A] = function()
 		char.Head.Jump:Play()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
-		if part then
-			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos - root.CFrame.rightVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
-		end
-		remote:FireServer(code,{ "InvFrames", 0.2 })
+		
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -714,10 +710,8 @@ inputbegan[Enum.KeyCode.S] = function()
 		char.Head.Jump:Play()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
-		if part then
-			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos - root.CFrame.LookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
-		end
-		remote:FireServer(code,{ "InvFrames", 0.2 })
+	
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -740,10 +734,8 @@ inputbegan[Enum.KeyCode.D] = function()
 		char.Head.Jump:Play()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
-		if part then
-			remote:FireServer(code,{ "Particle", "SmallForwardSmokeParticle", CFrame.new(pos, pos + root.CFrame.rightVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
-		end
-		remote:FireServer(code,{ "InvFrames", 0.2 })
+		
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
