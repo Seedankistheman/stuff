@@ -64,9 +64,7 @@ end
 function combatModule.Damage(char, info, code)
 	for i, enemy in pairs(workspace:GetChildren()) do
 		if enemy:FindFirstChild("HumanoidRootPart") and enemy ~= char and (root.Position + root.CFrame.lookVector * 6 - enemy.HumanoidRootPart.Position).magnitude <= 7 then
-			if math.random(1,2) == 2 and code then
-			
-			end
+	
 			if game.ReplicatedStorage.Remotes.Damage:InvokeServer(getrenv()._G.Pass, enemy, info) then
 				return enemy
 			else
@@ -145,7 +143,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 2
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 					anim:AdjustSpeed(1)
@@ -164,7 +162,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 2
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 					anim:AdjustSpeed(1)
@@ -183,7 +181,7 @@ function combatModule.Combat(animationid, form, code)
 							HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 							Damage = 9
-						},code)
+						})
 						anim:AdjustSpeed(1)
 						if h then
 							combatModule.shakeScreen("BigExplosion")
@@ -201,7 +199,7 @@ function combatModule.Combat(animationid, form, code)
 							HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 							VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 							Damage = 2
-							},code) then
+							}) then
 							combatModule.shakeScreen("Bump")
 						end
 					end
@@ -300,7 +298,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 5
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 						return
 					end
@@ -316,7 +314,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -332,7 +330,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 9
-					},code)
+					})
 					anim:AdjustSpeed(1)
 					if v47 then
 						combatModule.shakeScreen("BigExplosion")
@@ -350,7 +348,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -366,7 +364,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6, 
 						Damage = 3
-						},code) then
+						}) then
 						combatModule.shakeScreen("Explosion")
 						return
 					end
@@ -382,7 +380,7 @@ function combatModule.Combat(animationid, form, code)
 						HurtAnimation = rep.Animations.HurtAnimations["Hurt" .. math.random(1, 3)], 
 						VictimCFrame = root.CFrame * CFrame.Angles(0, math.rad(180), 0) + root.CFrame.lookVector * 6 + Vector3.new(0, 6, 0), 
 						Damage = 5
-						},code) then
+						}) then
 						combatModule.shakeScreen("Bump")
 					end
 				end
@@ -663,7 +661,7 @@ inputbegan[Enum.KeyCode.W] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-	
+		remote:FireServer(getrenv()._G.Pass,{"InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -687,7 +685,7 @@ inputbegan[Enum.KeyCode.A] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-	
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -711,7 +709,7 @@ inputbegan[Enum.KeyCode.S] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -735,7 +733,7 @@ inputbegan[Enum.KeyCode.D] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-
+		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -747,7 +745,17 @@ inputbegan[Enum.KeyCode.D] = function()
 	end
 end
 
-
+inputbegan[Enum.KeyCode.R] = function()
+	if debounce and not checkIfHurt() and cooldowns("Teleport", nil) then
+		cooldowns("Teleport", false)
+		debounce = false
+		remote:FireServer(code,{"Teleport",getTP()})
+		task.wait(.05)
+		debounce = true
+		task.wait(0.7)
+		cooldowns("Teleport", true)
+	end
+end
 
 inputbegan[Enum.KeyCode.LeftControl] = function()
 	if debounce and not checkIfHurt() then
@@ -959,7 +967,7 @@ inputbegan[Enum.KeyCode.Two] = function()
 			debounce = false
 			cooldowns("My2", false)
 			uiCooldowns(2, true, nil, 2)
-		
+			remote:FireServer(code,{"TakeStamina",50})
 			for i, v in pairs(root:GetChildren()) do
 				if v.Name == "Client" then
 					v:Destroy();
@@ -1037,11 +1045,11 @@ inputbegan[Enum.KeyCode.Four] = function()
 				end
 			end
 			_G.RootPartFollow = false
-		
+			remote:FireServer(code,{"TakeStamina",500})
 			_G.RootPartFollow = true
 			cooldowns("My5", false)
 			uiCooldowns(4, true, nil, 2)
-		
+			functions:InvokeServer(code,{"SpiritBomb"})
 			uiCooldowns(4, false, 20, 2)
 			debounce = true
 			task.wait(20)
@@ -1079,8 +1087,8 @@ inputbegan[Enum.KeyCode.Five] = function()
 			hum.WalkSpeed = 0
 			uiCooldowns(5, true, nil, 2)
 			_G.RootPartFollow = false
-		
-
+			remote:FireServer(code,{"TakeStamina",60})
+			functions:InvokeServer(code,{"Blink"})
 			_G.RootPartFollow = true
 			hum.WalkSpeed = 0
 			uiCooldowns(5, false, 10, 2)
@@ -1104,7 +1112,7 @@ inputbegan[Enum.KeyCode.Six] = function()
 			uiCooldowns(6, true, nil, 1)
 			_G.RootPartFollow = false
 			hum.WalkSpeed = 0
-	
+			remote:FireServer(code,{"TakeStamina",300})
 			pcall(function()
 				functions:InvokeServer(code,{"WarpKame",locked,getTP()})
 			end)
@@ -1168,7 +1176,7 @@ uis.InputBegan:Connect(function(i,s)
 		if ((light == 5 or heavy == 5) and data.Transformation.Value == "Base") or ((light == 9 or heavy == 6) and data.Transformation.Value:match("SSJ")) or ((light == 9 or heavy == 6) and data.Transformation.Value:match("UI")) then
 			light = 0
 			heavy = 0
-			remotes.Functions:InvokeServer({ _G.Pass, "Comfirmation" })
+			remotes.Functions:InvokeServer({ _G.Pass, "Confirmation" })
 			task.wait(2)
 		end
 		combatDebounce = false
