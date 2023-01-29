@@ -815,7 +815,7 @@ end
 
 
 inputbegan[Enum.KeyCode.Z] = function()
-	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
 		if data.Transformation.Value == "Base" or data.Transformation.Value == "SSJG" or data.Transformation.Value == "SSJB" then
@@ -846,7 +846,7 @@ inputbegan[Enum.KeyCode.Z] = function()
 end
 
 inputbegan[Enum.KeyCode.V] = function()
-	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
 	  spawn(function()
@@ -986,7 +986,7 @@ doingEff = false
 end
 
 inputbegan[Enum.KeyCode.B] = function()
-	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) and not data.Transformation.Value:match("UI") then
+	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
 		functions:InvokeServer(code,{"SSJB"})
@@ -1010,7 +1010,7 @@ inputbegan[Enum.KeyCode.X] = function()
 end
 
 inputbegan[Enum.KeyCode.K] = function()
-	if debounce and not checkIfHurt() and uis:IsKeyDown(Enum.KeyCode.LeftShift) then
+	if debounce and not checkIfHurt()   then
 		debounce = false
 		hum.WalkSpeed = 0
 		functions:InvokeServer(code,{"Kaioken"})
@@ -1018,6 +1018,7 @@ inputbegan[Enum.KeyCode.K] = function()
 		debounce = true
 	end
 end
+
 
 
 
