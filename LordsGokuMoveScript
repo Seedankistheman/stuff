@@ -663,7 +663,7 @@ inputbegan[Enum.KeyCode.W] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-		remote:FireServer(getrenv()._G.Pass,{"InvFrames", 0.2 })
+	
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -747,17 +747,7 @@ inputbegan[Enum.KeyCode.D] = function()
 	end
 end
 
-inputbegan[Enum.KeyCode.R] = function()
-	if debounce and not checkIfHurt() and cooldowns("Teleport", nil) then
-		cooldowns("Teleport", false)
-		debounce = false
-		remote:FireServer(code,{"Teleport",getTP()})
-		task.wait(.05)
-		debounce = true
-		task.wait(0.7)
-		cooldowns("Teleport", true)
-	end
-end
+
 
 inputbegan[Enum.KeyCode.LeftControl] = function()
 	if debounce and not checkIfHurt() then
