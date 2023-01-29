@@ -989,7 +989,7 @@ inputbegan[Enum.KeyCode.B] = function()
 	if debounce and not checkIfHurt()   and not data.Transformation.Value:match("UI") then
 		debounce = false
 		hum.WalkSpeed = 0
-		functions:InvokeServer(code,{"SSJB"})
+	--	functions:InvokeServer(code,{"SSJB"})
 		hum.WalkSpeed = 0
 		debounce = true
 	end
@@ -1000,9 +1000,9 @@ inputbegan[Enum.KeyCode.X] = function()
 		debounce = false
 		hum.WalkSpeed = 0
 		if uis:IsKeyDown(Enum.KeyCode.LeftShift) then
-			functions:InvokeServer(code,{"Aura"})
+		--	functions:InvokeServer(code,{"Aura"})
 		else
-			functions:InvokeServer(code,{"Deform"})
+		--	functions:InvokeServer(code,{"Deform"})
 		end
 		hum.WalkSpeed = 0
 		debounce = true
@@ -1013,7 +1013,7 @@ inputbegan[Enum.KeyCode.K] = function()
 	if debounce and not checkIfHurt()   then
 		debounce = false
 		hum.WalkSpeed = 0
-		functions:InvokeServer(code,{"Kaioken"})
+	--	functions:InvokeServer(code,{"Kaioken"})
 		hum.WalkSpeed = 0
 		debounce = true
 	end
