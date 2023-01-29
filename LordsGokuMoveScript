@@ -394,7 +394,7 @@ function combatModule.Combat(animationid, form, code)
 		hum:ChangeState(Enum.HumanoidStateType.Flying)
 		local v49, v50 = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		if v49 then
-			rep.Remotes.Effects:FireServer({ _G.Pass, "Particle", "SmallForwardSmokeParticle", CFrame.new(v50, v50 + root.CFrame.lookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
+			rep.Remotes.Effects:FireServer({ getrenv()._G.Pass, "Particle", "SmallForwardSmokeParticle", CFrame.new(v50, v50 + root.CFrame.lookVector * 10) * CFrame.Angles(math.rad(90), math.rad(90), math.rad(0)), 0.1 })
 		end
 		bodypos.MaxForce = Vector3.new(100000, 100000, 100000)
 		bodypos.P = 100000
