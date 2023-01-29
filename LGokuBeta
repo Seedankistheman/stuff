@@ -1,8 +1,8 @@
 frame = game:GetObjects("rbxassetid://12308424823")[1]
 gokumodule = game.ReplicatedStorage:WaitForChild("GokuStuff")
 
-gokuAssets = gokumod.GokuAssets
-gokuSounds = gokumod.GokuSounds
+gokuAssets = gokumodule.GokuAssets
+gokuSounds = gokumodule.GokuSounds
 local plrs = game:GetService("Players")
 local rep = game:GetService("ReplicatedStorage")
 local main = require(rep.ClientModules.MainModule)
