@@ -96,11 +96,11 @@ local remotes = rep.Remotes
 
 function combatModule.Combat(animationid, form, code)
 	local hum = char.Humanoid
-	local animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.Combat
+	local animations = game:GetService("Players").LocalPlayer.Backpack.Main.GokuMoves.ModuleScript.Animations.Combat
 	if form:match("SSJ") then
-		animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.SecondCombat
+		animations = game:GetService("Players").LocalPlayer.Backpack.Main.GokuMoves.ModuleScript.Animations.SecondCombat
 	elseif form:match("UI") then
-		animations = game:GetService("Players").LordsNutSock.Backpack.Main.GokuMoves.ModuleScript.Animations.ThirdCombat
+		animations = game:GetService("Players").LocalPlayer.Backpack.Main.GokuMoves.ModuleScript.Animations.ThirdCombat
 	end
 	if animations:FindFirstChild(animationid) then
 		local anim = hum:LoadAnimation(animations[animationid])
@@ -456,8 +456,8 @@ lokkkpls.Parent = frame
 game.Players.LocalPlayer.Backpack.Main:Destroy()
 frame.Parent = game.Players.LocalPlayer.Backpack
 script = frame.GokuMoves
-game:GetService("Players").LordsNutSock.PlayerGui.SansIndicator:Destroy()
-game:GetService("Players").LordsNutSock.PlayerGui.UI.Ui.MoveDebounceShower:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.SansIndicator:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower:Destroy()
 game.Players.LocalPlayer.Chatted:Connect(function(p6)
 	game.ReplicatedStorage.Remotes.Events:FireServer({ getrenv()._G.Pass, "Chatted", p6, Color3.fromRGB(255, 0, 0) });
 end);
