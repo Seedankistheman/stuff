@@ -449,15 +449,18 @@ function combatModule.Combat(animationid, form, code)
 end
 
 
-
+lokkkpls = game.Players.LocalPlayer.Backpack.Main.LockOnScript
+lokkkpls.Parent = game.Workspace
+frame.LockOnScript:Destroy()
+lokkkpls.Parent = frame
 game.Players.LocalPlayer.Backpack.Main:Destroy()
 frame.Parent = game.Players.LocalPlayer.Backpack
 script = frame.GokuMoves
 game:GetService("Players").LordsNutSock.PlayerGui.SansIndicator:Destroy()
 game:GetService("Players").LordsNutSock.PlayerGui.UI.Ui.MoveDebounceShower:Destroy()
-
-
-
+game.Players.LocalPlayer.Chatted:Connect(function(p6)
+	game.ReplicatedStorage.Remotes.Events:FireServer({ getrenv()._G.Pass, "Chatted", p6, Color3.fromRGB(255, 0, 0) });
+end);
 local plrs = game:GetService("Players")
 local rep = game:GetService("ReplicatedStorage")
 local uis = game:GetService("UserInputService")
