@@ -661,7 +661,7 @@ inputbegan[Enum.KeyCode.W] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-		remote:FireServer(getrenv()._G.Pass,{"InvFrames", 0.2 })
+		
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -685,7 +685,7 @@ inputbegan[Enum.KeyCode.A] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
+		
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -709,7 +709,7 @@ inputbegan[Enum.KeyCode.S] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), -root.CFrame.lookVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 	
-		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
+		
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -733,7 +733,7 @@ inputbegan[Enum.KeyCode.D] = function()
 		main.CreateBodyMover({ "BodyVelocity", root, Vector3.new(100000, 0, 100000), root.CFrame.rightVector * 100, 0.2 })
 		local part, pos = game:GetService("Workspace"):FindPartOnRay(Ray.new(root.CFrame.p, Vector3.new(0, -1, 0).unit * 4), char)
 		
-		remote:FireServer(getrenv()._G.Pass,{ "InvFrames", 0.2 })
+		
 		instantRun()
 		hum:ChangeState(Enum.HumanoidStateType.Freefall)
 		task.wait(0.1)
@@ -862,7 +862,7 @@ uis.InputBegan:Connect(function(i,s)
 		if ((light == 5 or heavy == 5) and data.Transformation.Value == "Base") or ((light == 9 or heavy == 6) and data.Transformation.Value:match("SSJ")) or ((light == 9 or heavy == 6) and data.Transformation.Value:match("UI")) then
 			light = 0
 			heavy = 0
-			remotes.Functions:InvokeServer({ getrenv()._G.Pass, "Confirmation" })
+		--	remotes.Functions:InvokeServer({ getrenv()._G.Pass, "Confirmation" })
 			task.wait(2)
 		end
 		combatDebounce = false
