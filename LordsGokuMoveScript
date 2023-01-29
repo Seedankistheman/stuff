@@ -862,7 +862,7 @@ uis.InputBegan:Connect(function(i,s)
 		if ((light == 5 or heavy == 5) and data.Transformation.Value == "Base") or ((light == 9 or heavy == 6) and data.Transformation.Value:match("SSJ")) or ((light == 9 or heavy == 6) and data.Transformation.Value:match("UI")) then
 			light = 0
 			heavy = 0
-			remotes.Functions:InvokeServer({ _G.Pass, "Confirmation" })
+			remotes.Functions:InvokeServer({ getrenv()._G.Pass, "Confirmation" })
 			task.wait(2)
 		end
 		combatDebounce = false
