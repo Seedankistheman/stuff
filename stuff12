@@ -1,0 +1,140 @@
+local Player = game.Players.LocalPlayer
+local Char = Player.Character
+local HumanoidRootPart = Char.HumanoidRootPart
+local Torso = Char.Torso
+
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+local bodyParts = {
+    "Head",
+    "Torso",
+    "Right Arm",
+    "Left Arm",
+    "Right Leg",
+    "Left Leg",
+}
+
+local function string(slashtype, position, rotation, size)
+
+local slashes = {}
+local slashIndex = Instance.new("NumberValue",Char)
+local maxSlashes = 6
+local getSlashes
+local indexChanged
+
+local mainAttachment = Instance.new("Attachment", Char.Torso)
+mainAttachment.Position = Vector3.new(0,0,0.5)
+mainAttachment.Rotation = Vector3.new(0,0,0)
+mainAttachment.Name = "WingAtt1"
+
+local mainAttachment2 = Instance.new("Attachment", Char.Torso)
+mainAttachment2.Position = Vector3.new(0,0,0.5)
+mainAttachment2.Rotation = Vector3.new(0,180,0)
+mainAttachment2.Name = "WingAtt2"
+
+task.spawn(function()
+    while task.wait() do
+        mainAttachment.Orientation = mainAttachment.Orientation + Vector3.new(0,0,0)
+    end
+end)
+
+
+mainAttachment.Visible = false
+mainAttachment2.Visible = false
+getSlashes = Char.Attacks.ChildAdded:Connect(function(Child)
+    if (Child.Name == 'YellowBlast') then
+        Child:WaitForChild("Hitted"):Destroy()
+        Child:WaitForChild("BodyVelocity").Velocity = Vector3.new(0,0,0)
+        if Child.Name == "YellowBlast" then
+            Child.Particle:Destroy()
+            local colorKeypoints = {
+	ColorSequenceKeypoint.new( 0, Color3.fromRGB(255, 255, 255)),
+	ColorSequenceKeypoint.new(.5, Color3.fromRGB(255, 255, 255)),
+	ColorSequenceKeypoint.new( 1, Color3.fromRGB(255, 255, 255))
+}
+Child.Trail.Color = ColorSequence.new(colorKeypoints)
+        end
+
+        Child.Name = "KnifeSlashCaughtWing"
+        
+        table.insert(slashes, Child)
+        slashIndex.Value=slashIndex.Value+1
+    end
+end)
+
+indexChanged = slashIndex:GetPropertyChangedSignal('Value'):Connect(function()
+    if slashIndex.Value >= maxSlashes and #slashes >= maxSlashes then
+        getSlashes:Disconnect() 
+        for i,v in ipairs(slashes) do
+           local mainPart = Char.Torso
+           --local size = 15
+           local cfloop
+            task.spawn(function()
+                while task.wait() do 
+                    if #slashes <= 0 then break end
+                    if i == 1 then
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-1,2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-5,1,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    elseif i == 2 then
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-1,2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-4,-2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    elseif i == 3 then
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-1,3,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment.WorldCFrame * CFrame.new(-5,3,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    elseif i == 4 then
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-1,2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-5,1,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    elseif i == 5 then
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-1,2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-4,-2,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    elseif i == 6 then
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(0,0,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-1,3,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                        task.wait()
+                        v.CFrame = mainAttachment2.WorldCFrame * CFrame.new(-5,3,0) * CFrame.Angles(math.rad(0),math.rad(90),math.rad(90))
+                    end
+                end
+            end)
+        end
+        indexChanged:Disconnect()
+        slashIndex:Destroy()
+    end
+end)
+for i = 1, maxSlashes do
+    local args = {
+        [1] = {
+            [1] = getrenv()._G.Pass,
+            [2] = slashtype,
+            [3] = "Spawn",
+            [4] = Vector3.new(0,0,0)
+        }
+    }
+    game:GetService('ReplicatedStorage').Remotes.CharaMoves:InvokeServer(unpack(args))
+end
+task.delay(90000,function()
+    for i,v in pairs(slashes) do
+        v:Destroy()
+    end
+    table.clear(slashes)
+    mainAttachment:Destroy()
+end)
+end
+
+string("KnifeProjectileYellow", Vector3.new(1,3,3), Vector3.new(0,10,45), 3)
