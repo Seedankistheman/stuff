@@ -1,0 +1,37 @@
+LocalPlayer = game:GetService("Players").LocalPlayer
+selection = LocalPlayer.PlayerGui:FindFirstChild("CharacterSelection")
+if selection then
+selection.Character.Value = "XSans"
+game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+wait(0.6)
+
+end
+wait(3)
+
+char = game.Players.LocalPlayer.Character
+ char.Head.Voice:Destroy()
+ local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Reset"
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
+repeat wait() until char.Head.HealthBar.Frame.HealthLabel.Text == "0/0"
+char.Head.HealthBar.Frame.PName:Destroy()
+char.Head.HealthBar.Frame.Script:Destroy()
+repeat wait() until char.Humanoid.Health == 190
+spawn(function()
+    local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Overwrite",
+        [3] = "OverwriteKnives",
+        [4] = game:GetService("ReplicatedStorage").Resources.MoveEffects.HateBall.HateBall
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.XSansMoves:InvokeServer(unpack(args))
+
+    end)
