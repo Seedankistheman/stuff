@@ -1,0 +1,3056 @@
+local uis = game:GetService("UserInputService")
+local function gettouched(CFramee, what, part)
+    local v11 = OverlapParams.new()
+v11.FilterType = Enum.RaycastFilterType.Whitelist
+local v20 = CFramee
+		local v21 = what
+		local v22 = part
+		if v22 then
+			v20 = v22.CFrame
+		end
+		local v23 = {}
+		for v24, v25 in pairs(workspace:GetChildren()) do
+			if
+				v25:FindFirstChild("HumanoidRootPart") and v25.Name ~=game.Players.LocalPlayer.Name and
+				not v25:FindFirstChild("Inv")
+			then
+				table.insert(v23, v25.HumanoidRootPart)
+			end
+		end
+		v11.FilterDescendantsInstances = v23
+		return workspace:GetPartBoundsInBox(v20, typeof(v21) == "Vector3" and v21 or Vector3.new(v21, v21, v21), v11)
+end
+
+local currentType = "Goku"
+local keys = {W=false,A=false,S=false,D=false}
+local inputbegan = {}
+local inputended = {}
+_G.hidechat = true -- Hides your chat
+chargeanim = {}
+game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Betty"
+repeat wait() until game.Players.LocalPlayer.Character
+local frame = game:GetObjects("rbxassetid://12309319034")[1]
+frame.Parent = game:GetService("ReplicatedStorage") --10186247615
+frame.Name = "GokuStuff"
+
+local hb2 = frame.GokuAssets.GokuBar:Clone()
+
+game.Players.LocalPlayer.Character:WaitForChild("Head"):WaitForChild("HealthBar").Frame.PName:Destroy()
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame.HealthLabel:Destroy()
+
+game.Players.LocalPlayer.Character.Head.HealthBar.Enabled = false
+--game.Players.LocalPlayer.Backpack:WaitForChild("Main").BettyMoves.Animations.Jump.AnimationId = "rbxassetid://3198665507"
+
+wait(0.5)
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame:WaitForChild("KumuBar"):Destroy()
+game.Players.LocalPlayer.Character.Head.HealthBar.Enabled = false
+workspace:SetAttribute("RbxLegacyAnimationBlending", true)
+
+local uic1 = Instance.new("UICorner")
+uic1.Parent = game.Players.LocalPlayer.Character.Head.HealthBar.Frame.BackHealth
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(812, 1101, 429)
+hb2.Parent = game.Players.LocalPlayer.Character.Head
+hb2.Frame.PName.Text = game.Players.LocalPlayer.Character.Name
+
+
+
+spawn(function()
+while true do
+task.wait()
+hb2.Frame.HealthLabel.Text = (math.floor(game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health).."/"..game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
+hb2.Frame.BackHealth.Health.Size = UDim2.new(game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health/game.Players.LocalPlayer.Character:WaitForChild("Humanoid").MaxHealth * 1,1,1)
+end
+end)
+
+-- Chat
+
+game.Players.LocalPlayer.Chatted:Connect(function(Chat)
+local A_1 =  {
+          [1] = getrenv()._G.Pass, 
+          [2] = "Chatted", 
+          [3] = '' ..Chat, 
+          [4] = Color3.fromRGB(255, 255, 255)
+    }
+    local Event = game:GetService("ReplicatedStorage").Remotes.Events
+    Event:FireServer(A_1)
+end)
+
+local mt = getrawmetatable(game)
+    local backup = mt.__namecall
+    if setreadonly then setreadonly(mt, false) else make_writeable(mt, true) end
+    
+    mt.__namecall = newcclosure(function(...)
+        local method = getnamecallmethod()
+        local args = {...}
+
+        if tostring(args[1]) == 'SayMessageRequest' and _G.hidechat then
+        return
+        end
+        return backup(...)
+    end)
+
+
+local Fonts = {
+	["A"] = "Ａ",
+	["B"] = "Ｂ",
+	["C"] = "Ｃ",
+	["D"] = "Ｄ",
+	["E"] = "Ｅ",
+	["F"] = "Ｆ",
+	["G"] = "Ｇ",
+	["H"] = "Ｈ",
+	["I"] = "Ｉ",
+	["J"] = "Ｊ",
+	["K"] = "Ｋ",
+	["L"] = "Ｌ",
+	["M"] = "Ｍ",
+	["N"] = "Ｎ",
+	["O"] = "Ｏ",
+	["P"] = "Ｐ",
+	["Q"] = "Ｑ",
+	["R"] = "Ｒ",
+	["S"] = "Ｓ",
+	["T"] = "Ｔ",
+	["U"] = "Ｕ",
+	["V"] = "Ｖ",
+	["W"] = "Ｗ",
+	["X"] = "Ｘ",
+	["Y"] = "Ｙ",
+	["Z"] = "Ｚ",
+	["a"] = "ａ",
+	["b"] = "ｂ",
+	["c"] = "ｃ",
+	["d"] = "ｄ",
+	["e"] = "ｅ",
+	["f"] = "ｆ",
+	["g"] = "ｇ",
+	["h"] = "ｈ",
+	["i"] = "ｉ",
+	["j"] = "ｊ",
+	["k"] = "ｋ",
+	["l"] = "ｌ",
+	["m"] = "ｍ",
+	["n"] = "ｎ",
+	["o"] = "ｏ",
+	["p"] = "ｐ",
+	["q"] = "ｑ",
+	["r"] = "ｒ",
+	["s"] = "ｓ",
+	["t"] = "ｔ",
+	["u"] = "ｕ",
+	["v"] = "ｖ",
+	["w"] = "ｗ",
+	["x"] = "ｘ",
+	["y"] = "ｙ",
+	["z"] = "ｚ",
+	[","] = "，",
+	["."] = "．",
+	["?"] = "？",
+	["/"] = "／",
+	["'"] = "＇",
+	["!"] = "！",
+	["@"] = "＠",
+	["#"] = "＃",
+	["$"] = "＄",
+	["%"] = "％",
+	["&"] = "＆",
+	["*"] = "＊",
+	["("] = "（",
+	[")"] = "）",
+	["1"] = "１",
+	["2"] = "２",
+	["3"] = "３",
+	['4'] = "４",
+	['5'] = "５",
+	['6'] = "６",
+	['7'] = "７",
+	['8'] = "８",
+	['9'] = "９",
+	['0'] = "０",
+	["+"] = "＋",
+	["-"] = "－",
+	["="] = "＝",
+}
+local mt = getrawmetatable(game.Players.LocalPlayer.Backpack:WaitForChild("Main"))
+local backup = mt.__namecall
+if setreadonly then setreadonly(mt, false) else make_writeable(mt, true) end
+
+mt.__namecall = newcclosure(function(...)
+	local method = getnamecallmethod()
+	local args = {...}
+
+
+	if tostring(method) == 'GetState' and tostring(args[1]) == 'Humanoid' then
+		return Enum.HumanoidStateType.Running --\\[[ Can do move MidAir ]]//
+	elseif tostring(method) == 'InvokeServer' and tostring(args[1]) == 'Functions' then
+		if tostring(args[2][2]) == 'TakeStamina' then
+			return true
+		end
+	elseif tostring(method) == 'FireServer' and tostring(args[1]) == 'Events' and args[2][2] == "Chatted" then
+		local oldText = args[2][3]
+		local newtext = ""
+		for i = 1,#oldText do
+			if Fonts[oldText:sub(i,i)] then
+				newtext = newtext..Fonts[oldText:sub(i,i)]
+			else
+				newtext = newtext..oldText:sub(i,i)
+			end
+		end
+		args[2][3] = newtext
+		return backup(unpack(args))
+	end
+	return backup(...)
+end)
+
+setreadonly(mt, true) 
+make_writeable(mt, false)
+
+local frame = game:GetObjects("rbxassetid://12309319034")[1]
+frame.Parent = game:GetService("ReplicatedStorage") --10186247615
+frame.Name = "GokuStuff"
+local tweenS = game:GetService("TweenService")
+local gokuAssets = frame.GokuAssets
+local gokuSounds = frame.GokuSounds
+local char = game.Players.LocalPlayer.Character
+local cf = char.Torso.CFrame
+	local trans = {}
+	local function handleAccessories(t)
+		for i,ac in pairs(char:GetChildren()) do
+			if ac:IsA("Accessory") then
+				local handle = ac:FindFirstChild("Handle")
+				if handle and (handle:FindFirstChild("HatAttachment") or handle:FindFirstChild("HairAttachment")) then
+					if t then
+						trans[ac] = handle.Transparency
+						handle.Transparency = 1
+					elseif trans[ac] then
+						handle.Transparency = trans[ac]
+						trans[ac] = nil
+					end
+				end
+			end
+		end
+	end
+	local function hairHandle(hair)
+		local old = char:FindFirstChild("FormHair")
+		if old then
+			pcall(function()
+				old.Name = "Removing"
+				tweenS:Create(old.Hair,TweenInfo.new(0.5),{Transparency=1}):Play()
+				if old.Hair:FindFirstChild("Hair") then
+					tweenS:Create(old.Hair.Hair,TweenInfo.new(0.5),{Transparency=1}):Play()
+				end
+				game.Debris:AddItem(old,0.5)
+			end)
+			handleAccessories(char)
+		end
+		if hair then
+			handleAccessories(char,true)
+			local newhair = hair:Clone()
+			newhair.Name = "FormHair"
+			local weld = Instance.new("WeldConstraint")
+			weld.Part0 = char.Head
+			newhair:SetPrimaryPartCFrame(char.Head.CFrame)
+			weld.Part1 = newhair.Hair
+			weld.Parent = newhair
+			newhair.Parent = char
+			return newhair
+		end
+	end
+		local function auraHandle(aura,entireBody, name)
+		if not aura then
+			for i,v in pairs(char:GetDescendants()) do
+				if (v.Name == (name or "FormAura") or v.Parent.Name == (name or "FormAura")) and v:IsA("ParticleEmitter") then
+					v.Name = "Removing"
+					v.Enabled = false
+				elseif v.Name == (name or "FormAura") and not v:IsA("BoolValue") then
+					game.Debris:AddItem(v,1.5)
+				end
+			end
+		else
+			for i,v in pairs(aura:GetChildren()) do
+				if not entireBody then
+					local clone = v:Clone()
+					clone.Name = (name or "FormAura")
+					clone.Parent = char.HumanoidRootPart
+					if v:IsA("Sound") then
+						v:Play()
+					end
+				else
+					for i,part in pairs(char:GetChildren()) do
+						if (part:IsA("BasePart") or part:IsA("MeshPart") or part:IsA("Part")) and part.Transparency ~= 1 then
+							if ((v:IsA("PointLight") or v:IsA("Sound")) and part.Name == "Torso") then
+								local clone = v:Clone()
+								clone.Name = (name or "FormAura")
+								clone.Parent = part
+								if v:IsA("Sound") then
+									v:Play()
+								end
+							elseif v:IsA("ParticleEmitter") then
+								local clone = v:Clone()
+								clone.Name = (name or "FormAura")
+								clone.Parent = part
+							end
+						end
+					end
+				end
+			end
+		end
+		end
+
+
+
+
+
+	local trans = {}
+	local auraColors = {
+		Base = ColorSequence.new(Color3.new(1,1,1)),
+		SSJ = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJ2 = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJ3 = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJG = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,0,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJB = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(0,1,1)),ColorSequenceKeypoint.new(1,Color3.new(0,0,1))}),
+		UI = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(0,85,255)),ColorSequenceKeypoint.new(0.35,Color3.fromRGB(170,0,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,170,255)),ColorSequenceKeypoint.new(0.65,Color3.fromRGB(0,0,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(85,0,255))}),
+		MUI = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(0,85,255)),ColorSequenceKeypoint.new(0.35,Color3.fromRGB(170,0,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,170,255)),ColorSequenceKeypoint.new(0.65,Color3.fromRGB(0,0,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(85,0,255))}),
+	}
+	wait(3)
+	hairHandle(gokuAssets.BaseHair)
+	--	auraHandle(gokuAssets.UI,true)
+			heckerss = Instance.new("Folder")
+			heckerss.Parent = game.Workspace
+			heckerss.Name = "Parts"
+local function celShading(color,transp,secondaryColor)
+		if color then
+			for i,p in pairs(char:GetChildren()) do
+				if p.Name == "Left Arm" or p.Name == "Right Arm" or p.Name == "Torso" or p.Name == "Head" or p.Name == "Left Leg" or p.Name == "Right Leg" then
+					local cel = gokuAssets.CelShade:FindFirstChild(p.Name):Clone()
+					cel.Color = color
+					cel.Transparency = transp
+					cel.Name = "CelShade"
+					local weld = Instance.new("WeldConstraint")
+					weld.Part0 = p
+					cel.CFrame = p.CFrame
+					weld.Part1 = cel
+					weld.Parent = cel
+					cel.Parent = p
+					if secondaryColor then
+						tweenS:Create(cel,secondary,{Color = secondaryColor}):Play()
+					end
+				end
+			end
+		else
+			for i,p in pairs(char:GetChildren()) do
+				if p.Name == "Left Arm" or p.Name == "Right Arm" or p.Name == "Torso" or p.Name == "Head" or p.Name == "Left Leg" or p.Name == "Right Leg" then
+					local cel = p:FindFirstChild("CelShade")
+					if cel then cel:Destroy() end
+				end
+			end
+		end
+	end
+			lightningTable = {}
+				local ti = TweenInfo.new(0.09,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut)
+				local function Lightning(Part0, Part1, Times, Offset, Color, Thickness, Trans, SizeAdd, part0ok)
+		local magz = (Part0 - Part1).magnitude
+		local curpos = Part0
+		local trz = {
+			-Offset,
+			Offset
+		}
+		for i = 1, Times do
+			local li = Instance.new("Part")
+			li.Name = "Lightning"
+			li.TopSurface = 0
+			li.Material = "Neon"
+			li.BottomSurface = 0
+			li.Locked = true
+			li.CastShadow = false
+			li.Transparency = 0
+			li.BrickColor = Color
+			li.formFactor = "Custom"
+			li.CanCollide = false
+			li.CanTouch = false
+			li.CanQuery = false
+			li.Massless = true
+			local weld = Instance.new("WeldConstraint")
+			weld.Parent = li
+			weld.Part0 = part0ok
+			weld.Part1 = li
+			game.Debris:AddItem(li,4)
+			li.Size = Vector3.new(Thickness, Thickness, magz / Times)
+			local Offzet = Vector3.new(trz[math.random(1, 2)], trz[math.random(1, 2)], trz[math.random(1, 2)])
+			local trolpos = CFrame.new(curpos, Part1) * CFrame.new(0, 0, magz / Times).Position + Offzet
+			if Times == i then
+				local magz2 = (curpos - Part1).magnitude
+				li.Size = Vector3.new(Thickness, Thickness, magz2)
+				li.CFrame = CFrame.new(curpos, Part1) * CFrame.new(0, 0, -magz2 / 2)
+			else
+				li.CFrame = CFrame.new(curpos, trolpos) * CFrame.new(0, 0, magz / Times / 2)
+			end
+		
+			li.Parent = workspace.Parts
+			curpos = li.CFrame * CFrame.new(0, 0, magz / Times / 2).Position
+			task.spawn(function()
+				task.wait(math.random(500,800)/10000)
+				tweenS:Create(li,ti,{Transparency=1}):Play()
+				game.Debris:AddItem(li, 0.12)
+			end)
+		end
+	end
+	local function bodyLightning(color ,rate)
+		if not color then -- if no color given it will deactivate
+			lightningTable[char] = nil
+		else
+			task.spawn(function()
+				local bodyParts = {}
+				for i,p in pairs(char:GetChildren()) do
+					if (p:IsA("Part") or p:IsA("MeshPart")) and p.Transparency ~= 1 then
+						table.insert(bodyParts,p)
+					end
+				end
+				local bounding = {}
+				for _, v in pairs(bodyParts) do
+					local temp = {
+						X = nil,
+						Y = nil,
+						Z = nil
+					}
+					temp.X = v.Size.X / 2 * 35
+					temp.Y = v.Size.Y / 2 * 35
+					temp.Z = v.Size.Z / 2 * 35
+					bounding[v.Name] = temp
+				end
+				local cd = tick()
+				lightningTable[char] = cd
+				local deb = false
+				while char and lightningTable[char] == cd  do
+					task.wait(math.random(130,600)/1000)
+				
+					for i=1,rate do
+						local Body1 = bodyParts[math.random(#bodyParts)]
+						local Body2 = bodyParts[math.random(#bodyParts)]
+						local Pos1 = Vector3.new(math.random(-bounding[Body1.Name].X, bounding[Body1.Name].X) / 55, math.random(-bounding[Body1.Name].Y, bounding[Body1.Name].Y) / 55, math.random(-bounding[Body1.Name].Z, bounding[Body1.Name].Z) / 55)
+						local Pos2 = Vector3.new(math.random(-bounding[Body2.Name].X, bounding[Body2.Name].X) / 55, math.random(-bounding[Body2.Name].Y, bounding[Body2.Name].Y) / 55, math.random(-bounding[Body2.Name].Z, bounding[Body2.Name].Z) / 55)
+						local SPos1 = Body1.Position + Pos1
+						local SPos2 = Body2.Position + Pos2
+						Lightning(SPos1, SPos2, 4, 3, BrickColor.new(color), 0.05, 0.05, -0.1, Body1)
+					end
+				end
+			end)
+		end
+	end
+-- Speed
+
+
+for key, value in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+if value.Name == "Battling" then
+value:Destroy()
+end
+end
+wait(0.1)
+
+
+
+local function ca(tabee)
+	local player = game.Players.LocalPlayer;local ff;local tabee = tabee
+	for _,v in pairs(player.Character.Humanoid:GetPlayingAnimationTracks()) do
+	    if AnimationId == "rbxassetid://4556726554" then
+		v:Stop()
+end
+end
+end
+
+detect = game.Players.LocalPlayer.Character.Head.ChildAdded:Connect(function(j)
+task.wait()
+if j.Name == "Rhabdophobia" then
+j:Destroy()
+end
+end)
+
+
+
+detect = game.Players.LocalPlayer.Character.Effects.ChildAdded:Connect(function(h)
+task.wait()
+if h.Name == "RhabdophobiaBall" then
+h:Destroy()
+ca(tabee)
+game.Players.LocalPlayer.Character.Head.TextBar:Destroy()
+end
+end)
+
+game.Players.LocalPlayer:ClearCharacterAppearance()
+local phase = 1
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(812, 1101, 429)
+game.Players.LocalPlayer.Character:WaitForChild("ForceField"):Destroy()
+wait(1)
+local function getmouser()
+    l__LocalPlayer__9 = game.Players.LocalPlayer
+    l__mouse__10 = l__LocalPlayer__9:GetMouse()
+    		local l__HumanoidRootPart__52 = l__LocalPlayer__9.Character.HumanoidRootPart;
+		local l__LockOn__53 = l__LocalPlayer__9.Backpack.Main.LockOnScript.LockOn;
+
+		if l__LockOn__53.Value then
+			return l__LockOn__53.Value.HumanoidRootPart.CFrame.p;
+		else
+			return l__mouse__10.Hit.p;
+		end;
+	end;
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "SummonScythe",
+        [3] = true
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "KumuFused"
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+wait(0.5)
+game.Players.LocalPlayer.Character.KumuArmL:Destroy()
+game.Players.LocalPlayer.Character.KumuArmR:Destroy()
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "SummonScythe",
+        [3] = false
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+
+
+
+-- Extra Changes
+
+
+game.Players.LocalPlayer.PlayerGui.UI.Ui.UpdateLog:Destroy()
+
+--// Aura
+
+local function aura()
+game:GetObjects("rbxassetid://9338992122")[1].Parent = game.Workspace
+game.Workspace.Ultra.Name = "aura"
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+ 
+local pa1 = Instance.new("Motor",game.Players.LocalPlayer.Character["Torso"])
+pa1.Name = "UltraInsctinctAura"
+pa1.Part0 = game.Workspace.aura.Torso
+pa1.Part1 = game.Players.LocalPlayer.Character["Torso"]
+pa1.C0 = cf0:Inverse()
+
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+
+local pa2 = Instance.new("Motor",game.Players.LocalPlayer.Character["Left Arm"])
+pa2.Name = "UltraInsctinctAura"
+pa2.Part0 = game.Workspace.aura["Left Arm"]
+pa2.Part1 = game.Players.LocalPlayer.Character["Left Arm"]
+pa2.C0 = cf0:Inverse()
+
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+
+local pa2 = Instance.new("Motor",game.Players.LocalPlayer.Character["Right Arm"])
+pa2.Name = "UltraInsctinctAura"
+pa2.Part0 = game.Workspace.aura["Right Arm"]
+pa2.Part1 = game.Players.LocalPlayer.Character["Right Arm"]
+pa2.C0 = cf0:Inverse()
+
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+
+local pa3 = Instance.new("Motor",game.Players.LocalPlayer.Character["Right Leg"])
+pa3.Name = "UltraInsctinctAura"
+pa3.Part0 = game.Workspace.aura["Right Leg"]
+pa3.Part1 = game.Players.LocalPlayer.Character["Right Leg"]
+pa3.C0 = cf0:Inverse()
+
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+
+local pa4 = Instance.new("Motor",game.Players.LocalPlayer.Character["Left Leg"])
+pa4.Name = "UltraInsctinctAura"
+pa4.Part0 = game.Workspace.aura["Left Leg"]
+pa4.Part1 = game.Players.LocalPlayer.Character["Left Leg"]
+pa4.C0 = cf0:Inverse()
+
+local cf0 = CFrame.new(0,0,0) * CFrame.Angles(0,0,0)
+
+local pa4 = Instance.new("Motor",game.Players.LocalPlayer.Character["Head"])
+pa4.Name = "UltraInsctinctAura"
+pa4.Part0 = game.Workspace.aura["Head"]
+pa4.Part1 = game.Players.LocalPlayer.Character["Head"]
+pa4.C0 = cf0:Inverse()
+end
+
+spawn(function()
+local plrs = game:GetService("Players")
+local rep = game:GetService("ReplicatedStorage")
+local uis = game:GetService("UserInputService")
+local plr = plrs.LocalPlayer
+local remotes = rep:WaitForChild("Remotes")
+local mainModule = require(rep:WaitForChild("ClientModules").MainModule)
+local player = game.Players.LocalPlayer;local char = player.Character;local pass = getrenv()._G.Pass
+
+task.wait()
+
+remotes.BettyMoves:InvokeServer({pass, "Rhabdophobia" })
+
+
+_G.sansnocd = true
+local limit = 20 --mess around to find the limit to whatever your internet can handle
+spawn(function()
+    local A_1 =  {
+      [1] = pass,  [2] = "Bones", [3] = "Ground",  [4] = Vector3.new(0,1000,0), [5] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, [6] = game.Players.LocalPlayer.Character.HumanoidRootPart
+}
+local Event = game:GetService("ReplicatedStorage").Remotes.SansMoves
+Event:InvokeServer(A_1)
+wait(1)
+local args = {
+        [1] = {
+            [1] = getrenv()._G.Pass,
+            [2] = "KnifeProjectileYellow",
+            [3] = "Spawn",
+            [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(1000,1000,1000),
+            [5] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame,
+            [6] = game.Players.LocalPlayer.Character.HumanoidRootPart
+        }
+    }
+    game:GetService('ReplicatedStorage').Remotes.CharaMoves:InvokeServer(unpack(args))
+    xxx = game.Players.LocalPlayer.Character.Attacks:WaitForChild("YellowBlast")
+    xxx:WaitForChild("BodyVelocity").Velocity = Vector3.new(0,0,0)
+    xxx:WaitForChild("Hitted"):Destroy()
+    xxx.Position = Vector3.new(50000,50000,50000)
+end) 
+local diff = 0;       local pb
+spawn(function()
+    while _G.sansnocd and char:IsDescendantOf(workspace) do 
+pb = tonumber(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
+    wait(.2)
+local pb2 = tonumber(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
+ diff =  math.clamp((pb2/pb) -1 ,0,1)
+
+    end
+end)
+local pp = char.Effects:WaitForChild('MultipleBones');pp.Name = 'nocd'
+
+spawn(function() pp:WaitForChild('Warning'):Destroy() pp:WaitForChild('Warning'):Destroy() end)
+wait(.5) local bonetab = {} 
+    for _,v in pairs(pp:GetDescendants()) do
+        if v:IsA('BasePart') then
+table.insert(bonetab,v)
+        end 
+end
+    for _,v in pairs(game:GetService("Workspace").Map["New Map"]:GetChildren()) do
+        if v:IsA('BasePart') then
+table.insert(bonetab,v)
+        end 
+end
+local num = #bonetab-(#bonetab-limit)
+print(num)
+for _,v in pairs(pp:GetDescendants()) do
+if v.Name == 'RemoteEvent' then
+   spawn(function() pp:WaitForChild('Script'):Destroy() end)
+    spawn(function() local v = v
+        _G.DamageBoneRemote = v 
+while _G.sansnocd and char:IsDescendantOf(workspace) do local manage = 0
+    local ea = workspace.ServerEffects.ServerCooldown[player.Name]:GetChildren()
+    local a = 0 
+    for _,v in pairs(ea) do local name = string.lower(v.Name) 
+        if not string.find(name,'slice') and not string.find(name,'spawnbone') then
+            a = a + 1
+        end end
+    if a > 0 and pb < 500 then
+manage = math.clamp(math.round(#bonetab*diff),0,#bonetab);if diff >= .2 then manage = #bonetab-16 end
+ for i = 1,num-manage do local hit = bonetab[i]
+            spawn(function() v:FireServer(hit) end)
+ end
+        end
+wait()
+        end
+pp:Destroy()
+    end)
+end
+end
+
+task.wait(2)
+
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/IdkRandomUsernameok/scripts/main/fade'))()
+
+NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/AbstractPoo/Main/main/Notifications.lua", true))()
+
+
+task.delay(1,function()
+
+_G.Spam=false
+local Lighting = game:GetService("Lighting")
+game:WaitForChild("Run Service").Heartbeat:Connect(function()
+    if _G.Spam then
+        if not char:FindFirstChild("Rhad") then
+            remotes.BettyMoves:InvokeServer({pass, "Rhabdophobia" })
+            char:WaitForChild("Rhad")
+            spawn(function()
+    local A_1 =  {
+      [1] = pass,  [2] = "Bones", [3] = "Ground",  [4] = Vector3.new(0,1000,0), [5] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame, [6] = game.Players.LocalPlayer.Character.HumanoidRootPart
+}
+local Event = game:GetService("ReplicatedStorage").Remotes.SansMoves
+Event:InvokeServer(A_1)
+end) 
+        end
+    end
+
+end)
+end)
+xy = 0 
+mytab = {}
+
+  game.Players.LocalPlayer.Character.Effects.ChildAdded:Connect(function(v)
+    if v.Name == "MultipleBones" then
+  
+    v:WaitForChild("Base").Warning:Destroy()
+        v:WaitForChild("Base").SpawnBone:Destroy()
+                        v:WaitForChild("Script"):Destroy()
+                         v:WaitForChild("Warning"):Destroy()
+                         xy = xy + 1
+                         table.insert(mytab,v)
+    end
+        end)
+
+
+
+task.wait(.2)
+_G.Spam=false
+ NotificationHolder:message {
+    Title = "Rhad Spam turned off",
+	Description = "You can re-enable by pressing Z (ONLY USE WHEN YOU WANNA USE ATTACKS)",
+	Icon = 10952973354
+}
+
+game:GetService("UserInputService").InputBegan:Connect(function(key, gc)
+	if gc then return end
+	if key.KeyCode == Enum.KeyCode["P"] then
+	    if not _G.Spam then
+	        _G.Spam=true
+	    NotificationHolder:message {
+        Title = "Rhad Spam turned On",
+	    Description = "While it is on use ur attacks if ur not using them turn this off",
+	    Icon = 10952973354
+        }
+	    elseif _G.Spam then
+        NotificationHolder:message {
+            Title = "Rhad Spam turned off",
+	        Description = "You can re-enable by pressing Z (ONLY USE WHEN YOU WANNA USE ATTACKS)",
+	        Icon = 10952973354
+            }
+        _G.Spam=false
+        end
+	end
+end)
+
+end)
+
+wait(2)
+
+
+-- LMB/RMB
+
+
+-- Dodge
+
+spawn(function()
+while true do 
+wait(1)
+dodge = true
+wait(1)
+dodge = false
+end
+end)
+
+
+spawn(function()
+local A_1 = {
+   [1] = getrenv()._G.Pass,
+   [2] = "Blocking",
+   [3] = true
+   }
+   local Event = game:GetService("ReplicatedStorage").Remotes.Functions
+repeat wait(1)
+if game.Players.LocalPlayer.Character.Data.Blocking.Value == false and dodge == true and phase == 2 then
+Event:InvokeServer(A_1)
+end
+until state == false
+end)
+
+
+spawn(function()
+game.Players.LocalPlayer.Character.Head.ChildAdded:Connect(function(v)
+task.wait()
+if v.Name == "DamageShower" and v.Gui.TextLabel.Text == "Blocked" and phase == 2 then
+v.Gui.TextLabel.Text = "MISS"
+
+dodgeran = math.random(1,2)
+if dodgeran == 1 then
+stopanim = true
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://3728912921"
+local f = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+f:Play()
+f:AdjustSpeed(1)
+wait(1)
+stopanim = false
+elseif dodgeran == 2 then
+stopanim = true
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://3728914916"
+local f = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+f:Play()
+f:AdjustSpeed(1) 
+wait(1)
+stopanim = false
+end
+end
+end)
+end)
+
+
+su={
+[1] = "".." ",
+[2] = "".." ",
+[3] = "Has Been Made!",
+}
+function fold(t)
+su[1] = "File".." "
+su[2] = t.." "
+if not isfile(t) then
+    makefolder(t)
+    print(su[1]..su[2]..su[3])
+end
+return t
+end
+function wf(sn,au)
+if not isfile(sn) then
+    local an=au
+    if string.find(au, "https://cdn.discordapp.com/attachments/") then
+        re = syn.request({Url = au, Method = "GET"}).Body
+    else error("No")
+    end
+    writefile(sn,re)
+end
+return getsynasset(sn)
+end
+wf("Jiren_Theme_Song.mp3", "https://cdn.discordapp.com/attachments/938155251146580032/1054951601992913006/Jiren_Theme_Song.mp3")
+
+music = Instance.new("Sound", game.Players.LocalPlayer.Backpack)
+music.Volume = 1
+music.Name = "Music"
+music.SoundId = getsynasset('Jiren_Theme_Song.mp3')
+music.Looped = true
+music.Playing = true
+music.EmitterSize = 1000
+music.TimePosition = 0
+
+su={
+[1] = "".." ",
+[2] = "".." ",
+[3] = "Has Been Made!",
+}
+function fold(t)
+su[1] = "File".." "
+su[2] = t.." "
+if not isfile(t) then
+    makefolder(t)
+    print(su[1]..su[2]..su[3])
+end
+return t
+end
+function wf(sn,au)
+if not isfile(sn) then
+    local an=au
+    if string.find(au, "https://cdn.discordapp.com/attachments/") then
+        re = syn.request({Url = au, Method = "GET"}).Body
+    else error("No")
+    end
+    writefile(sn,re)
+end
+return getsynasset(sn)
+end
+wf("Teleport_DBZ_Sound.mp3", "https://cdn.discordapp.com/attachments/938155251146580032/1055153521386856518/Teleport_DBZ_Sound.mp3")
+
+su={
+[1] = "".." ",
+[2] = "".." ",
+[3] = "Has Been Made!",
+}
+function fold(t)
+su[1] = "File".." "
+su[2] = t.." "
+if not isfile(t) then
+    makefolder(t)
+    print(su[1]..su[2]..su[3])
+end
+return t
+end
+function wf(sn,au)
+if not isfile(sn) then
+    local an=au
+    if string.find(au, "https://cdn.discordapp.com/attachments/") then
+        re = syn.request({Url = au, Method = "GET"}).Body
+    else error("No")
+    end
+    writefile(sn,re)
+end
+return getsynasset(sn)
+end
+wf("Touhou_Death_Sound.mp3", "https://cdn.discordapp.com/attachments/938155251146580032/1055161079002583100/Touhou_Death_Sound.mp3")
+
+local frame = game:GetObjects("rbxassetid://12309319034")[1]
+frame.Parent = game:GetService("ReplicatedStorage") --10186247615
+frame.Name = "GokuStuff"
+local tweenS = game:GetService("TweenService")
+local gokuAssets = frame.GokuAssets
+local gokuSounds = frame.GokuSounds
+local char = game.Players.LocalPlayer.Character
+local cf = char.Torso.CFrame
+	local trans = {}
+	local function handleAccessories(t)
+		for i,ac in pairs(char:GetChildren()) do
+			if ac:IsA("Accessory") then
+				local handle = ac:FindFirstChild("Handle")
+				if handle and (handle:FindFirstChild("HatAttachment") or handle:FindFirstChild("HairAttachment")) then
+					if t then
+						trans[ac] = handle.Transparency
+						handle.Transparency = 1
+					elseif trans[ac] then
+						handle.Transparency = trans[ac]
+						trans[ac] = nil
+					end
+				end
+			end
+		end
+	end
+	local function hairHandle(hair)
+		local old = char:FindFirstChild("FormHair")
+		if old then
+			pcall(function()
+				old.Name = "Removing"
+				tweenS:Create(old.Hair,TweenInfo.new(0.5),{Transparency=1}):Play()
+				if old.Hair:FindFirstChild("Hair") then
+					tweenS:Create(old.Hair.Hair,TweenInfo.new(0.5),{Transparency=1}):Play()
+				end
+				game.Debris:AddItem(old,0.5)
+			end)
+			handleAccessories(char)
+		end
+		if hair then
+			handleAccessories(char,true)
+			local newhair = hair:Clone()
+			newhair.Name = "FormHair"
+			local weld = Instance.new("WeldConstraint")
+			weld.Part0 = char.Head
+			newhair:SetPrimaryPartCFrame(char.Head.CFrame)
+			weld.Part1 = newhair.Hair
+			weld.Parent = newhair
+			newhair.Parent = char
+			return newhair
+		end
+	end
+		local function auraHandle(aura,entireBody, name)
+		if not aura then
+			for i,v in pairs(char:GetDescendants()) do
+				if (v.Name == (name or "FormAura") or v.Parent.Name == (name or "FormAura")) and v:IsA("ParticleEmitter") then
+					v.Name = "Removing"
+					v.Enabled = false
+				elseif v.Name == (name or "FormAura") and not v:IsA("BoolValue") then
+					game.Debris:AddItem(v,1.5)
+				end
+			end
+		else
+			for i,v in pairs(aura:GetChildren()) do
+				if not entireBody then
+					local clone = v:Clone()
+					clone.Name = (name or "FormAura")
+					clone.Parent = char.HumanoidRootPart
+					if v:IsA("Sound") then
+						v:Play()
+					end
+				else
+					for i,part in pairs(char:GetChildren()) do
+						if (part:IsA("BasePart") or part:IsA("MeshPart") or part:IsA("Part")) and part.Transparency ~= 1 then
+							if ((v:IsA("PointLight") or v:IsA("Sound")) and part.Name == "Torso") then
+								local clone = v:Clone()
+								clone.Name = (name or "FormAura")
+								clone.Parent = part
+								if v:IsA("Sound") then
+									v:Play()
+								end
+							elseif v:IsA("ParticleEmitter") then
+								local clone = v:Clone()
+								clone.Name = (name or "FormAura")
+								clone.Parent = part
+							end
+						end
+					end
+				end
+			end
+		end
+		end
+
+
+
+
+
+	local trans = {}
+	local auraColors = {
+		Base = ColorSequence.new(Color3.new(1,1,1)),
+		SSJ = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJ2 = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJ3 = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,1,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJG = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(1,0,0)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}),
+		SSJB = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.new(0,1,1)),ColorSequenceKeypoint.new(1,Color3.new(0,0,1))}),
+		UI = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(0,85,255)),ColorSequenceKeypoint.new(0.35,Color3.fromRGB(170,0,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,170,255)),ColorSequenceKeypoint.new(0.65,Color3.fromRGB(0,0,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(85,0,255))}),
+		MUI = ColorSequence.new({ColorSequenceKeypoint.new(0,Color3.fromRGB(0,85,255)),ColorSequenceKeypoint.new(0.35,Color3.fromRGB(170,0,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,170,255)),ColorSequenceKeypoint.new(0.65,Color3.fromRGB(0,0,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(85,0,255))}),
+	}
+	wait(3)
+	hairHandle(gokuAssets.BaseHair)
+	--	auraHandle(gokuAssets.UI,true)
+			heckerss = Instance.new("Folder")
+			heckerss.Parent = game.Workspace
+			heckerss.Name = "Parts"
+local function celShading(color,transp,secondaryColor)
+		if color then
+			for i,p in pairs(char:GetChildren()) do
+				if p.Name == "Left Arm" or p.Name == "Right Arm" or p.Name == "Torso" or p.Name == "Head" or p.Name == "Left Leg" or p.Name == "Right Leg" then
+					local cel = gokuAssets.CelShade:FindFirstChild(p.Name):Clone()
+					cel.Color = color
+					cel.Transparency = transp
+					cel.Name = "CelShade"
+					local weld = Instance.new("WeldConstraint")
+					weld.Part0 = p
+					cel.CFrame = p.CFrame
+					weld.Part1 = cel
+					weld.Parent = cel
+					cel.Parent = p
+					if secondaryColor then
+						tweenS:Create(cel,secondary,{Color = secondaryColor}):Play()
+					end
+				end
+			end
+		else
+			for i,p in pairs(char:GetChildren()) do
+				if p.Name == "Left Arm" or p.Name == "Right Arm" or p.Name == "Torso" or p.Name == "Head" or p.Name == "Left Leg" or p.Name == "Right Leg" then
+					local cel = p:FindFirstChild("CelShade")
+					if cel then cel:Destroy() end
+				end
+			end
+		end
+	end
+			lightningTable = {}
+				local ti = TweenInfo.new(0.09,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut)
+				local function Lightning(Part0, Part1, Times, Offset, Color, Thickness, Trans, SizeAdd, part0ok)
+		local magz = (Part0 - Part1).magnitude
+		local curpos = Part0
+		local trz = {
+			-Offset,
+			Offset
+		}
+		for i = 1, Times do
+			local li = Instance.new("Part")
+			li.Name = "Lightning"
+			li.TopSurface = 0
+			li.Material = "Neon"
+			li.BottomSurface = 0
+			li.Locked = true
+			li.CastShadow = false
+			li.Transparency = 0
+			li.BrickColor = Color
+			li.formFactor = "Custom"
+			li.CanCollide = false
+			li.CanTouch = false
+			li.CanQuery = false
+			li.Massless = true
+			local weld = Instance.new("WeldConstraint")
+			weld.Parent = li
+			weld.Part0 = part0ok
+			weld.Part1 = li
+			game.Debris:AddItem(li,4)
+			li.Size = Vector3.new(Thickness, Thickness, magz / Times)
+			local Offzet = Vector3.new(trz[math.random(1, 2)], trz[math.random(1, 2)], trz[math.random(1, 2)])
+			local trolpos = CFrame.new(curpos, Part1) * CFrame.new(0, 0, magz / Times).Position + Offzet
+			if Times == i then
+				local magz2 = (curpos - Part1).magnitude
+				li.Size = Vector3.new(Thickness, Thickness, magz2)
+				li.CFrame = CFrame.new(curpos, Part1) * CFrame.new(0, 0, -magz2 / 2)
+			else
+				li.CFrame = CFrame.new(curpos, trolpos) * CFrame.new(0, 0, magz / Times / 2)
+			end
+		
+			li.Parent = workspace.Parts
+			curpos = li.CFrame * CFrame.new(0, 0, magz / Times / 2).Position
+			task.spawn(function()
+				task.wait(math.random(500,800)/10000)
+				tweenS:Create(li,ti,{Transparency=1}):Play()
+				game.Debris:AddItem(li, 0.12)
+			end)
+		end
+	end
+	local function bodyLightning(color ,rate)
+		if not color then -- if no color given it will deactivate
+			lightningTable[char] = nil
+		else
+			task.spawn(function()
+				local bodyParts = {}
+				for i,p in pairs(char:GetChildren()) do
+					if (p:IsA("Part") or p:IsA("MeshPart")) and p.Transparency ~= 1 then
+						table.insert(bodyParts,p)
+					end
+				end
+				local bounding = {}
+				for _, v in pairs(bodyParts) do
+					local temp = {
+						X = nil,
+						Y = nil,
+						Z = nil
+					}
+					temp.X = v.Size.X / 2 * 35
+					temp.Y = v.Size.Y / 2 * 35
+					temp.Z = v.Size.Z / 2 * 35
+					bounding[v.Name] = temp
+				end
+				local cd = tick()
+				lightningTable[char] = cd
+				local deb = false
+				while char and lightningTable[char] == cd  do
+					task.wait(math.random(130,600)/1000)
+				
+					for i=1,rate do
+						local Body1 = bodyParts[math.random(#bodyParts)]
+						local Body2 = bodyParts[math.random(#bodyParts)]
+						local Pos1 = Vector3.new(math.random(-bounding[Body1.Name].X, bounding[Body1.Name].X) / 55, math.random(-bounding[Body1.Name].Y, bounding[Body1.Name].Y) / 55, math.random(-bounding[Body1.Name].Z, bounding[Body1.Name].Z) / 55)
+						local Pos2 = Vector3.new(math.random(-bounding[Body2.Name].X, bounding[Body2.Name].X) / 55, math.random(-bounding[Body2.Name].Y, bounding[Body2.Name].Y) / 55, math.random(-bounding[Body2.Name].Z, bounding[Body2.Name].Z) / 55)
+						local SPos1 = Body1.Position + Pos1
+						local SPos2 = Body2.Position + Pos2
+						Lightning(SPos1, SPos2, 4, 3, BrickColor.new(color), 0.05, 0.05, -0.1, Body1)
+					end
+				end
+			end)
+		end
+	end
+	debounce = true
+	hum = game.Players.LocalPlayer.Character.Humanoid
+	data = game.Players.LocalPlayer.Character.Data
+	spawn(function()
+	data:WaitForChild("Transformation").Value = "Base"
+	end)
+	
+	task.wait()
+local p = game.Players.LocalPlayer
+
+
+local tweenS = game:GetService("TweenService")
+
+local mathrandom = math.random
+local cf = CFrame.new
+local cfangles = CFrame.Angles
+local vector = Vector3.new
+local mathrad = math.rad
+
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Effects").OnClientEvent:Connect(function(args)
+	if args[1] == "Kamehameha" then
+		local model = args[2]
+		local sizing = args[3]
+		local sizey = args[4]
+		local sizer = {}
+		local front = {}
+		local back = {}
+		local center = model:WaitForChild("Center")
+		for i,v in pairs(model:GetChildren()) do
+			if v.Name:match("Sizing") then
+				sizer[v] = {X=v.Size.X,Y=v.Size.Y,Z=v.Size.Z,CF=v.CFrame}
+				v.Size = vector(v.Size.X,0,v.Size.Z)
+			elseif v.Name:match("Front") then
+				local w = v:FindFirstChild("Weld")
+				if w then
+					front[w] = w.C0
+				end
+			elseif v.Name:match("Back") then
+				table.insert(back,v)
+			end
+		end
+		for i,v in pairs(back) do
+			local original = v.Size
+			tweenS:Create(v,TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.Out),{Size = original + Vector3.new(original.X * 2.3,0,original.Z * 2.3)}):Play()
+			task.spawn(function()
+				task.wait(0.15)
+				if back then
+					tweenS:Create(v,TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.In),{Size = original}):Play()
+				end
+			end)
+		end
+		local deb = false
+		while model and model.Parent and sizing and sizing.Parent and sizing.Value do
+			local random = mathrandom(-10, 10) / 100
+			for part,info in pairs(sizer) do
+				part.Size = vector(info.X + random, sizey.Value, info.Z + random)
+				part.CFrame = info.CF + center.CFrame.LookVector * (sizey.Value / 2 - info.Y/2)
+			end
+			for i,v in pairs(back) do
+				v.CFrame = v.CFrame * cfangles(0,mathrad(mathrandom(10,60)),0)
+			end
+			for w,cfr in pairs(front) do
+				w.C0 = cfr * cf(0,-(sizey.Value/2 - sizer[w.Part0].Y/2),0) * cfangles(0,mathrad(-(mathrandom(10,60))),0)
+			end
+			if not deb then
+				deb = true
+				task.spawn(function()
+					local clone = model:FindFirstChild("BeamAura"):Clone()
+					clone.Name = "Cloned"
+					for i,v in pairs(clone:GetChildren()) do
+						v.Transparency = 0
+					end
+					clone.Parent = model
+					tweenS:Create(clone,TweenInfo.new(0.35),{CFrame = clone.CFrame * cf(0,sizey.Value,0)}):Play()
+					task.wait(0.25)
+					for i,v in pairs(clone:GetChildren()) do
+						tweenS:Create(v,TweenInfo.new(0.1),{Transparency=1}):Play()
+					end
+					game.Debris:AddItem(clone,0.1)
+					task.wait(0.2)
+					deb = false
+				end)
+			end
+			task.wait()
+		end
+		sizer = nil
+		back = nil
+		front = nil
+		if model then
+			for i,v in pairs(model:GetChildren()) do
+				if v:IsA("MeshPart") then
+					tweenS:Create(v,TweenInfo.new(0.25,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut),{Size = Vector3.new(0,v.Size.Y,0)}):Play()
+				end
+			end
+			game.Debris:AddItem(model,0.25)
+		end
+	end
+end)
+
+local function getlock()
+		return game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+	end
+
+
+print("actu the cute loli femboy, shol the ray, ammy the violent, zeus the olymp god, lord the actu r34 provider, soft the galaxy (bees included), soulshatters the bot\nLord.#0068 esteve aqui oi gente :scream:")
+	
+		local function checkIfHurt()
+		return char:FindFirstChild("Hit") or char:FindFirstChild("Debounce") or char.Humanoid.Health <= 0
+	end
+	
+
+	
+	
+	local function createBeam(plr,char,direction,beamName,level,noadjust)
+		local beam = gokuAssets[beamName]["Beam"..level]:Clone()
+		local part = beam:WaitForChild("Sizing3")
+		local center = beam:WaitForChild("Center")
+		local beamcf,beamsize = beam:GetBoundingBox()
+		local active = Instance.new("BoolValue")
+		active.Value = true
+		active.Parent = beam
+		local val = Instance.new("NumberValue")
+			spawn(function() while beam do 
+			    needed = true 
+			    TrailPart.Position = beam.Front1.Position task.wait() TrailPart.Position = beam.Back1.Position task.wait()	
+		    TrailPart.Anchored = false
+	 end
+	 			    needed = false
+	 
+	 end)
+		val.Value = 4
+		val.Parent = beam
+		if not noadjust then
+			char:SetPrimaryPartCFrame(CFrame.new(char.HumanoidRootPart.Position,Vector3.new(direction.X,char.HumanoidRootPart.Position.Y,direction.Z)))
+		end	
+		beam:SetPrimaryPartCFrame(CFrame.new(char.HumanoidRootPart.Position,direction))
+		beam.Parent = char.Effects
+		spawn(function()
+		    		local model = beam
+		local sizing = active
+		local sizey = val
+		local sizer = {}
+		local front = {}
+		local back = {}
+		local center = model:WaitForChild("Center")
+		for i,v in pairs(model:GetChildren()) do
+			if v.Name:match("Sizing") then
+				sizer[v] = {X=v.Size.X,Y=v.Size.Y,Z=v.Size.Z,CF=v.CFrame}
+				v.Size = vector(v.Size.X,0,v.Size.Z)
+			elseif v.Name:match("Front") then
+				local w = v:FindFirstChild("Weld")
+				if w then
+					front[w] = w.C0
+				end
+			elseif v.Name:match("Back") then
+				table.insert(back,v)
+			end
+		end
+		for i,v in pairs(back) do
+			local original = v.Size
+			tweenS:Create(v,TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.Out),{Size = original + Vector3.new(original.X * 2.3,0,original.Z * 2.3)}):Play()
+			task.spawn(function()
+				task.wait(0.15)
+				if back then
+					tweenS:Create(v,TweenInfo.new(0.15,Enum.EasingStyle.Sine,Enum.EasingDirection.In),{Size = original}):Play()
+				end
+			end)
+		end
+		local deb = false
+		while model and model.Parent and sizing and sizing.Parent and sizing.Value do
+			local random = mathrandom(-10, 10) / 100
+			for part,info in pairs(sizer) do
+				part.Size = vector(info.X + random, sizey.Value, info.Z + random)
+				part.CFrame = info.CF + center.CFrame.LookVector * (sizey.Value / 2 - info.Y/2)
+			end
+			for i,v in pairs(back) do
+				v.CFrame = v.CFrame * cfangles(0,mathrad(mathrandom(10,60)),0)
+			end
+			for w,cfr in pairs(front) do
+				w.C0 = cfr * cf(0,-(sizey.Value/2 - sizer[w.Part0].Y/2),0) * cfangles(0,mathrad(-(mathrandom(10,60))),0)
+			end
+			if not deb then
+				deb = true
+				task.spawn(function()
+					local clone = model:FindFirstChild("BeamAura"):Clone()
+					clone.Name = "Cloned"
+					for i,v in pairs(clone:GetChildren()) do
+						v.Transparency = 0
+					end
+					clone.Parent = model
+					tweenS:Create(clone,TweenInfo.new(0.35),{CFrame = clone.CFrame * cf(0,sizey.Value,0)}):Play()
+					task.wait(0.25)
+					for i,v in pairs(clone:GetChildren()) do
+						tweenS:Create(v,TweenInfo.new(0.1),{Transparency=1}):Play()
+					end
+					game.Debris:AddItem(clone,0.1)
+					task.wait(0.2)
+					deb = false
+				end)
+			end
+			task.wait()
+		end
+	
+		sizer = nil
+		back = nil
+		front = nil
+		if model then
+			for i,v in pairs(model:GetChildren()) do
+				if v:IsA("MeshPart") then
+					tweenS:Create(v,TweenInfo.new(0.25,Enum.EasingStyle.Sine,Enum.EasingDirection.InOut),{Size = Vector3.new(0,v.Size.Y,0)}):Play()
+				end
+			end
+			game.Debris:AddItem(model,0.25)
+		end
+
+		    end)
+
+
+		local tween = tweenS:Create(val,TweenInfo.new(level + 1),{Value = 250 + (level*50)})
+		tween:Play()
+		local wallhit = false
+		local hitdeb = false
+		local cancelled = false
+
+
+	
+		task.spawn(function()
+			task.wait(level + 1)
+			if not cancelled and beam and beam.Parent and char and char.Parent then
+				if tween then
+					tween:Cancel()
+					tween = nil
+				end
+				active.Value = false
+				if chargeanim[char] then
+					chargeanim[char]:Stop(0.15)
+					chargeanim[char] = nil
+				end
+		local beamcf,beamsize = beam:GetBoundingBox()
+				for i,v in pairs(gettouched(part.CFrame + center.CFrame.LookVector * (val.Value / 2 - part.Size.Y/2), Vector3.new(part.Size.X,val.Value + (beamsize.Z - part.Size.Y),part.Size.Z), nil))
+do 		 spawn(function()
+         for _,xv in pairs(mytab) do xv.Base:WaitForChild("RemoteEvent"):FireServer(v.Parent) end
+        end) end 
+				game.Debris:AddItem(beam,1)
+
+			end
+		end)
+		while tween and beam and beam.Parent and char and char.Parent and not cancelled do
+			if not hitdeb then
+				hitdeb = true
+								
+
+				task.spawn(function()
+					task.wait(0.1)
+					hitdeb = false
+				end)
+						local beamcf,beamsize = beam:GetBoundingBox()
+			for i,v in pairs(gettouched(part.CFrame + center.CFrame.LookVector * (val.Value / 2 - part.Size.Y/2), Vector3.new(part.Size.X,val.Value + (beamsize.Z - part.Size.Y),part.Size.Z), nil))
+
+do 
+    
+    			 spawn(function()
+         for _,xv in pairs(mytab) do xv.Base:WaitForChild("RemoteEvent"):FireServer(v.Parent) end
+        end)
+    end
+			end
+			if checkIfHurt(char) then
+				cancelled = true
+				chargeanim[char]:Stop(0.15)
+				chargeanim[char] = nil
+				if tween then
+					tween:Cancel()
+					tween = nil
+				end
+				game.Debris:AddItem(beam,1)
+				active.Value = false
+				break
+			end
+			if not wallhit then
+				local ray = workspace:Raycast(center.Position,center.CFrame.LookVector * (val.Value + part.Size.Y/2),rayParams)
+							
+				if ray and ray.Instance and tween and not ray.Instance:IsDescendantOf(char) then
+
+					wallhit = true
+					tween:Cancel()
+					task.spawn(function()
+						while active and active.Parent and active.Value do
+						    						    for i,v in pairs(getconnections(game.ReplicatedStorage.Remotes.Effects.OnClientEvent)) do
+v:Fire({"Rocks",ray.Instance,CFrame.new(ray.Position),5,1.2})
+end
+		
+						--	main.shakeNearbyScreens("Explosion", char.Torso.Position, 80 + (level*10))
+							task.wait(0.2)
+						end
+					end)
+				end
+			end
+			task.wait()
+		end
+
+	end
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	uis.InputBegan:Connect(function(i,s)
+	if s then return end
+	if inputbegan[i.KeyCode] then
+		inputbegan[i.KeyCode]()
+	
+	end
+end)
+
+uis.InputEnded:Connect(function(i,s)
+	if inputended[i.KeyCode] then
+		inputended[i.KeyCode]()
+	end
+end)
+		 local mouse = game.Players.LocalPlayer:GetMouse()
+local char = game.Players.LocalPlayer.Character
+local player = game.Players.LocalPlayer
+hum = char.Humanoid
+            mouse.KeyDown:Connect(function(key)
+                if key == "b" then
+                    char.Humanoid.WalkSpeed = 0
+		if data.Transformation.Value == "Base" or data.Transformation.Value:match("SSJ") then
+		if data.Transformation.Value == "SSJB" or data.Transformation.Value:match("UI") then return end    
+		    local tweenS = game:GetService("TweenService")
+
+local doingEff = true
+
+task.spawn(function()
+	task.wait(0.4)
+	local fo = gokuAssets.Waves:Clone()
+	fo.Material = "Neon"
+	fo.Transparency = 1
+	fo.Color = Color3.fromRGB(0,255,255)
+	fo.Size = Vector3.new(8,2.2,8)
+	fo.Position = char.Torso.Position + Vector3.new(0,(2.2)/2 - 3,0)
+	fo.Parent = char.Effects
+	tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 0.1}):Play()
+	while doingEff do
+		fo.Position = char.Torso.Position + Vector3.new(0,fo.Size.Y/2 - 3,0)
+		fo.Orientation = fo.Orientation + Vector3.new(0,2.5,0)
+		task.wait()
+	end
+	if fo then
+		tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 1;Size = Vector3.new(35, 15, 35);Orientation = fo.Orientation + Vector3.new(0,80,0)}):Play()
+		game.Debris:AddItem(fo,2)
+	end
+end)
+
+for i,v in pairs({char["Left Leg"],char["Right Leg"]}) do
+	local effect = gokuAssets.SSBEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-1,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.8)
+		effect.SSBEffect.LockedToPart = false
+		effect.SSBEffect.Speed = NumberRange.new(2)
+		effect.SSBEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSBEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSBEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSBEffect.Enabled = false
+	end)
+end
+task.spawn(function()
+	for i=1,3 do
+		local ring = gokuAssets.DRing:Clone()
+		ring.Orientation = Vector3.new(90,0,0)
+		ring.Color = Color3.new(0,1,1)
+		ring.Material = Enum.Material.Neon
+		ring.Transparency = 0.8
+		ring.Size = Vector3.new(30,30,2)
+		ring.Position = char.Torso.Position - Vector3.new(0,2 - i,0)
+		ring.Parent = char.Effects
+		tweenS:Create(ring, TweenInfo.new(1,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Size = Vector3.new(0,0,0)}):Play()
+		game.Debris:AddItem(ring,1)
+		task.spawn(function()
+			task.wait(0.5)
+			tweenS:Create(ring, TweenInfo.new(0.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 0}):Play()
+		end)
+		task.wait(0.5)
+	end
+end)
+
+task.wait(0.5)
+
+for i,v in pairs({char["Left Arm"],char["Right Arm"],char.Torso}) do
+	local effect = gokuAssets.SSBEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-1,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	if v.Name ~= "Torso" then
+		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
+	else
+		effect.Size = Vector3.new(2,0,1)
+		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(2,2,1)}):Play()
+	end
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.5)
+		effect.SSBEffect.LockedToPart = false
+		effect.SSBEffect.Speed = NumberRange.new(2)
+		effect.SSBEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSBEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSBEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSBEffect.Enabled = false
+	end)
+end
+
+task.wait(0.5)
+
+for i,v in pairs({char.Head}) do
+	local effect = gokuAssets.SSBEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-0.5,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,1,1)}):Play()
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.5)
+		effect.SSBEffect.LockedToPart = false
+		effect.SSBEffect.Speed = NumberRange.new(2)
+		effect.SSBEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSBEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSBEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSBEffect.Enabled = false
+	end)
+end
+
+task.wait(1.2)
+
+task.spawn(function()
+	for i = 1,5 do
+		local a = math.random(5,20)
+		local wave2 = gokuAssets.Waves:Clone()
+		wave2.Color = Color3.new(0,1,1)
+		wave2.Size = Vector3.new(0,3,0)
+		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
+		wave2.Transparency = 0.6
+		wave2.Material = Enum.Material.SmoothPlastic
+		wave2.Parent = char.Effects
+		game.Debris:AddItem(wave2,2)
+		tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,1.5,a);Orientation = -Vector3.new(0,math.random(-80,80),0);Position = char.Torso.Position + Vector3.new(0,1.5/2 - 3,0)}):Play()
+		task.spawn(function()
+			task.wait(1)
+			tweenS:Create(wave2, TweenInfo.new(0.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+		end)
+		task.wait(0.01)
+	end
+end)
+
+doingEff = false
+ data.Transformation.Value = "SSJB"
+		    if char.HumanoidRootPart:FindFirstChild("FormAura") then
+			for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end
+			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+auraHandle(gokuAssets.SSJBAura)
+
+			local hair = hairHandle(gokuAssets.SSJHair)
+			hair.Hair.Color = Color3.fromRGB(0, 170, 255)
+		    
+		    end end end)
+	
+	local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Move1",
+        [3] = "Spawn"
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+TrailPart = char.Attacks:WaitForChild("BettyHandProjectile")
+
+TrailPart.Position = Vector3.new(50000,50000,50000)
+TrailPart:WaitForChild("Hitted"):Destroy()
+TrailPart.BodyVelocity.Velocity = Vector3.new(0,0,0)
+	spawn(function() while task.wait() do if not needed then TrailPart.Position = Vector3.new(50000,50000,50000) end end end)
+	
+	
+	 local mouse = game.Players.LocalPlayer:GetMouse()
+local char = game.Players.LocalPlayer.Character
+local player = game.Players.LocalPlayer
+hum = char.Humanoid
+            mouse.KeyDown:Connect(function(key)
+                if key == "z" then
+                    char.Humanoid.WalkSpeed = 0
+		if data.Transformation.Value == "Base" or data.Transformation.Value == "SSJG" or data.Transformation.Value == "SSJB" then
+		  
+		    if char.HumanoidRootPart:FindFirstChild("FormAura") then
+			for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end
+			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+			if char:FindFirstChild("FormHair") then
+			 
+			end
+		    data.Transformation.Value = "SSJ"
+		    
+		
+			    local tweenS = game:GetService("TweenService")
+
+local effect = gokuAssets.ExplosionEffect:Clone()
+local cf = char.HumanoidRootPart.CFrame
+effect:SetPrimaryPartCFrame(cf)
+local wshockwave = effect:WaitForChild("wshockwave")
+local shockwave = effect:WaitForChild("shockwave")
+local shockwave2 = effect:WaitForChild("shockwave2")
+local sk = effect:WaitForChild("sk")
+local boom = effect:WaitForChild("boom")
+for i,v in pairs(effect:GetChildren()) do
+	v.Color = Color3.new(1,1,0)
+end
+effect.Parent = char.Effects
+
+task.spawn(function()
+	while shockwave and shockwave.Parent do
+		tweenS:Create(shockwave,TweenInfo.new(0.1),{CFrame = shockwave.CFrame * CFrame.Angles(math.rad(0),math.rad(150),0)}):Play()
+		tweenS:Create(shockwave2,TweenInfo.new(0.1),{CFrame = shockwave2.CFrame * CFrame.Angles(math.rad(0),math.rad(-60),0)}):Play()
+		task.wait(.1)
+	end
+end)
+tweenS:Create(shockwave,TweenInfo.new(0.4),{Transparency=1}):Play()
+tweenS:Create(shockwave2,TweenInfo.new(0.4),{Transparency=1}):Play()
+tweenS:Create(wshockwave,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(boom,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(sk,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(shockwave.Mesh,TweenInfo.new(0.4),{Scale=shockwave.Mesh.Scale + Vector3.new(190,40,190)}):Play()
+tweenS:Create(shockwave2.Mesh,TweenInfo.new(0.4),{Scale=shockwave2.Mesh.Scale + Vector3.new(190,40,190)}):Play()
+tweenS:Create(sk.wave,TweenInfo.new(0.2),{Scale=sk.wave.Scale + Vector3.new(14,0,14)}):Play()
+tweenS:Create(wshockwave.wswm,TweenInfo.new(0.2),{Scale=wshockwave.wswm.Scale + Vector3.new(100,0,100)}):Play()
+tweenS:Create(boom,TweenInfo.new(0.2),{Size=boom.Size + Vector3.new(50,50,50)}):Play()
+game.Debris:AddItem(effect,0.42)
+task.wait(0.2)
+task.spawn(function()
+	for i = 1,10 do
+		local a = math.random(35,55)
+		local wave2 = gokuAssets.Waves:Clone()
+		wave2.Color = Color3.new(1,1,0)
+		wave2.Size = Vector3.new(0,3,0)
+		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
+		wave2.Transparency = 0.6
+		wave2.Material = Enum.Material.SmoothPlastic
+		wave2.Parent = char.Effects
+		game.Debris:AddItem(wave2,2)
+		tweenS:Create(wave2, TweenInfo.new(2,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,1,a);Orientation = -Vector3.new(0,math.random(-80,80),0)}):Play()
+		task.spawn(function()
+			task.wait(1)
+			tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+		end)
+		task.wait(0.01)
+	end
+end)
+task.wait(.01)
+local wave = gokuAssets.Waves:Clone()
+wave.Color = Color3.new(1,1,0)
+wave.Transparency = 0.6
+wave.Size = Vector3.new(0,0,0)
+wave.Material = Enum.Material.SmoothPlastic
+wave.Position = char.Torso.Position - Vector3.new(0,2,0)
+wave.Parent = char.Effects
+tweenS:Create(wave, TweenInfo.new(1.4,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(10,5,10);Position = char.Torso.Position + Vector3.new(0,(5/2) - 3,0),Orientation = -Vector3.new(0,math.random(-80,80),0)}):Play()
+game.Debris:AddItem(wave,1.5)
+task.spawn(function()
+	task.wait(0.7)
+	tweenS:Create(wave, TweenInfo.new(0.7,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+end)
+		auraHandle(gokuAssets.SSJAura)
+			hairHandle(gokuAssets.SSJHair)
+		
+		elseif data.Transformation.Value == "SSJ" then
+		     data.Transformation.Value = "SSJ2"
+	   if char.HumanoidRootPart:FindFirstChild("FormAura") then
+						for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end 			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+			if char:FindFirstChild("FormHair") then
+			 
+			end
+		
+
+			    
+local ball = gokuAssets.Sphere:Clone()
+ball.Color = Color3.new(1,1,0)
+ball.Size = Vector3.new(30,30,30)
+ball.Position = char.Torso.Position
+ball.Transparency = 0
+ball.Material = Enum.Material.Neon
+ball.Parent = char.Effects
+tweenS:Create(ball, TweenInfo.new(1,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size=Vector3.new(0,0,0);Transparency=1}):Play()
+game.Debris:AddItem(ball,1)
+task.wait(1)
+local effect = gokuAssets.ExplosionEffect:Clone()
+local cf = char.HumanoidRootPart.CFrame
+effect:SetPrimaryPartCFrame(cf)
+local wshockwave = effect:WaitForChild("wshockwave")
+local shockwave = effect:WaitForChild("shockwave")
+local shockwave2 = effect:WaitForChild("shockwave2")
+local sk = effect:WaitForChild("sk")
+local boom = effect:WaitForChild("boom")
+for i,v in pairs(effect:GetChildren()) do
+	v.Color = Color3.new(1,1,0)
+end
+effect.Parent = char.Effects
+
+task.spawn(function()
+	while shockwave and shockwave.Parent do
+		tweenS:Create(shockwave,TweenInfo.new(0.1),{CFrame = shockwave.CFrame * CFrame.Angles(math.rad(0),math.rad(150),0)}):Play()
+		tweenS:Create(shockwave2,TweenInfo.new(0.1),{CFrame = shockwave2.CFrame * CFrame.Angles(math.rad(0),math.rad(-60),0)}):Play()
+		task.wait(.1)
+	end
+end)
+tweenS:Create(shockwave,TweenInfo.new(0.4),{Transparency=1}):Play()
+tweenS:Create(shockwave2,TweenInfo.new(0.4),{Transparency=1}):Play()
+tweenS:Create(wshockwave,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(boom,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(sk,TweenInfo.new(0.2),{Transparency=1}):Play()
+tweenS:Create(shockwave.Mesh,TweenInfo.new(0.4),{Scale=shockwave.Mesh.Scale + Vector3.new(190,40,190)}):Play()
+tweenS:Create(shockwave2.Mesh,TweenInfo.new(0.4),{Scale=shockwave2.Mesh.Scale + Vector3.new(190,40,190)}):Play()
+tweenS:Create(sk.wave,TweenInfo.new(0.2),{Scale=sk.wave.Scale + Vector3.new(14,0,14)}):Play()
+tweenS:Create(wshockwave.wswm,TweenInfo.new(0.2),{Scale=wshockwave.wswm.Scale + Vector3.new(100,0,100)}):Play()
+tweenS:Create(boom,TweenInfo.new(0.2),{Size=boom.Size + Vector3.new(50,50,50)}):Play()
+game.Debris:AddItem(effect,0.42)
+task.wait(0.2)
+task.spawn(function()
+	for i = 1,10 do
+		local a = math.random(50,90)
+		local wave2 = gokuAssets.Waves:Clone()
+		wave2.Color = Color3.new(1,1,0)
+		wave2.Size = Vector3.new(0,3,0)
+		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
+		wave2.Transparency = 0.6
+		wave2.Material = Enum.Material.SmoothPlastic
+		wave2.Parent = char.Effects
+		game.Debris:AddItem(wave2,2)
+		tweenS:Create(wave2, TweenInfo.new(2,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,5,a);Position = char.Torso.Position + Vector3.new(0,(5/2)-3,0),Orientation = -Vector3.new(0,math.random(-80,80),0)}):Play()
+		task.spawn(function()
+			task.wait(1)
+			tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+		end)
+		task.wait(0.01)
+	end
+end)
+	auraHandle(gokuAssets.SSJAura)
+			hairHandle(gokuAssets.SSJ2Hair)
+		elseif data.Transformation.Value == "SSJ2" then
+		    		     data.Transformation.Value = "SSJ3"
+		    		   
+   if char.HumanoidRootPart:FindFirstChild("FormAura") then
+						for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end 			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+			if char:FindFirstChild("FormHair") then
+			 
+			end
+	
+			    local tweenS = game:GetService("TweenService")
+
+local cf = char.Torso.CFrame
+local ball = gokuAssets.Sphere:Clone()
+ball.Color = Color3.new(1,1,0)
+ball.Size = Vector3.new(0,0,0)
+ball.Position = char.Torso.Position
+ball.Transparency = 0.2
+ball.Material = Enum.Material.Neon
+local inner = ball:Clone()
+inner.Color = Color3.new(1,1,1)
+inner.Transparency = 0
+inner.Parent = ball
+ball.Parent = char.Effects
+tweenS:Create(ball, TweenInfo.new(2,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size=Vector3.new(80,80,80);Transparency=1}):Play()
+tweenS:Create(inner, TweenInfo.new(2,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size=Vector3.new(100,100,100);Transparency=1}):Play()
+task.spawn(function()
+	while ball and inner and ball.Parent do
+		ball.CFrame = cf + Vector3.new(math.random(-10, 10) / 5, math.random(-10, 10) / 5, math.random(-10, 10) / 5)
+		inner.CFrame = cf + Vector3.new(math.random(-10, 10) / 5, math.random(-10, 10) / 5, math.random(-10, 10) / 5)
+		task.wait()
+	end
+end)
+game.Debris:AddItem(ball,2)
+task.spawn(function()
+	for i = 1,15 do
+		local a = math.random(100,300)
+		local wave2 = gokuAssets.Waves:Clone()
+		wave2.Color = Color3.new(1,1,0)
+		wave2.Size = Vector3.new(0,3,0)
+		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
+		wave2.Transparency = 0.6
+		wave2.Material = Enum.Material.SmoothPlastic
+		wave2.Parent = char.Effects
+		game.Debris:AddItem(wave2,2)
+		tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,a/15,a);Orientation = -Vector3.new(0,math.random(-80,80),0);Position = char.Torso.Position + Vector3.new(0,a/15 - 3,0)}):Play()
+		task.spawn(function()
+			task.wait(1)
+			tweenS:Create(wave2, TweenInfo.new(0.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+		end)
+		task.wait(0.05)
+	end
+end)
+			auraHandle(gokuAssets.SSJAura)
+			hairHandle(gokuAssets.SSJ3Hair)
+		end
+                end end)
+                 local mouse = game.Players.LocalPlayer:GetMouse()
+local char = game.Players.LocalPlayer.Character
+local player = game.Players.LocalPlayer
+            mouse.KeyDown:Connect(function(key)
+                if key == "x" then
+                    game.Players.LocalPlayer.Character.Data.Transformation.Value = "Base"
+                    if char.HumanoidRootPart:FindFirstChild("FormAura") then
+						for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end 			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+			if char:FindFirstChild("FormHair") then
+			 
+			end
+
+			hairHandle(gokuAssets.BaseHair)
+                    end end)
+ local mouse = game.Players.LocalPlayer:GetMouse()
+local char = game.Players.LocalPlayer.Character
+local player = game.Players.LocalPlayer
+            mouse.KeyDown:Connect(function(key)
+                if key == "g" then
+                    	if data.Transformation.Value == "Base" or data.Transformation.Value == "SSJ3" or data.Transformation.Value == "SSJ2" or data.Transformation.Value == "SSJ" or data.Transformation.Value == "SSJB" then
+   game.Players.LocalPlayer.Character.Data.Transformation.Value = "SSJG"
+		debounce = false
+	char.Humanoid.WalkSpeed = 0
+
+		    		         local tweenS = game:GetService("TweenService")
+
+local char = game.Players.LocalPlayer.Character
+local doingEff = true
+
+task.spawn(function()
+	task.wait(0.4)
+	local fo = gokuAssets.Waves:Clone()
+	fo.Material = "Neon"
+	fo.Transparency = 1
+	fo.Color = Color3.fromRGB(255, 42, 0)
+	fo.Size = Vector3.new(8,2.2,8)
+	fo.Position = char.Torso.Position + Vector3.new(0,(2.2)/2 - 3,0)
+	fo.Parent = char.Effects
+	tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 0.1}):Play()
+	while doingEff do
+		fo.Position = char.Torso.Position + Vector3.new(0,fo.Size.Y/2 - 3,0)
+		fo.Orientation = fo.Orientation + Vector3.new(0,2.5,0)
+		task.wait()
+	end
+	if fo then
+		tweenS:Create(fo, TweenInfo.new(2,Enum.EasingStyle.Quart,Enum.EasingDirection.Out), {Transparency = 1;Size = Vector3.new(35, 15, 35);Orientation = fo.Orientation + Vector3.new(0,80,0)}):Play()
+		game.Debris:AddItem(fo,2)
+	end
+end)
+
+for i,v in pairs({char["Left Leg"],char["Right Leg"]}) do
+	local effect = gokuAssets.SSGEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-1,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.8)
+		effect.SSGEffect.LockedToPart = false
+		effect.SSGEffect.Speed = NumberRange.new(2)
+		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSGEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSGEffect.Enabled = false
+	end)
+end
+
+task.wait(0.5)
+
+for i,v in pairs({char["Left Arm"],char["Right Arm"],char.Torso}) do
+	local effect = gokuAssets.SSGEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-1,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	if v.Name ~= "Torso" then
+		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,2,1)}):Play()
+	else
+		effect.Size = Vector3.new(2,0,1)
+		tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(2,2,1)}):Play()
+	end
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.5)
+		effect.SSGEffect.LockedToPart = false
+		effect.SSGEffect.Speed = NumberRange.new(2)
+		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSGEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSGEffect.Enabled = false
+	end)
+end
+
+task.wait(0.5)
+
+for i,v in pairs({char.Head}) do
+	local effect = gokuAssets.SSGEFFECT:Clone()
+	local weld = Instance.new("Weld")
+	weld.Part0 = v
+	weld.Part1 = effect
+	weld.C0 = CFrame.new(0,-0.5,0)
+	weld.Parent = effect
+	effect.Parent = char.Effects
+	tweenS:Create(effect,TweenInfo.new(0.5),{Size=Vector3.new(1,1,1)}):Play()
+	tweenS:Create(weld,TweenInfo.new(0.5),{C0=CFrame.new(0,0,0)}):Play()
+	game.Debris:AddItem(effect,3)
+	task.spawn(function()
+		task.wait(1.5)
+		effect.SSGEffect.LockedToPart = false
+		effect.SSGEffect.Speed = NumberRange.new(2)
+		effect.SSGEffect.SpreadAngle = Vector2.new(100,100)
+		effect.SSGEffect.RotSpeed = NumberRange.new(-150,150)
+		effect.SSGEffect.Lifetime = NumberRange.new(1)
+		task.wait(0.15)
+		effect.SSGEffect.Enabled = false
+	end)
+end
+
+task.wait(1.2)
+
+task.spawn(function()
+	for i = 1,5 do
+		local a = math.random(5,20)
+		local wave2 = gokuAssets.Waves:Clone()
+		wave2.Color = Color3.fromRGB(255, 42, 0)
+		wave2.Size = Vector3.new(0,3,0)
+		wave2.Position = char.Torso.Position - Vector3.new(0,3,0)
+		wave2.Transparency = 0.6
+		wave2.Material = Enum.Material.SmoothPlastic
+		wave2.Parent = char.Effects
+		game.Debris:AddItem(wave2,2)
+		tweenS:Create(wave2, TweenInfo.new(1,Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = Vector3.new(a,1.5,a);Orientation = -Vector3.new(0,math.random(-80,80),0);Position = char.Torso.Position + Vector3.new(0,1.5/2 - 3,0)}):Play()
+		task.spawn(function()
+			task.wait(1)
+			tweenS:Create(wave2, TweenInfo.new(0.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out), {Transparency = 1}):Play()
+		end)
+		task.wait(0.01)
+	end
+end)
+
+doingEff = false
+
+
+		    if char.HumanoidRootPart:FindFirstChild("FormAura") then
+			for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end
+			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+                 	    	    		         auraHandle(gokuAssets.SSJGAura)
+			 hairHandle(gokuAssets.SSJGHair) end
+                    end end)
+
+-- Teleport
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+        mouse.KeyDown:Connect(function(k) 
+            if k == "r" then
+spawn(function()
+tp = Instance.new("Sound", game.Players.LocalPlayer.Backpack)
+tp.Volume = 1
+tp.Name = "TP"
+tp.SoundId = getsynasset('Teleport_DBZ_Sound.mp3')
+tp.Looped = false
+tp.Playing = true
+tp.EmitterSize = 1000
+tp.TimePosition = 0
+wait(1)
+tp:Destroy()
+end)
+local LockOn = game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+if LockOn then 
+    
+function getlockchar()
+local char = game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+return char
+end
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getlockchar().HumanoidRootPart.CFrame * CFrame.new(0,0,-3)
+
+elseif not LockOn then
+
+plr = game.Players.LocalPlayer
+hum = plr.Character.HumanoidRootPart
+mouse = plr:GetMouse()
+
+if mouse.Target then
+hum.CFrame = CFrame.new(mouse.Hit.x, mouse.Hit.y + 5, mouse.Hit.z)
+end
+end
+
+
+end
+end)
+
+
+
+
+
+
+combat = true
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Seedankistheman/stuff/main/LordsGokuMoveScript"), true))()
+
+spawn(function() 
+    wait(3)
+    spawn(function() while task.wait() do if game:GetService("Players").LordsNutSock.PlayerGui.UI.Ui.MoveDebounceShower.Moves1.Visible then currentType = "DeltaSans" elseif game:GetService("Players").LordsNutSock.PlayerGui.UI.Ui.MoveDebounceShower.Moves2.Visible then currentType = "Goku" end end end)
+    local localPlr = game.Players.LocalPlayer
+local function CreateTween(obj, tb, eas, play)
+	local thing13 = game:GetService("TweenService"):Create(obj, TweenInfo.new(unpack(tb)), eas)
+	if play then
+		thing13:Play()
+	end
+	return thing13
+end
+local function createButtonEffect(p1)
+	p1.Rotation = -10
+	CreateTween(p1, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true}, {
+		Rotation = 10
+	}, true)
+end
+local function createChangedValue(p2)
+	p2:WaitForChild("Start").Changed:Connect(function(p3)
+		if p3 then
+			local img = p2.ImageLabel
+			p2.TextLabel.TextColor3 = Color3.new(1, 0, 0)
+			img.ImageColor3 = Color3.new(1, 0, 0)
+			img.Size = UDim2.new(1, 0, 0, 0)
+			img.Position = UDim2.new(0, 0, 1, 0)
+		end
+	end)
+	local time = p2.Time
+	p2:WaitForChild("Activated").Changed:Connect(function(p4)
+		if p4 then
+			local textl = p2.TextLabel
+			local imgl = p2.ImageLabel
+			textl.TextColor3 = Color3.new(1, 0, 0)
+			imgl.ImageColor3 = Color3.new(1, 0, 0)
+			imgl.Size = UDim2.new(1, 0, 0, 0)
+			imgl.Position = UDim2.new(0, 0, 1, 0)
+			CreateTween(imgl, { time.Value, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0 }, {
+				Position = UDim2.new(0, 0, 0, 0), 
+				Size = UDim2.new(1, 0, 1, 0)
+			}, true)
+			task.wait(time.Value)
+			imgl.ImageColor3 = Color3.new(1, 1, 1)
+			textl.TextColor3 = Color3.new(1, 1, 1)
+		end
+	end)
+	
+end
+	cooldownsTable = {}
+	moveDebounce = game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower
+local function cooldowns(name, val)
+	if cooldownsTable[name] == nil then
+		cooldownsTable[name] = true
+		return cooldownsTable[name]
+	end
+	if val ~= nil then
+		cooldownsTable[name] = val
+		return
+	end
+	return cooldownsTable[name]
+end
+
+spawn(function() while task.wait() do if char.Effects:FindFirstChild("EnergyPart") then char.Attacks.YellowBlast.Position =char.Effects:FindFirstChild("EnergyPart").Position
+elseif not char.Effects:FindFirstChild("EnergyPart") then game.Players.LocalPlayer.Character.Attacks.YellowBlast.Position = Vector3.new(50000,50000,50000)
+    end end end)
+
+local function uiCooldowns(id,start,cooldown,combatid)
+	if start then
+		moveDebounce["Moves" .. combatid][id].Start.Value = true
+		moveDebounce["Moves" .. combatid][id].Start.Value = false
+		return
+	end
+	moveDebounce["Moves" .. combatid][id].Time.Value = cooldown
+	moveDebounce["Moves" .. combatid][id].Activated.Value = true
+	moveDebounce["Moves" .. combatid][id].Activated.Value = false
+end
+	debounce = true 
+	inputbegan[Enum.KeyCode.One] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 25 and cooldowns("Delta1",nil) then
+			debounce = false
+			_G.RootPartFollow = false
+			cooldowns("Delta1", false)
+			uiCooldowns(1, true, nil, 1)
+			HumanoidRootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+			 local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Rhabdophobia",
+        [3] = True,
+        [4] = game:GetService("Players").LocalPlayer.UserId
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+char:WaitForChild("Rhad")
+	--	game.ReplicatedStorage.Remotes.DeltaSansMoves:InvokeServer({ getrenv()._G.Pass, "Combat1", HumanoidRootPart.CFrame, HumanoidRootPart  })
+		local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Combat1",
+        [4] = HumanoidRootPart.CFrame,
+        [5] = HumanoidRootPart
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.DeltaSansMoves:InvokeServer(unpack(args))
+			uiCooldowns(1, false, 30, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(30)
+			cooldowns("Delta1", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My1",nil) then
+			debounce = false
+			cooldowns("My1", false)
+			uiCooldowns(1, true, nil, 2)
+		local anim = Instance.new("Animation")
+				anim.AnimationId = "rbxassetid://3320797123"
+				chargeanim[char] = char.Humanoid:LoadAnimation(anim)
+				chargeanim[char].KeyframeReached:Connect(function(k)
+					if k == "Pause" and chargeanim[char] then
+						chargeanim[char]:AdjustSpeed(0)
+					end
+				end)
+				chargeanim[char]:Play(0.15)
+				local charge = gokuAssets.Kamehameha.EnergyPart:Clone()
+				local weld = Instance.new("Weld")
+				weld.Part0 = char["Left Arm"]
+				weld.Part1 = charge
+				weld.C0 = CFrame.new(0.5,-1.4,0)
+				weld.Parent = charge
+				charge.Parent = char.Effects
+				charge.Sound:Play()
+				charge.Sound.Ended:Connect(function()
+					if charge.Parent then
+						charge.Sound.TimePosition = 31
+					--	charge:Pause()
+					end
+				end)
+				for i,v in pairs(charge:GetChildren()) do
+					if v:IsA("Attachment") and v:FindFirstChild("OriginalPosition") then
+						tweenS:Create(v,TweenInfo.new(25),{Position = v.OriginalPosition.Value}):Play()
+					end
+				end
+				tweenS:Create(charge:WaitForChild("KMLight"),TweenInfo.new(25),{Brightness = 12}):Play()
+				task.spawn(function()
+					while charge and charge.Parent do
+	
+						weld.C0 *= CFrame.Angles(math.rad(1),math.rad(1),0)
+						task.wait(0.01)
+					end
+				end)
+			while true do
+				if not uis:IsKeyDown(Enum.KeyCode.One) then
+					break
+				end
+				if data.Stamina.Value <= 0 then
+					break
+				end
+				task.wait(0.1)
+			end
+			_G.RootPartFollow = false;
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+			local charge = char.Effects:FindFirstChild("EnergyPart")
+				local pos = charge.Sound.TimePosition
+				local level = math.clamp(math.round(pos/3),1,10)
+				charge:Destroy()
+				spawn(function() for i = 1,15 do 
+					game.Players.LocalPlayer.Character.Attacks.YellowBlast.Position = Vector3.new(50000,50000,50000) end end)
+				createBeam(plr,char,getmouser(),"Kamehameha",level)
+			uiCooldowns(1, false, 10, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(10)
+			cooldowns("My1", true)
+		end
+	end
+end
+	
+	
+local function wkam()
+    enemy = game:GetService("Players").LordsNutSock.Backpack.Main.LockOnScript.LockOn.Value
+    		local iframe = Instance.new("ForceField")
+			iframe.Name = "Inv"
+			iframe.Visible = false
+			iframe.Parent = char
+			local current = char.HumanoidRootPart.CFrame
+			local anim = Instance.new("Animation")
+			anim.AnimationId = "rbxassetid://4820780935"
+			anim = char.Humanoid:LoadAnimation(anim)
+			local hit = Instance.new("StringValue")
+			hit.Name = "Hit"
+			hit.Parent = enemy
+		--	playSound(char,gokuSounds.Teleport)
+			local two = gokuAssets.ZanzokenParticles:Clone()
+			local weld = Instance.new("Weld")
+			weld.Part0 = char.Torso
+			weld.Part1 = two
+			weld.Parent = two
+			two.Parent = char.Effects
+			char:SetPrimaryPartCFrame(enemy.HumanoidRootPart.CFrame)
+			task.spawn(function()
+				task.wait(0.2)
+				two.ParticleEmitter1.Enabled = false
+				two.ParticleEmitter.Enabled = false
+				game.Debris:AddItem(two,0.15)
+			end)
+			local clash = char.Humanoid:LoadAnimation(rep.Animations.Clashing)
+			clash:Play()
+			for i=1,30 do
+				if enemy and enemy.Parent then
+					if enemy.Data.Blocking.Value then
+						enemy.Data.Blocking.Value = false
+						enemy.Data.PerfectBlocking.Value = false
+					end
+				char = game.Players.LocalPlayer.Character
+local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = enemy,
+    [3] = {
+        ["Type"] = "Normal",
+        ["HitEffect"] = "HeavyHitEffect",
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations["Hurt" .. math.random(1, 3)],
+        ["Velocity"] = Vector3.new(0,1,0),
+        ["Position"] = char.HumanoidRootPart.Position + char.HumanoidRootPart.CFrame.LookVector * 3,
+        ["CameraShake"] = "Bump",
+        ["HitTime"] = 2,
+        ["VictimCFrame"] =  CFrame.new(enemy.HumanoidRootPart.Position, char.HumanoidRootPart.Position) ,
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Punch,
+        ["CombatInv"] = true,
+        ["CancelKnockback"] = true,
+        ["Damage"] = 0.5
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+				--	main.shakeNearbyScreens("Bump", char.HumanoidRootPart.Position, 100)
+				end
+				task.wait(.09)
+			end
+			clash:Stop(.2)
+			if enemy and enemy.Parent and enemy.Humanoid.Health > 0 then
+				anim:Play(.2)
+				task.wait(.25)
+	 local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = enemy,
+    [3] = {
+        ["Type"] = "Knockback",
+        ["HitEffect"] = "HeavyHitEffect",
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Hurt2,
+        ["Velocity"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.UpVector *70,
+        ["CameraShake"] = "Bump",
+        ["HitTime"] = 2.5,
+        ["VictimCFrame"] =  CFrame.new(enemy.HumanoidRootPart.Position, char.HumanoidRootPart.Position) ,
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Punch,
+        ["CombatInv"] = true,
+        ["CancelKnockback"] = true,
+        ["Damage"] = 2
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+
+			--		main.shakeNearbyScreens("Explosion", char.HumanoidRootPart.Position, 100)
+			--		remotes.Effects:FireAllClients({"Model","HighJump",CFrame.new(enemy.HumanoidRootPart.Position - Vector3.new(0,2,0))})
+					task.wait(1)
+					char.HumanoidRootPart.Anchored = true
+				--	playSound(char,gokuSounds.Teleport)
+					local two = gokuAssets.ZanzokenParticles:Clone()
+					local weld = Instance.new("Weld")
+					weld.Part0 = char.Torso
+					weld.Part1 = two
+					weld.Parent = two
+					two.Parent = char.Effects
+					char:SetPrimaryPartCFrame(CFrame.new(enemy.HumanoidRootPart.Position + Vector3.new(0,135,0),enemy.HumanoidRootPart.Position))
+					task.spawn(function()
+						task.wait(0.2)
+						two.ParticleEmitter1.Enabled = false
+						two.ParticleEmitter.Enabled = false
+						game.Debris:AddItem(two,0.15)
+					end)
+					local anim = Instance.new("Animation")
+					anim.AnimationId = "rbxassetid://3320797123"
+					chargeanim[char] = char.Humanoid:LoadAnimation(anim)
+					chargeanim[char].KeyframeReached:Connect(function(k)
+						if k == "Pause" and chargeanim[char] then
+							chargeanim[char]:AdjustSpeed(0)
+						end
+					end)
+					chargeanim[char]:Play(0.15)
+					task.wait(.1)
+					task.spawn(function()
+						while enemy and enemy.Parent and enemy.Humanoid.Health > 0 do
+							local result = workspace:Raycast(enemy.HumanoidRootPart.Position,Vector3.new(0,-3,0),rayParams)
+							if result then
+								remotes.Effects:FireAllClients({"Model","HighJump",CFrame.new(result.Position + Vector3.new(0,2,0))})
+							--	playSound(enemy,rep.Sounds.GroundHit)
+							--	main.shakeNearbyScreens("Explosion", result.Position, 100)
+								break
+							end
+							task.wait(0.03)
+						end
+					end)
+					createBeam(plr,char,enemy.HumanoidRootPart.Position,"Kamehameha",5,true)
+				--	playSound(char,gokuSounds.Teleport)
+					char.HumanoidRootPart.CFrame = current
+					char.HumanoidRootPart.Anchored = false
+			end
+end
+
+
+
+local blasts = false
+   local function lerp(p0, p1, t)
+        return p0*(1-t) + p1*t
+    end
+    local function quadBezier(p0, p1, p2, t)
+        local l1 = lerp(p0, p1, t)
+        local l2 = lerp(p1, p2, t)
+        local quad = lerp(l1, l2, t)
+        return quad
+    end
+
+
+game.Players.LocalPlayer.Character.Attacks.ChildAdded:Connect(function(Child)
+if Child.Name:match("YellowBlast") and blasts == true then
+Child.Name = "JusticeCaught"
+Child:WaitForChild("BodyVelocity").Velocity = Vector3.new(0,0,0)
+Child:WaitForChild("Particle").ParticleEmitter.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255))
+Child:WaitForChild("Particle").ParticleEmitter2.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255))
+Child:WaitForChild("Trail").Color = ColorSequence.new(Color3.fromRGB(0, 255, 255))
+Child:WaitForChild("Particle").Burst.Color = ColorSequence.new(Color3.fromRGB(0, 255, 255))
+local start = Child.CFrame
+local ending = Vector3.new(math.random(-80,80)/10,math.random(-80,80)/10,math.random(-80,80)/10)
+local middle = Child.Position +Child.CFrame.LookVector * 40
+Child.Anchored = true 
+wait(0.2)
+Child.Anchored = false
+enemy = game:GetService("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+for i=1,50 do
+task.wait()
+if true then
+local t = i/50
+local updated = quadBezier(start.Position,middle,enemy.HumanoidRootPart.Position + ending,t)
+Child.CFrame = CFrame.new(updated,ending)
+end
+if i == 49 then break end
+end
+
+end
+end)
+
+
+	inputbegan[Enum.KeyCode.Two] = function()
+	if debounce and not checkIfHurt() then
+		if currentType == "DeltaSans" and data.Stamina.Value >= 25 and cooldowns("Delta2",nil) then
+			debounce = false
+			_G.RootPartFollow = false
+			cooldowns("Delta2", false)
+			uiCooldowns(2, true, nil, 1)
+			HumanoidRootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+			 local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Rhabdophobia",
+        [3] = True,
+        [4] = game:GetService("Players").LocalPlayer.UserId
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+char:WaitForChild("Rhad")
+	--	game.ReplicatedStorage.Remotes.DeltaSansMoves:InvokeServer({ getrenv()._G.Pass, "Combat1", HumanoidRootPart.CFrame, HumanoidRootPart  })
+		local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Combat2",
+        [3] = game.Players.LocalPlayer.Backpack.LockOnScript.LockOn.Value,
+        [5] = HumanoidRootPart.CFrame,
+        [6] = HumanoidRootPart
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.DeltaSansMoves:InvokeServer(unpack(args))
+			uiCooldowns(2, false, 15, 1)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(15)
+			cooldowns("Delta2", true)
+		elseif currentType == "Goku" and data.Stamina.Value >= 50 and cooldowns("My2",nil) then
+			debounce = false
+			cooldowns("My2", false)
+			uiCooldowns(2, true, nil, 2)
+
+	blasts = true
+local tweenService = game:GetService("TweenService")
+local part = game.Players.LocalPlayer.Character.HumanoidRootPart
+local tweeningInformation = TweenInfo.new(
+1,
+Enum.EasingStyle.Sine,
+Enum.EasingDirection.InOut,
+0,
+false,
+0
+)
+local Properties = {
+CFrame = part.CFrame + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 2
+}
+local Tween = tweenService:Create(part, tweeningInformation, Properties)
+Tween:Play()
+
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://3207868272"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+wait(0.6)
+local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1.8, 
+        ["Type"] = "Normal",
+        ["HitEffect"] = "BurstEffect",
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations,
+        ["Velocity"] = Vector3.new(0,8,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0,
+        ["CombatInv"] = true,
+        ["VictimCFrame"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(0),math.rad(-90),math.rad(0)),
+        ["Sound"] = game:GetService("ReplicatedStorage").RogueSounds.OwlSlash,
+        ["BlockAble"] = false,
+        ["Damage"] = 0
+    }
+}
+ 
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+spawn(function()
+wait(0.8)
+local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1.8, 
+        ["Type"] = "Normal",
+        ["HitEffect"] = "BurstEffect",
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations,
+        ["Velocity"] = Vector3.new(0,0.0001,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0,
+        ["CombatInv"] = true,
+        ["VictimCFrame"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(0),math.rad(-90),math.rad(0)),
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds,
+        ["BlockAble"] = false,
+        ["Damage"] = 0
+    }
+}
+ 
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+wait(0.8)
+local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1.8, 
+        ["Type"] = "Normal",
+        ["HitEffect"] = "BurstEffect",
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations,
+        ["Velocity"] = Vector3.new(0,0.0001,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0,
+        ["CombatInv"] = true,
+        ["VictimCFrame"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(0),math.rad(-90),math.rad(0)),
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds,
+        ["BlockAble"] = false,
+        ["Damage"] = 0
+    }
+}
+ 
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+end)
+wait(1)
+spawn(function()
+local lookvec = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector
+function Dashing()
+local bv = Instance.new("BodyVelocity")
+bv.Name = "Client"
+bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+task.spawn(function()
+    while task.wait() do 
+        bv.Velocity = Vector3.new(0,60,0) + lookvec * -80
+    end
+end)
+bv.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+return bv 
+end
+game.Players.LocalPlayer.Character.Humanoid.Sit = true
+local Dash = Dashing()
+wait(0.2)
+Dash:Destroy()
+
+local bv1 = Instance.new("BodyVelocity")
+bv1.Name = "Client"
+bv1.Velocity = Vector3.new(0,0,0)
+bv1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+wait(3.2)
+bv1:Destroy()
+end)
+
+spawn(function()
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://3207868272"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+wait(1)
+k:AdjustSpeed(0.04)
+wait(2.8)
+k:Stop()
+end)
+			 local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Rhabdophobia",
+        [3] = True,
+        [4] = game:GetService("Players").LocalPlayer.UserId
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+char:WaitForChild("Rhad")
+wait(1)
+HumanoidRootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+for i = 1, 10 do
+task.wait(0.02)
+    local args = {
+        [1] = {
+            [1] = getrenv()._G.Pass,
+            [2] = "KnifeProjectileYellow",
+            [3] = "Spawn",
+            [4] = Vector3.new(0,5000,0),
+                  [5] = HumanoidRootPart.CFrame,
+        [6] = HumanoidRootPart
+        }
+    }
+    game:GetService('ReplicatedStorage').Remotes.CharaMoves:InvokeServer(unpack(args))
+end
+wait(1)
+blasts = false
+game.Players.LocalPlayer.Character.Humanoid.Sit = false
+			uiCooldowns(2, false, 10, 2)
+			_G.RootPartFollow = true
+			debounce = true
+			task.wait(10)
+			cooldowns("My2", true)
+		end
+	end
+end
+	
+
+
+		local mouse = game.Players.LocalPlayer:GetMouse()
+        mouse.KeyDown:Connect(function(k) 
+            if k == "9" then
+			wkam() end end)
+	
+local function getAllCooldowns()
+	local ha = {}
+	for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower:GetChildren()) do
+		if string.match(v.Name, "Moves") then
+			for a,b in pairs(v:GetChildren()) do
+				if b.Name ~= "Indicator" then
+					ha[b] = {
+						Moveset = v.Name, 
+						Activated = b:WaitForChild("Activated"), 
+						Time = b:WaitForChild("Time")
+					}
+					createButtonEffect(b)
+					createChangedValue(b)
+				end
+			end
+		end
+	end
+	return ha
+end
+task.wait(0.5)
+getAllCooldowns()
+
+    
+    end)
+
+
+
+
+local dying = false
+
+spawn(function()  
+ while task.wait() do
+    if dying == true then
+game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth end
+end
+end)
+
+-- Phase 2
+rep = game.ReplicatedStorage
+repeat task.wait() until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 and phase == 1
+game.Players.LocalPlayer.Backpack.Music:Destroy()
+dying = true
+HumanoidRootPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+local function rhabok()
+    local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Rhabdophobia",
+        [3] = True,
+        [4] = game:GetService("Players").LocalPlayer.UserId
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.BettyMoves:InvokeServer(unpack(args))
+end 
+rhabok()
+char:WaitForChild("Rhad")
+local A_1 = {
+            [1] = getrenv()._G.Pass,
+            [2] = "HyperGoner",
+            [3] = "Start",
+            [4] = HumanoidRootPart.CFrame,
+            [5] = HumanoidRootPart
+        }
+        local Event = game:GetService("ReplicatedStorage").Remotes.AsrielMoves
+        Event:InvokeServer(A_1)
+	local result = workspace:Raycast(char.Torso.Position,Vector3.new(0,-999,0),rayParams)
+
+						if result and result.Instance then
+							char.HumanoidRootPart.CFrame = CFrame.new(result.Position + Vector3.new(0,2.4,0))
+						end
+						local inground = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(game.ReplicatedStorage.Animations.HurtAnimations.GroundHurt)
+						inground:Play()
+						repeat task.wait() until inground.TimePosition >= 0.89
+						inground:AdjustSpeed(0)
+						task.wait(10)
+						local theme = Instance.new("Sound")
+						theme.Parent = char
+						theme.SoundId = "rbxassetid://1579337956"
+						theme.Volume = 2
+						theme.Looped = true
+						theme:Play()
+					
+						for i=1,30 do
+							if result then
+							    for i,v in pairs(getconnections(game.ReplicatedStorage.Remotes.Effects.OnClientEvent)) do
+v:Fire({"Rocks2",1,result.Instance,char.HumanoidRootPart.CFrame * CFrame.new(0,-5,0),math.random(10,30)/100,3,Vector3.new(0,18,0),400})
+end
+							
+							end
+						
+						end
+						
+						spawn(function()
+						    local tweenS = game:GetService("TweenService")
+						    local main = require(game.ReplicatedStorage.ClientModules.MainModule)
+
+local root = char.Torso
+local s1 = gokuSounds.PowerUp:Clone()
+s1.Parent = root
+s1:Play()
+game.Debris:AddItem(s1,2)
+for i=1,15 do
+	local p = Instance.new("Part")
+	p.Shape = "Ball"
+	p.Material = "Neon"
+	p.Color = Color3.fromRGB(255,255,255)
+	p.Anchored = true
+	p.CanCollide = false
+	p.CastShadow = false
+	p.CanTouch = false
+	p.CanQuery = false
+	local light = Instance.new("PointLight")
+	light.Color = Color3.new(1,1,1)
+	local a = math.random(3,7)
+	light.Range = a*2
+	light.Parent = p
+	p.Size = Vector3.new(a,a,a)
+	p.CFrame = root.CFrame * CFrame.new(math.random(-45,45)/10,math.random(-45,45)/10,math.random(-45,45)/10)
+	p.Parent = char.Effects
+	tweenS:Create(p,TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut),{Transparency = 1,Size = Vector3.new(0,0,0)}):Play()
+	tweenS:Create(light,TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut),{Range = 0}):Play()
+	game.Debris:AddItem(p,0.3)
+	task.wait(0.04)
+end
+task.wait(0.6)
+
+task.spawn(function()
+	local ef = gokuAssets.UIEffect1:Clone()
+	ef:SetPrimaryPartCFrame(CFrame.new(root.Position - Vector3.new(0,1,0)))
+	ef.Parent = char.Effects
+	local partsinfo = main.GetParts(ef)
+	for i, part in pairs(ef:GetChildren()) do
+		if part.Name == "Middle" then
+			task.spawn(function()
+				main.CreateTween(part, { 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+					Transparency = partsinfo[part].Transparency
+				}, true)
+				main.CreateTween(part, { 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0 }, {
+					Size = partsinfo[part].Size * Vector3.new(5, 40, 5)
+				}, true)
+				if part:FindFirstChild("Attachment") then
+					part.Attachment.ParticleEmitter.Enabled = true
+				end
+				task.wait(0.5)
+				main.CreateTween(part, { 10, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+					Size = partsinfo[part].Size * Vector3.new(15, 80, 15)
+				}, true)
+			end)
+		elseif part.Name == "Mest1" then
+			main.RotatePart(part):Play({ 0, 0.15, 0 }, 1, 4)
+			main.CreateTween(part, { 0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+				Transparency = partsinfo[part].Transparency, 
+				Size = partsinfo[part].Size * 20
+			}, true)
+		elseif part.Name == "Ring" then
+			task.spawn(function()
+				main.CreateTween(part, { 0.2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+					Transparency = partsinfo[part].Transparency
+				}, true)
+				main.CreateTween(part, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0 }, {
+					Size = partsinfo[part].Size
+				}, true)
+				task.wait(1)
+				main.CreateTween(part, { 0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+					Size = partsinfo[part].Size * 1.2, 
+					Transparency = 1
+				}, true)
+			end)
+		end
+	end
+	task.spawn(function()
+		for i, part in pairs(ef.Crater:GetChildren()) do
+			main.CreateTween(part, { 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out }, {
+				Transparency = partsinfo[part].Transparency, 
+				Size = partsinfo[part].Size,
+			}, true)
+		end
+		task.wait(0.8)
+		for i, part in pairs(ef.Crater2:GetChildren()) do
+			main.CreateTween(part, { 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out }, {
+				Transparency = partsinfo[part].Transparency, 
+				Size = partsinfo[part].Size,
+			}, true)
+		end
+		task.wait(0.8)
+		for i, part in pairs(ef.Crater3:GetChildren()) do
+			main.CreateTween(part, { 0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out }, {
+				Transparency = partsinfo[part].Transparency, 
+				Size = partsinfo[part].Size,
+			}, true)
+		end
+	end)
+	for i = 1, 85 do
+		task.spawn(function()
+			local mult = ef.Multiply:Clone()
+			mult.Parent = script
+			main.RotatePart(mult):Play({ 0, 0.5, 0 }, 0, 4)
+			main.CreateTween(mult, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0 }, {
+				Transparency = partsinfo[ef.Multiply].Transparency, 
+				Size = partsinfo[ef.Multiply].Size * Vector3.new(ef.Middle.Size.X / math.random(3, 8), 20, ef.Middle.Size.X / math.random(3, 8))
+			}, true)
+			task.wait(1)
+			main.CreateTween(mult, { 1, Enum.EasingStyle.Back, Enum.EasingDirection.Out, 0, false, 0 }, {
+				Size = partsinfo[ef.Multiply].Size * Vector3.new(1, 80, 1), 
+				Transparency = 1
+			}, true)
+			task.wait(1)
+			mult:Destroy()
+		end)
+		task.wait(0.05)
+	end
+	task.wait(0.2)
+	for i, part in pairs(ef:GetChildren()) do
+		if part.Name == "Middle" or part.Name == "Mest1" or part.Name == "Mest2" then
+			spawn(function()
+				local v27 = main.CreateTween(part, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+					Transparency = 1
+				}, true)
+			end)
+			if part:FindFirstChild("Attachment") then
+				part.Attachment.ParticleEmitter.Enabled = false
+			end
+		end
+	end
+	task.wait(5)
+	for i, part in pairs(ef.Crater3:GetChildren()) do
+		main.CreateTween(part, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+			Transparency = 1
+		}, true)
+	end
+	task.wait(0.5)
+	for i, part in pairs(ef.Crater2:GetChildren()) do
+		main.CreateTween(part, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+			Transparency = 1
+		}, true)
+	end
+	task.wait(0.5)
+	for v28, part in pairs(ef.Crater:GetChildren()) do
+		main.CreateTween(part, { 1, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0 }, {
+			Transparency = 1
+		}, true)
+	end
+	game.Debris:AddItem(ef,3)
+end)
+
+local s2 = gokuSounds.UIT:Clone()
+s2.Parent = root
+s2:Play()
+game.Debris:AddItem(s1,6)
+local s3 = gokuSounds.Explosion:Clone()
+s3.Parent = root
+s3:Play()
+game.Debris:AddItem(s3,12)
+local s4 = gokuSounds.Shockwave:Clone()
+s4.Parent = root
+s4:Play()
+						    end)
+						char.Data.Transformation.Value = "UI"
+						local hair = hairHandle(gokuAssets.UIHair)
+						hair.Hair.Hair.Color = Color3.new(1, 1, 1)
+						celShading(Color3.new(1, 1, 1),0)
+						inground:Stop()
+wait(0.2)
+--ca(tabee)
+wait(0.2)
+repeat wait() until game.Players.LocalPlayer.Character.Humanoid.Health < 251
+spawn(function()
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://5093205779"
+local f = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+f:Play()
+f:AdjustSpeed(1)
+wait(1)
+f:AdjustSpeed(0)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+game.Players.LocalPlayer.Character.Torso.Anchored = true
+game.Players.LocalPlayer.Character.Hate:Destroy()
+wait(2)
+spawn(function()
+    spawn(function()
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "PlaySound",
+        [3] = game:GetService("ReplicatedStorage").Sounds.ChaosSaberCharge,
+        [4] = game:GetService("Players").LocalPlayer.Character.Head
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
+
+end)
+wait(8)
+f:Stop()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+game.Players.LocalPlayer.Character.Torso.Anchored = false
+end)
+wait(8)
+game:GetService("Players").LocalPlayer.Character.DarkHead:Destroy()
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "PlaySound",
+        [3] = game:GetService("ReplicatedStorage").Resources.Sounds.Moves.SpecialHell2.Fire,
+        [4] = game:GetService("Players").LocalPlayer.Character.Head
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
+
+end)
+wait(4)
+su={
+[1] = "".." ",
+[2] = "".." ",
+[3] = "Has Been Made!",
+}
+function fold(t)
+su[1] = "File".." "
+su[2] = t.." "
+if not isfile(t) then
+    makefolder(t)
+    print(su[1]..su[2]..su[3])
+end
+return t
+end
+function wf(sn,au)
+if not isfile(sn) then
+    local an=au
+    if string.find(au, "https://cdn.discordapp.com/attachments/") then
+        re = syn.request({Url = au, Method = "GET"}).Body
+    else error("No")
+    end
+    writefile(sn,re)
+end
+return getsynasset(sn)
+end
+wf("Ultra_Instinct_Theme_Remix.mp3", "https://cdn.discordapp.com/attachments/938155251146580032/1054951602445885470/Ultra_Instinct_Theme_Remix.mp3")
+
+music = Instance.new("Sound", game.Players.LocalPlayer.Backpack)
+music.Volume = 0.5
+music.Name = "Music"
+music.SoundId = getsynasset('Ultra_Instinct_Theme_Remix.mp3')
+music.Looped = true
+music.Playing = true
+music.EmitterSize = 1000
+music.TimePosition = 0
+wait(2)
+spawn(function()
+    local tweenS = game:GetService("TweenService")
+local gokuAssets = game:GetService("ReplicatedStorage").GokuStuff.GokuAssets
+local gokuSounds = game:GetService("ReplicatedStorage").GokuStuff.GokuSounds
+local char = game.Players.LocalPlayer.Character
+local root = char.Torso
+local s1 = gokuSounds.UIT2:Clone()
+s1.Parent = root
+s1:Play()
+game.Debris:AddItem(s1,13)
+local uiLight = gokuAssets.UILight:Clone()
+uiLight.Position = root.Position - Vector3.new(0,3,0)
+uiLight.Parent = char.Effects
+for i=1,6 do
+	for i,v in pairs(uiLight:GetChildren()) do
+		if v:IsA("Beam") then
+			v.Enabled = math.random(1,3) == 3
+		end
+	end
+	task.wait(.11)
+end
+uiLight:Destroy()
+task.wait(.4)
+local ui2 = gokuAssets.UIEffect2:Clone()
+ui2:SetPrimaryPartCFrame(CFrame.new(root.Position) * CFrame.new(0,90,0) * CFrame.Angles(0,0,math.rad(90)))
+ui2.Parent = char.Effects
+for i,v in pairs(ui2:GetChildren()) do
+	if v.Name ~= "Middle" then
+		tweenS:Create(v,TweenInfo.new(0.2,Enum.EasingStyle.Sine,Enum.EasingDirection.Out),{Size = Vector3.new(200,9,9)}):Play()
+		task.spawn(function()
+			task.wait(0.2)
+			tweenS:Create(v,TweenInfo.new(3,Enum.EasingStyle.Sine,Enum.EasingDirection.Out),{Size = Vector3.new(200,0,0)}):Play()
+		end)
+	end
+end
+game.Debris:AddItem(ui2,3)
+    end)
+phase = 2
+dying = false
+wait(0.5)
+
+wait(1.5)
+  if char.HumanoidRootPart:FindFirstChild("FormAura") then
+						for i,v in pairs(char.HumanoidRootPart:GetDescendants()) do if v.Name == "FormAura" and v:IsA("ParticleEmitter") then v.Enabled = false spawn(function() wait(1) v:Destroy() end) end end 			for i,v in pairs(char.HumanoidRootPart:GetChildren()) do if v.Name == "FormAura" and v:IsA("Sound") or v:IsA("PointLight") then v:Destroy() end end
+			end
+			if char:FindFirstChild("FormHair") then
+			 
+			end
+			spawn(function()
+game.Players.LocalPlayer.Character.HyperGonered:Destroy()
+game.Players.LocalPlayer.Character.Wing1:Destroy()
+game.Players.LocalPlayer.Character.Wing2:Destroy() end)
+	hairHandle(gokuAssets.MUIHair)
+	auraHandle(gokuAssets.UI,true)
+data.Transformation = "MUI"
+		
+						celShading(Color3.fromRGB(255,255,255),0)
+					bodyLightning(Color3.fromRGB(255,255,255), 3)
