@@ -6,8 +6,7 @@ local whitelist = {
 "FemaleDarkLatexBeast",
 "Racjist",
 "Bunheiler",
-"SwellCaster",
-"telolodude"
+"SwellCaster"
 }
 
 local function Connect(plr)
