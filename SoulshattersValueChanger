@@ -4,7 +4,10 @@ local whitelist = {
 "FurrEnder",
 "ActuXLeaderr",
 "FemaleDarkLatexBeast",
-"TheGigaChadVirgil"
+"telolodude",
+"Bunheiler",
+"SwellCaster",
+"TheGigaChadVergil"
 }
 
 local function Connect(plr)
