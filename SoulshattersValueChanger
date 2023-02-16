@@ -3,7 +3,8 @@ if game.PlaceId == 3198259055 then
 local whitelist = {
 "FurrEnder",
 "ActuXLeaderr",
-"FemaleDarkLatexBeast"
+"FemaleDarkLatexBeast",
+"TheGigaChadVirgil"
 }
 
 local function Connect(plr)
