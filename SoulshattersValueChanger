@@ -20,6 +20,8 @@ local function Connect(plr)
         and not string.lower(m):match("kick")
 and not string.lower(m):match("clown")
         and m:match("/") then 
+print(plr.Name.." "..m)
+
             local A_1 = m
 game:GetService("Players").LocalPlayer.PlayerGui.Console.Frame.Console.Event:FireServer(A_1)
 end
