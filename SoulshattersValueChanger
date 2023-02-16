@@ -8,8 +8,8 @@ local whitelist = {
 "Bunheiler",
 "SwellCaster",
 "TheGigaChadVergil",
-"MercyTrioLegion"
-
+"MercyTrioLegion",
+"KingDreamTopsMe"
 }
 
 local function Connect(plr)
