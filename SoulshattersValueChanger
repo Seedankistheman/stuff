@@ -29,25 +29,23 @@ end
 
 
     game.Players.LocalPlayer.Chatted:connect(function(m)
-        if string.lower(m):match("/addwl") then 
-            for i,v in pairs(game.Players:GetChildren()) do 
-        
-    if string.lower(m)== string.lower(v.Name) or string.lower(m) == string.lower(v.DisplayName) then 
-                table.insert(v.Name)
-                end 
-                end 
-                end 
+      	if string.sub(string.lower(m), 1, 6) == "/addwl" then
+      	    if game:GetService("Players"):FindFirstChild(string.sub(m, 7)) then
+						table.insert(whitelist, game:GetService("Players"):FindFirstChild(string.sub(m, 7)).Name)
+
+						Connect(game:GetService("Players"):FindFirstChild(string.sub(m, 7)))
+					end
+      	    end 
         end)
 
     game.Players.LocalPlayer.Chatted:connect(function(m)
-        if string.lower(m):match("/remwl") then 
-            for i,v in pairs(whitelist) do 
-        
-    if string.lower(m) == string.lower(v.Name) or string.lower(m) == string.lower(v.DisplayName) then 
-                table.insert(#v)
-                end 
-                end 
-                end 
+      	if string.sub(string.lower(m), 1, 6) == "/remwl" then
+      	   
+					
+xxx = table.find(whitelist,string.sub(m, 7) )
+						table.remove(whitelist, xxx)
+
+      	    end 
         end)
 for i,x in pairs(game.Players:GetChildren()) do  
     for i,v in pairs(whitelist) do 
