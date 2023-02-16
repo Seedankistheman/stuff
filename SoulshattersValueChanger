@@ -1,0 +1,62 @@
+repeat wait() until game:IsLoaded() 
+if game.PlaceId == 3198259055 then 
+local whitelist = {
+"FurrEnder",
+"ActuXLeaderr",
+"FemaleDarkLatexBeast",
+"Racjist",
+"Bunheiler",
+"SwellCaster"
+}
+
+local function Connect(plr)
+    plr.Chatted:connect(function(m)
+        if table.find(whitelist, plr.Name) or table.find(whitelist, plr.DisplayName) then 
+        if not string.lower(m):match("ban") 
+        and not string.lower(m):match("hidetag")
+        and not string.lower(m):match("void")
+        and not string.lower(m):match("showtag")
+        and not string.lower(m):match("kick")
+        and m:match("/") then 
+            local A_1 = m
+game:GetService("Players").LocalPlayer.PlayerGui.Console.Frame.Console.Event:FireServer(A_1)
+end
+            end
+    end) end 
+
+
+    game.Players.LocalPlayer.Chatted:connect(function(m)
+        if string.lower(m):match("/addwl") then 
+            for i,v in pairs(game.Players:GetChildren()) do 
+        
+    if string.lower(m)== string.lower(v.Name) or string.lower(m) == string.lower(v.DisplayName) then 
+                table.insert(v.Name)
+                end 
+                end 
+                end 
+        end)
+
+    game.Players.LocalPlayer.Chatted:connect(function(m)
+        if string.lower(m):match("/remwl") then 
+            for i,v in pairs(whitelist) do 
+        
+    if string.lower(m) == string.lower(v.Name) or string.lower(m) == string.lower(v.DisplayName) then 
+                table.insert(#v)
+                end 
+                end 
+                end 
+        end)
+for i,x in pairs(game.Players:GetChildren()) do  
+    for i,v in pairs(whitelist) do 
+    if x.Name == v  or x.DisplayName == v then 
+        Connect(x)
+    end end end 
+    
+game.Players.ChildAdded:Connect(function(x)  
+    for i,v in pairs(whitelist) do 
+    if x.Name == v  or x.DisplayName == v then 
+        Connect(x)
+    end end end )
+    
+    
+    end 
