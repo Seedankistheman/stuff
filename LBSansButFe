@@ -1,4 +1,4 @@
-   --Start
+
 game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
 game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Sans"
 wait(5)
@@ -15,6 +15,7 @@ game.Players.LocalPlayer.Character.Head.HealthBar.Frame.PName:Destroy()
 wait(1)
 game.Players:Chat("/health king 2")
 wait(3)
+if game.Players.LocalPlayer.Character:FindFirstChild("ForceField") then game.Players.LocalPlayer.Character:FindFirstChild("ForceField"):Destroy() end
 game.Players:Chat("/damage king 0.5")
 wait(1)
 local args = {
