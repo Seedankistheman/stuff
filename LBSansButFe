@@ -1,4 +1,4 @@
-
+   --Start
 game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
 game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Sans"
 wait(5)
