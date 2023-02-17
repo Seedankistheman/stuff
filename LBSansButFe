@@ -1,0 +1,91 @@
+game.Players.LocalPlayer.PlayerScripts.Music:Destroy()
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Reset"
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame.PName:Destroy()
+wait(1)
+game.Players:Chat("/health king 2")
+wait(3)
+game.Players:Chat("/damage king 0.5")
+wait(1)
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Telekinesis",
+        [3] = "Start",
+        [4] = game.Players.LocalPlayer.Character
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.SansMoves:InvokeServer(unpack(args))
+
+local function ca(tabee)
+local player = game.Players.LocalPlayer;local ff;local tabee = tabee
+    for _,v in pairs(player.Character.Humanoid:GetPlayingAnimationTracks()) do 
+        v:Stop()
+        end
+for _,v in pairs(player.Backpack.Main:GetChildren()) do
+er = string.lower(v.Name)
+if string.match(er,'moves') then
+for i = 1,#tabee do
+v.Animations:WaitForChild(tabee[i][1]).AnimationId = tabee[i][2]
+end
+
+end
+end
+
+local yea = player.Backpack.Main
+local yen  = yea.Name;local main = player.Backpack.Main;
+for _,v in pairs(main:GetDescendants()) do
+if v.Name == 'Extra' then
+extra = v
+end
+end
+for _,v in pairs(main:GetChildren()) do
+    if string.find(v.Name,'Moves') and v:IsA('LocalScript') then
+main = v ;main.Disabled = true
+    end
+    end
+for _,v in pairs(player.PlayerGui.UI.Ui:GetChildren()) do
+er = string.lower(v.Name)
+if string.match(er,'move') then
+v.Parent = extra
+end
+end
+for _,v in pairs(player.PlayerGui:GetChildren()) do
+er = string.lower(v.Name)
+if string.find(er,'food') or string.find(er,'weapon')  then
+v.Parent = extra
+end end
+
+
+for _,v in pairs(player:GetDescendants()) do
+if string.find(string.lower(v.Name),'indicator') and v.Name ~= 'Indicator' then
+v.Parent = extra
+indn = v.Name
+end
+end
+exn = 0
+for _,v in pairs(extra:GetChildren()) do
+  if v.Name == indn then
+  exn = exn + 1 
+if exn > 1 then
+  v:Destroy()
+end
+end 
+end
+main.Disabled = false
+end
+
+local Mayhem = {
+{'Idle','rbxassetid://4458837452'},{'Walk','rbxassetid://4458849950'}
+}
+
+
+
+ca(Mayhem)
