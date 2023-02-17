@@ -11,10 +11,7 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
-game.Players.LocalPlayer.Character.Head.HealthBar.Frame.PName:Destroy()
 game.Players.LocalPlayer.Character.Head.HealthBar.Frame.HP:Destroy()
-game.Players.LocalPlayer.Character.Head.HealthBar.Frame.StaminaBar:Destroy()
-game.Players.LocalPlayer.Character.Head.HealthBar.Frame.HealthLabel:Destroy()
 wait(1)
 game.Players:Chat("/health king 2")
 wait(3)
