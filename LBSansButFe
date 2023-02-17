@@ -12,6 +12,9 @@ local args = {
 
 game:GetService("ReplicatedStorage").Remotes.Functions:InvokeServer(unpack(args))
 game.Players.LocalPlayer.Character.Head.HealthBar.Frame.PName:Destroy()
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame.HP:Destroy()
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame.StaminaBar:Destroy()
+game.Players.LocalPlayer.Character.Head.HealthBar.Frame.HealthLabel:Destroy()
 wait(1)
 game.Players:Chat("/health king 2")
 wait(3)
@@ -28,7 +31,10 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Remotes.SansMoves:InvokeServer(unpack(args))
-
+xxx = Instance.new("Sound", game.Players.LocalPlayer.PlayerGui)
+xxx.SoundId = getsynasset("LBSP3.mp3")
+xxx.Playing = true 
+xxx.Looped = true
 local function ca(tabee)
 local player = game.Players.LocalPlayer;local ff;local tabee = tabee
     for _,v in pairs(player.Character.Humanoid:GetPlayingAnimationTracks()) do 
