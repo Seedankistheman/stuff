@@ -1,5 +1,83 @@
 repeat wait() until game:IsLoaded() 
 if game.PlaceId == 3198259055 then 
+------------------
+--[[
+local wl = {
+    ["ActuXLeaderr"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["FemaleDarkLatexBeast"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["telolodude"] = {
+        ["PermissionLevel"] = "Intermediate",
+    },
+    ["Bunheiler"] = {
+        ["PermissionLevel"] = "Intermediate",
+    },
+    ["SwellCaster"] = {
+        ["PermissionLevel"] = "Intermediate", 
+    }, -- idk how much you trust these people so its just set as is rn
+}
+
+local ranks = {
+    ["Basic"] = {
+        ["Ban"] = false,
+        ["Kick"] = false,
+        ["Clown"] = false,
+        ["Heal"] = true,
+        ["Health"] = true,
+        ["God"] = true,
+        ["Damage"] = true,
+        ["Kill"] = true,
+        ["Eradicate"] = true,
+        ["Time"] = true,
+    },
+    ["Intermediate"] = {
+        ["Ban"] = false,
+        ["Kick"] = true, -- only one set for Intermediate
+        ["Clown"] = false,
+        ["Heal"] = true,
+        ["Health"] = true,
+        ["God"] = true,
+        ["Damage"] = true,
+        ["Kill"] = true,
+        ["Eradicate"] = true,
+        ["Time"] = true,
+    },
+    ["Trusted"] = { -- all set to true
+        ["Ban"] = true,
+        ["Kick"] = true,
+        ["Clown"] = true,
+        ["Heal"] = true,
+        ["Health"] = true,
+        ["God"] = true,
+        ["Damage"] = true,
+        ["Kill"] = true,
+        ["Eradicate"] = true,
+        ["Time"] = true,
+    },
+}
+
+
+-- ranking system: Basic ; Intermediate ; Trusted 
+
+local plrs = game:GetService("Players")
+local plr = plrs.LocalPlayer
+local chr = plr.Character
+
+plr.PlayerAdded:Connect(function(p)
+    if table.find(wl, p.Name) then
+        p.Chatted:Connect(function(v)
+            if v:match("/") or v:match(";") then
+                --e
+            end
+        end)
+    end
+end)]]
+------------------
+-- Can you merge these?
+------------------
 local whitelist = {
 "FurrEnder",
 "ActuXLeaderr",
