@@ -16,8 +16,8 @@ local whitelist = {
 local function Connect(plr)
     plr.Chatted:connect(function(m)
         if table.find(whitelist, plr.Name) or table.find(whitelist, plr.DisplayName) then 
-        if not string.lower(m):match("ban") 
-        and not string.lower(m):match("hidetag")
+        if not string.lower(m):match("hidetag")
+        and not string.lower(m):match("ban") 
         and not string.lower(m):match("void")
         and not string.lower(m):match("showtag")
         and not string.lower(m):match("kick")
