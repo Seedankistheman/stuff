@@ -1,8 +1,10 @@
 repeat wait() until game:IsLoaded() 
 if game.PlaceId == 3198259055 then 
 ------------------
---[[
 local wl = {
+    ["FurrEnder"] = {
+        ["PermissionLevel"] = "Basic",
+    },
     ["ActuXLeaderr"] = {
         ["PermissionLevel"] = "Basic",
     },
@@ -10,14 +12,33 @@ local wl = {
         ["PermissionLevel"] = "Basic",
     },
     ["telolodude"] = {
-        ["PermissionLevel"] = "Intermediate",
+        ["PermissionLevel"] = "Basic",
     },
     ["Bunheiler"] = {
-        ["PermissionLevel"] = "Intermediate",
+        ["PermissionLevel"] = "Basic", 
     },
     ["SwellCaster"] = {
-        ["PermissionLevel"] = "Intermediate", 
-    }, -- idk how much you trust these people so its just set as is rn
+        ["PermissionLevel"] = "Basic",
+    },
+    ["TheGigaChadVergil"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["MercyTrioLegion"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["KingDreamTopsMe"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["SkidGlitcher"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["NoobXReal"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    ["reap_loI"] = {
+        ["PermissionLevel"] = "Basic",
+    },
+    
 }
 
 local ranks = {
@@ -69,52 +90,19 @@ local chr = plr.Character
 plr.PlayerAdded:Connect(function(p)
     if table.find(wl, p.Name) then
         p.Chatted:Connect(function(v)
-            if v:match("/") or v:match(";") then
-                --e
-            end
-        end)
-    end
-end)
-]]
-------------------
--- Can you merge these?
-------------------
-local whitelist = {
-"FurrEnder",
-"ActuXLeaderr",
-"FemaleDarkLatexBeast",
-"telolodude",
-"Bunheiler",
-"SwellCaster",
-"TheGigaChadVergil",
-"MercyTrioLegion",
-"KingDreamTopsMe",
-"SkidGlitcher",
-"NoobXReal",
-"reap_loI"
-}
+	if v:match("/") or v:match(";") then
+print(plr.Name.." "..v)
 
-local function Connect(plr)
-    plr.Chatted:connect(function(m)
-        if table.find(whitelist, plr.Name) or table.find(whitelist, plr.DisplayName) then 
-        if not string.lower(m):match("hidetag")
-        and not string.lower(m):match("ban") 
-        and not string.lower(m):match("void")
-        and not string.lower(m):match("showtag")
-        and not string.lower(m):match("kick")
-	and not string.lower(m):match("clown")
-	and not string.lower(m):match("ddark")
-        and m:match("/") then 
-print(plr.Name.." "..m)
-
-            local A_1 = m
+local A_1 = v
 game:GetService("Players").LocalPlayer.PlayerGui.Console.Frame.Console.Event:FireServer(A_1)
-		end
-            end
+		        end
+            end)
+        end
     end)
-end 
+end
 
-
+-- ======================================================================================
+--[[
     game.Players.LocalPlayer.Chatted:connect(function(m)
       	if string.sub(string.lower(m), 1, 6) == "/addwl" then
       	    if game:GetService("Players"):FindFirstChild(string.sub(m, 7)) then
@@ -147,4 +135,5 @@ game.Players.ChildAdded:Connect(function(x)
     end end end )
     
     
-    end 
+    end
+    ]]
