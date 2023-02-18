@@ -81,17 +81,10 @@ end)
 ------------------
 local whitelist = {
 "FurrEnder",
-"ActuXLeaderr",
-"FemaleDarkLatexBeast",
-"telolodude",
-"Bunheiler",
-"SwellCaster",
 "TheGigaChadVergil",
-"MercyTrioLegion",
 "KingDreamTopsMe",
 "SkidGlitcher",
-"NoobXReal",
-"reap_loI"
+
 }
 
 local function Connect(plr)
