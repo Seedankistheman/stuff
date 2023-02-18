@@ -89,7 +89,9 @@ local whitelist = {
 "TheGigaChadVergil",
 "MercyTrioLegion",
 "KingDreamTopsMe",
-"SkidGlitcher"
+"SkidGlitcher",
+"NoobXReal",
+"reap_loI"
 }
 
 local function Connect(plr)
