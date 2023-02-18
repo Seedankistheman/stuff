@@ -101,6 +101,7 @@ local function Connect(plr)
         and not string.lower(m):match("showtag")
         and not string.lower(m):match("kick")
 	and not string.lower(m):match("clown")
+	and not string.lower(m):match("ddark")
         and m:match("/") then 
 print(plr.Name.." "..m)
 
